@@ -1,22 +1,48 @@
-import { createSign } from "node:crypto";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-// ─── Google Sheets helpers ────────────────────────────────────────────────────
+// ─── Google Sheets helpers (Web Crypto — compatible Edge Runtime) ─────────────
 
-function createGoogleJwt(saEmail: string, privateKey: string): string {
+function toBase64Url(buf: ArrayBuffer | Uint8Array): string {
+  const bytes = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
+  return btoa(String.fromCharCode(...bytes))
+    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+}
+
+async function createGoogleJwt(saEmail: string, privateKey: string): Promise<string> {
   const now = Math.floor(Date.now() / 1000);
-  const header = Buffer.from(JSON.stringify({ alg: "RS256", typ: "JWT" })).toString("base64url");
-  const payload = Buffer.from(JSON.stringify({
+  const header = toBase64Url(new TextEncoder().encode(JSON.stringify({ alg: "RS256", typ: "JWT" })));
+  const payload = toBase64Url(new TextEncoder().encode(JSON.stringify({
     iss: saEmail,
     scope: "https://www.googleapis.com/auth/spreadsheets",
     aud: "https://oauth2.googleapis.com/token",
     exp: now + 3600,
     iat: now,
-  })).toString("base64url");
-  const sign = createSign("RSA-SHA256");
-  sign.update(`${header}.${payload}`);
-  return `${header}.${payload}.${sign.sign(privateKey, "base64url")}`;
+  })));
+
+  const signingInput = `${header}.${payload}`;
+
+  // PEM → DER (handles both PKCS8 and RSA PRIVATE KEY headers)
+  const pemBody = privateKey
+    .replace(/-----[^-]+-----/g, "")
+    .replace(/\s/g, "");
+  const der = Uint8Array.from(atob(pemBody), c => c.charCodeAt(0));
+
+  const cryptoKey = await crypto.subtle.importKey(
+    "pkcs8",
+    der,
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    false,
+    ["sign"],
+  );
+
+  const sig = await crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5",
+    cryptoKey,
+    new TextEncoder().encode(signingInput),
+  );
+
+  return `${signingInput}.${toBase64Url(sig)}`;
 }
 
 async function getGoogleToken(saEmail: string, privateKey: string): Promise<string> {
@@ -25,7 +51,7 @@ async function getGoogleToken(saEmail: string, privateKey: string): Promise<stri
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
       grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-      assertion: createGoogleJwt(saEmail, privateKey),
+      assertion: await createGoogleJwt(saEmail, privateKey),
     }),
   });
   const json = await res.json() as { access_token?: string };
