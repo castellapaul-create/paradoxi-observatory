@@ -125,8 +125,8 @@ function EmailForm({ large }: { large?: boolean }) {
 
   if (status === "done") {
     return (
-      <div className={`mx-auto flex items-center justify-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-6 text-primary ${large ? "h-16 max-w-xl text-base" : "h-14 max-w-md text-sm"}`}>
-        <Check className="h-5 w-5" />
+      <div className={`mx-auto flex items-center justify-center gap-2 rounded-2xl border border-primary/40 bg-primary/10 px-6 py-4 text-primary ${large ? "max-w-xl text-base" : "max-w-md text-sm"}`}>
+        <Check className="h-5 w-5 shrink-0" />
         Merci — votre prochaine édition arrive dimanche.
       </div>
     );
@@ -136,7 +136,7 @@ function EmailForm({ large }: { large?: boolean }) {
     <div className="mx-auto w-full">
       <form
         onSubmit={onSubmit}
-        className={`mx-auto flex items-center gap-2 rounded-full border border-border bg-card/80 p-2 pl-5 backdrop-blur ${large ? "h-16 max-w-xl" : "h-14 max-w-md"}`}
+        className={`mx-auto flex flex-col gap-2 rounded-2xl border border-border bg-card/80 p-3 backdrop-blur sm:flex-row sm:items-center sm:rounded-full sm:p-2 sm:pl-5 ${large ? "max-w-xl" : "max-w-md"}`}
       >
         <input
           type="email"
@@ -144,12 +144,12 @@ function EmailForm({ large }: { large?: boolean }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Votre adresse email"
-          className="h-full flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+          className="w-full bg-transparent px-2 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none sm:h-full sm:flex-1 sm:px-0 sm:py-0"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="inline-flex h-full items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] disabled:opacity-70 disabled:hover:scale-100"
+          className="inline-flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] disabled:opacity-70 disabled:hover:scale-100 sm:w-auto sm:rounded-full sm:py-0 sm:h-11"
         >
           {status === "loading" ? (
             <><Loader2 className="h-4 w-4 animate-spin" />Inscription…</>
@@ -309,14 +309,14 @@ function Hero() {
 
         {/* Title */}
         <h1
-          className="reveal font-black tracking-tight text-balance"
-          style={{ fontSize: "clamp(2.2rem, 4.5vw, 4.8rem)", lineHeight: "1.06" }}
+          className="reveal font-black tracking-tight"
+          style={{ fontSize: "clamp(1.75rem, 4.5vw, 4.8rem)", lineHeight: "1.08", overflowWrap: "break-word" }}
         >
           Vous analysez les marchés
           <br />
           <span className="text-primary">avec les outils du retail.</span>
           <br />
-          Les desks institutionnels lisent autre chose.
+          Les desks institutionnels<br className="sm:hidden" /> lisent autre chose.
         </h1>
 
         {/* Subtitle */}
@@ -325,16 +325,16 @@ function Hero() {
         </p>
 
         {/* Stats row */}
-        <div className="reveal mx-auto mt-10 inline-flex flex-wrap items-stretch justify-center divide-x divide-border/50 rounded-2xl border border-border/40 bg-card/30 backdrop-blur">
+        <div className="reveal mx-auto mt-10 grid w-full max-w-sm grid-cols-3 divide-x divide-border/50 rounded-2xl border border-border/40 bg-card/30 backdrop-blur sm:max-w-none sm:w-auto sm:inline-flex sm:flex-nowrap">
           {[
-            { value: "+1000h", label: "de recherche condensée par édition" },
-            { value: "52", label: "éditions publiées avec constance" },
-            { value: "+300", label: "lecteurs qui progressent", dot: true },
+            { value: "+1000h", label: "de recherche par édition" },
+            { value: "52", label: "éditions publiées" },
+            { value: "+300", label: "lecteurs actifs", dot: true },
           ].map((s) => (
-            <div key={s.value} className="flex items-center gap-3 px-7 py-4">
-              <span className="text-2xl font-black text-foreground md:text-[1.75rem]">{s.value}</span>
-              <span className="flex items-center gap-1.5 text-left text-xs leading-snug text-muted-foreground">
-                {s.dot && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />}
+            <div key={s.value} className="flex flex-col items-center gap-1 px-4 py-4 text-center sm:flex-row sm:items-center sm:gap-3 sm:px-7 sm:text-left">
+              <span className="text-xl font-black text-foreground sm:text-[1.75rem]">{s.value}</span>
+              <span className="flex items-center gap-1.5 text-[11px] leading-snug text-muted-foreground sm:text-xs">
+                {s.dot && <span className="hidden h-1.5 w-1.5 shrink-0 rounded-full bg-primary sm:block" />}
                 {s.label}
               </span>
             </div>
@@ -551,7 +551,7 @@ function RecentTradesSection() {
           <span className="h-1.5 w-1.5 rounded-full bg-primary" style={{ boxShadow: "0 0 6px 2px oklch(0.78 0.18 150 / 0.7)" }} />
           Décisions documentées
         </div>
-        <h2 className="font-black text-4xl leading-tight md:text-5xl">Des convictions argumentées, pas des signaux</h2>
+        <h2 className="font-black text-3xl leading-tight md:text-5xl">Des convictions argumentées, pas des signaux</h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
           Chaque position naît d'une thèse fondamentale construite. Rien n'est masqué — la conviction, le raisonnement et le résultat sont exposés avec la même rigueur.
         </p>
@@ -629,7 +629,7 @@ function Editions() {
   return (
     <section id="editions" className="py-28">
       <div className="reveal mx-auto max-w-2xl px-6 text-center">
-        <h2 className="font-black text-4xl leading-tight md:text-5xl">Ce que vous lisez chaque dimanche soir</h2>
+        <h2 className="font-black text-3xl leading-tight md:text-5xl">Ce que vous lisez chaque dimanche soir</h2>
         <p className="mt-4 text-lg text-muted-foreground">Huit modules conçus pour transformer le bruit des marchés en une lecture claire, structurée et décisionnelle.</p>
       </div>
       <div className="reveal mt-14 space-y-5">
@@ -659,7 +659,7 @@ function ReportShowcase() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-28">
       <div className="reveal mx-auto max-w-2xl text-center">
-        <h2 className="font-black text-4xl leading-tight md:text-5xl">La rigueur, visible à chaque page</h2>
+        <h2 className="font-black text-3xl leading-tight md:text-5xl">La rigueur, visible à chaque page</h2>
         <p className="mt-4 text-lg text-muted-foreground">Conçu comme une note de recherche institutionnelle. Dense, mesuré, lisible — même pour celui qui n'a que dix minutes.</p>
       </div>
       <div className="mt-16 grid gap-6 lg:grid-cols-3">
@@ -811,7 +811,7 @@ function MethodeSection() {
     <section id="methode" className="mx-auto max-w-7xl px-6 py-28">
       <div className="reveal mb-16 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Architecture analytique</p>
-        <h2 className="mt-4 font-black text-4xl leading-tight md:text-5xl">
+        <h2 className="mt-4 font-black text-3xl leading-tight md:text-5xl">
           Un processus rigoureux, pas une opinion
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
@@ -882,7 +882,7 @@ function PourQuiSection() {
     <section id="pour-qui" className="mx-auto max-w-7xl px-6 pb-28">
       <div className="reveal mb-14 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Un choix délibéré</p>
-        <h2 className="mt-4 font-black text-4xl leading-tight md:text-5xl">Ce n'est pas pour tout le monde. Et c'est voulu.</h2>
+        <h2 className="mt-4 font-black text-3xl leading-tight md:text-5xl">Ce n'est pas pour tout le monde. Et c'est voulu.</h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
           PARADOXI Observatory s'adresse à ceux qui ont décidé de progresser sérieusement — pas à ceux qui cherchent encore le raccourci qui n'existe pas.
         </p>
@@ -1103,7 +1103,7 @@ function Testimonials() {
     <section className="relative py-28">
       <div className="reveal mx-auto mb-14 max-w-2xl px-6 text-center">
         <span className="text-sm font-semibold text-primary">Ils ont pris la décision</span>
-        <h2 className="mt-3 font-black text-4xl leading-tight md:text-5xl">Ce que ça change, concrètement</h2>
+        <h2 className="mt-3 font-black text-3xl leading-tight md:text-5xl">Ce que ça change, concrètement</h2>
         <p className="mt-4 text-lg text-muted-foreground">Des lecteurs de profils différents, unis par un même choix : lire le marché avec plus de rigueur et de profondeur.</p>
       </div>
       <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
@@ -1138,7 +1138,7 @@ function PrivateLetter() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
             <span className="text-sm font-semibold text-primary">Publication privée</span>
-            <h2 className="mt-3 font-black text-4xl leading-tight md:text-5xl">
+            <h2 className="mt-3 font-black text-3xl leading-tight md:text-5xl">
               Ce n'est pas un email de plus. C'est votre rendez-vous hebdomadaire avec la clarté.
             </h2>
             <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-primary/25 bg-primary/[0.06] px-4 py-2 text-xs">
@@ -1183,7 +1183,7 @@ function Faq() {
 
         {/* FAQ accordion */}
         <div>
-          <h2 className="reveal font-black text-4xl leading-tight md:text-5xl">Questions fréquentes</h2>
+          <h2 className="reveal font-black text-3xl leading-tight md:text-5xl">Questions fréquentes</h2>
           <div className="mt-8 divide-y divide-border/60 border-t border-border/60">
             {FAQ.map((f, i) => {
               const isOpen = open === i;
@@ -1225,7 +1225,7 @@ function FinalCta() {
 
         <p className="relative text-xs font-bold uppercase tracking-[0.2em] text-primary">Une décision. Maintenant.</p>
 
-        <h2 className="relative mx-auto mt-6 max-w-3xl text-balance font-black text-4xl leading-tight md:text-6xl">
+        <h2 className="relative mx-auto mt-6 max-w-3xl text-balance font-black text-3xl leading-tight md:text-6xl">
           La personne que vous voulez devenir commence par les décisions que vous prenez{" "}
           <em className="not-italic text-primary">aujourd'hui.</em>
         </h2>
