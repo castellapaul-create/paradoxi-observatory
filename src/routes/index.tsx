@@ -95,7 +95,7 @@ const EDITION_ITEMS = [
 
 const FAQ = [
   { q: "Qu'est-ce que PARADOXI Observatory exactement ?", a: "Un observatoire de recherche financière indépendant. Chaque semaine, nous produisons une analyse macro approfondie des marchés des changes : fondamentaux, banques centrales, positionnement institutionnel, régimes de risque. Pas des signaux à copier — une compréhension à construire." },
-  { q: "Combien coûte l'accès ?", a: "L'accès est entièrement gratuit pendant la période de lancement. Une formule premium à 69 €/mois sera proposée prochainement, sur liste d'attente. Les lecteurs inscrits aujourd'hui bénéficieront des conditions d'accès prioritaires." },
+  { q: "Combien coûte l'accès ?", a: "L'accès est entièrement gratuit pendant la période de lancement. Une formule premium à 69 €/mois sera proposée prochainement, sur liste d'attente. Les lecteurs inscrits aujourd'hui bénéficieront d'un tarif préférentiel à l'ouverture." },
   { q: "À quelle fréquence le rapport est-il publié ?", a: "Une édition complète chaque dimanche soir — pour préparer votre semaine de marché avec méthode. Accompagnée d'un briefing quotidien les jours d'ouverture, pour suivre l'évolution du contexte macro en temps réel." },
   { q: "Est-ce un conseil en investissement ?", a: "Non. PARADOXI Observatory est un contenu strictement éducatif et informatif. Il ne constitue en aucun cas une recommandation personnalisée d'achat ou de vente d'instruments financiers. Vous restez seul décideur de vos choix — c'est précisément l'objectif." },
 ];
@@ -323,7 +323,6 @@ function Hero() {
             opacity: 0.80,
             mixBlendMode: "screen",
             maskImage: "radial-gradient(ellipse 90% 55% at 50% 50%, black 10%, transparent 70%)",
-            transform: "translateY(-22%)",
           }}
         />
       </div>
@@ -372,7 +371,7 @@ function Hero() {
         {/* Pricing narrative */}
         <div className="reveal mx-auto mt-8 max-w-lg rounded-xl border border-primary/20 bg-primary/[0.05] px-5 py-3 text-center text-sm">
           <span className="font-semibold text-foreground">Gratuit pendant le lancement.</span>
-          {" "}<span className="text-muted-foreground">À l'ouverture : <strong className="font-semibold text-foreground/80">69 €/mois</strong> — sauf pour les inscrits d'aujourd'hui.</span>
+          {" "}<span className="text-muted-foreground">À l'ouverture : <strong className="font-semibold text-foreground/80">69 €/mois</strong> — tarif préférentiel garanti aux inscrits d'aujourd'hui.</span>
         </div>
 
         {/* Email capture */}
@@ -1093,7 +1092,7 @@ function PricingSection() {
             <span className="text-5xl font-black text-foreground">69 €</span>
             <span className="mb-1.5 text-sm text-muted-foreground">/mois</span>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">Le tarif de lancement est réservé aux inscrits actuels. Rejoindre aujourd'hui, c'est sécuriser les meilleures conditions d'accès avant l'ouverture officielle.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Le tarif préférentiel est réservé aux inscrits actuels. Rejoindre aujourd'hui, c'est sécuriser les meilleures conditions avant l'ouverture officielle.</p>
 
           {/* Checklist */}
           <ul className="mt-6 space-y-3 border-t border-border/30 pt-6">
@@ -1113,7 +1112,7 @@ function PricingSection() {
               Rejoindre la liste d'attente
             </Link>
             <p className="text-center text-xs text-muted-foreground/50">
-              Les inscrits actuels bénéficient d'un accès prioritaire à tarif préférentiel.
+              Les inscrits actuels bénéficient d'un tarif préférentiel garanti à l'ouverture.
             </p>
           </div>
 
