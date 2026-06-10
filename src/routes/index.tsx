@@ -657,7 +657,7 @@ function Editions() {
   return (
     <section id="editions" className="py-28">
       <div className="reveal mx-auto max-w-2xl px-6 text-center">
-        <h2 className="font-black text-3xl leading-tight md:text-5xl">Ce que vous lisez chaque dimanche soir</h2>
+        <h2 className="font-black text-3xl leading-tight md:text-5xl">Ce que vous lirez chaque dimanche soir</h2>
         <p className="mt-4 text-lg text-muted-foreground">Huit modules conçus pour transformer le bruit des marchés en une lecture claire, structurée et décisionnelle.</p>
       </div>
       <div className="reveal mt-8 space-y-5 md:mt-14">
@@ -1008,7 +1008,7 @@ function PricingSection() {
       <div className="reveal mb-16 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Conditions d'accès</p>
         <h2 className="mt-4 font-black leading-tight" style={{ fontSize: "clamp(2.2rem, 4vw, 3.8rem)" }}>
-          Tout ce que vous recevez, dès maintenant.
+          Tout ce que vous recevrez, dès maintenant.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
           L'intégralité du contenu, sans friction, sans engagement. La confiance se gagne par la qualité — pas par les contrats.
