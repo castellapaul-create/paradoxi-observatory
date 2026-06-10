@@ -331,7 +331,7 @@ function Hero() {
         {/* Badge */}
         <div className="reveal mb-9 inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.07] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" style={{ boxShadow: "0 0 6px 2px oklch(0.78 0.18 150 / 0.7)" }} />
-          Observatoire de recherche · Accès gratuit
+          OBSERVATOIRE DE RECHERCHE FX • GRATUIT
         </div>
 
         {/* Title */}
@@ -347,8 +347,8 @@ function Hero() {
         </h1>
 
         {/* Subtitle */}
-        <p className="reveal mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Chaque dimanche soir, un rapport fondamental complet — COT, macro, banques centrales — synthétisé en un biais directionnel par devise. Pour décider avec leur cadre, pas avec le bruit.
+        <p className="reveal mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
+          Chaque dimanche, recevez gratuitement une analyse macroéconomique et les biais directionnels des principales devises.
         </p>
 
         {/* Stats row */}
@@ -379,11 +379,7 @@ function Hero() {
           <EmailForm large />
         </div>
 
-        <p className="reveal mt-4 text-xs text-muted-foreground/50">
-          Analyse entièrement humaine — ce rapport n'est pas généré par une IA.
-        </p>
-
-        <p className="reveal mt-2 text-xs text-muted-foreground/35">
+        <p className="reveal mt-4 text-xs text-muted-foreground/35">
           Contenu éducatif et informatif · Jamais un conseil en investissement · Données RGPD protégées
         </p>
       </div>
@@ -885,6 +881,9 @@ function MethodeSection() {
             </p>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               Quand les trois convergent dans la même direction, ce n'est plus une opinion — c'est une thèse. Le PCI mesure cette convergence et oriente le Weekly Bias publié chaque dimanche.
+            </p>
+            <p className="mt-4 text-xs text-muted-foreground/45 italic">
+              Analyse entièrement humaine — ce rapport n'est pas généré par une IA.
             </p>
           </div>
         </div>
