@@ -295,7 +295,7 @@ function Hero() {
           src={sectionShowcase}
           alt=""
           className="h-full w-full object-cover"
-          style={{ opacity: 0.20, objectPosition: "center top", maskImage: "radial-gradient(ellipse 62% 90% at 50% 25%, transparent 22%, black 68%)" }}
+          style={{ opacity: 0.20, maskImage: "radial-gradient(ellipse 62% 90% at 50% 25%, transparent 22%, black 68%)" }}
         />
       </div>
       <div className="pointer-events-none absolute inset-0 pdx-grid opacity-[0.14] [mask-image:radial-gradient(75%_80%_at_50%_30%,black,transparent)]" />
@@ -314,7 +314,7 @@ function Hero() {
         />
       </div>
       {/* Hands — mobile (opacity 0.80, plus grande visibilité) */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden md:hidden">
+      <div className="pointer-events-none absolute inset-0 flex items-start justify-center overflow-hidden md:hidden">
         <img
           src={heroHands}
           alt=""
@@ -322,6 +322,7 @@ function Hero() {
           style={{
             opacity: 0.80,
             mixBlendMode: "screen",
+            transform: "translateY(-15%)",
             maskImage: "radial-gradient(ellipse 90% 55% at 50% 50%, black 10%, transparent 70%)",
           }}
         />
