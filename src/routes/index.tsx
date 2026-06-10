@@ -27,6 +27,7 @@ import sectionTrades from "@/assets/section-trades.png";
 import sectionBriefing from "@/assets/section-briefing.png";
 import sectionRapport from "@/assets/section-rapport.png";
 import sectionShowcase from "@/assets/9D653234-1959-4A48-B0BA-DB75F32CF634.jpeg";
+import heroHands from "@/assets/hero-hands.png";
 import sectionMobile from "@/assets/A4806527-511C-47B8-B8C7-FFA71690663C.png";
 import founderBg from "@/assets/8E9213F7-50FE-44F1-B634-A8988C0BB773.png";
 import analyseChart from "@/assets/CE981A19-CB33-4A71-A1E6-62F9AC31E1C1.jpeg";
@@ -299,6 +300,19 @@ function Hero() {
       </div>
       <div className="pointer-events-none absolute inset-0 pdx-grid opacity-[0.14] [mask-image:radial-gradient(75%_80%_at_50%_30%,black,transparent)]" />
       <div className="pointer-events-none absolute inset-x-0 -top-40 h-[900px] pdx-glow opacity-45" />
+      {/* Hands — centered behind title, screen blend so black becomes transparent */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+        <img
+          src={heroHands}
+          alt=""
+          className="w-full max-w-5xl object-contain"
+          style={{
+            opacity: 0.55,
+            mixBlendMode: "screen",
+            maskImage: "radial-gradient(ellipse 82% 58% at 50% 50%, black 10%, transparent 68%)",
+          }}
+        />
+      </div>
       {/* Mobile: dark veil so background image doesn't bleed through text */}
       <div className="pointer-events-none absolute inset-0 bg-background/75 md:hidden" />
 
