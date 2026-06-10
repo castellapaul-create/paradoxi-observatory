@@ -351,11 +351,6 @@ function Hero() {
           Chaque dimanche soir, un rapport fondamental complet — COT, macro, banques centrales — synthétisé en un biais directionnel par devise. Pour décider avec leur cadre, pas avec le bruit.
         </p>
 
-        {/* Anti-IA note */}
-        <p className="reveal mx-auto mt-4 max-w-xl text-xs text-muted-foreground/50">
-          Analyse entièrement humaine — ce rapport n'est pas généré par une IA.
-        </p>
-
         {/* Stats row */}
         <div className="reveal mx-auto mt-10 grid w-full max-w-sm grid-cols-3 divide-x divide-border/50 rounded-2xl border border-border/40 bg-card/30 backdrop-blur sm:max-w-none sm:w-auto sm:inline-flex sm:flex-nowrap">
           {[
@@ -384,7 +379,11 @@ function Hero() {
           <EmailForm large />
         </div>
 
-        <p className="reveal mt-4 text-xs text-muted-foreground/35">
+        <p className="reveal mt-4 text-xs text-muted-foreground/50">
+          Analyse entièrement humaine — ce rapport n'est pas généré par une IA.
+        </p>
+
+        <p className="reveal mt-2 text-xs text-muted-foreground/35">
           Contenu éducatif et informatif · Jamais un conseil en investissement · Données RGPD protégées
         </p>
       </div>
