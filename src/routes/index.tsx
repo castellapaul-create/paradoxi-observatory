@@ -275,7 +275,7 @@ function Nav() {
             </svg>
           </a>
           <a href="#subscribe" className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_20px_-4px] hover:shadow-primary/50">
-            Accéder gratuitement
+            Recevoir le rapport
           </a>
         </div>
       </div>
@@ -321,15 +321,15 @@ function Hero() {
 
         {/* Subtitle */}
         <p className="reveal mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          PARADOXI Observatory vous livre chaque semaine la même lecture analytique — pour décider avec leur cadre, pas avec le bruit. Votre temps vaut plus que reconstruire cette synthèse vous-même chaque dimanche.
+          Chaque dimanche soir, un rapport fondamental complet — COT, macro, banques centrales — synthétisé en un biais directionnel par devise. Pour décider avec leur cadre, pas avec le bruit.
         </p>
 
         {/* Stats row */}
         <div className="reveal mx-auto mt-10 grid w-full max-w-sm grid-cols-3 divide-x divide-border/50 rounded-2xl border border-border/40 bg-card/30 backdrop-blur sm:max-w-none sm:w-auto sm:inline-flex sm:flex-nowrap">
           {[
-            { value: "+1000h", label: "de recherche par édition" },
-            { value: "52", label: "éditions publiées" },
-            { value: "+300", label: "lecteurs actifs", dot: true },
+            { value: "+1000h", label: "de recherche cumulées" },
+            { value: "52", label: "dimanches consécutifs" },
+            { value: "~300", label: "lecteurs · confidentiel", dot: true },
           ].map((s) => (
             <div key={s.value} className="flex flex-col items-center gap-1 px-4 py-4 text-center sm:flex-row sm:items-center sm:gap-3 sm:px-7 sm:text-left">
               <span className="text-xl font-black text-foreground sm:text-[1.75rem]">{s.value}</span>
@@ -342,9 +342,10 @@ function Hero() {
         </div>
 
         {/* Pricing narrative */}
-        <p className="reveal mx-auto mt-8 max-w-lg text-sm text-muted-foreground/60">
-          Accès complet gratuit pendant la phase de lancement — tarif d'ouverture 69 €/mois réservé aux inscrits actuels.
-        </p>
+        <div className="reveal mx-auto mt-8 max-w-lg rounded-xl border border-primary/20 bg-primary/[0.05] px-5 py-3 text-center text-sm">
+          <span className="font-semibold text-foreground">Gratuit pendant le lancement.</span>
+          {" "}<span className="text-muted-foreground">À l'ouverture : <strong className="font-semibold text-foreground/80">69 €/mois</strong> — sauf pour les inscrits d'aujourd'hui.</span>
+        </div>
 
         {/* Email capture */}
         <div className="reveal mt-6 mx-auto max-w-lg">
@@ -528,7 +529,7 @@ const RECENT_TRADES = [
   {
     symbol: "NZD/JPY",
     direction: "Short" as const,
-    result: "Confluence ×3",
+    result: "Convergence ×3",
     desc: "Positionnement COT JPY haussier + macro NZD affaiblie + confirmation banque centrale.",
     image: tradeNzdjpy,
   },
@@ -894,7 +895,7 @@ function PourQuiSection() {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
           <div className="mb-7 flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-xs font-black text-primary">✓</span>
-            <p className="text-sm font-bold uppercase tracking-[0.15em] text-primary">C'est pour toi si</p>
+            <p className="text-sm font-bold uppercase tracking-[0.15em] text-primary">C'est pour vous si</p>
           </div>
           <ul className="space-y-5">
             {oui.map((item) => (
@@ -909,7 +910,7 @@ function PourQuiSection() {
           </ul>
           <div className="mt-8 border-t border-primary/15 pt-6">
             <a href="#subscribe" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline underline-offset-4">
-              Je reconnais ce profil — accéder à l'Observatoire <ArrowRight className="h-3.5 w-3.5" />
+              Je reconnais ce profil — recevoir le rapport <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
@@ -918,7 +919,7 @@ function PourQuiSection() {
         <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/20 p-8">
           <div className="mb-7 flex items-center gap-3">
             <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-card/50 text-xs font-black text-muted-foreground">✕</span>
-            <p className="text-sm font-bold uppercase tracking-[0.15em] text-muted-foreground">C'est pas pour toi si</p>
+            <p className="text-sm font-bold uppercase tracking-[0.15em] text-muted-foreground">Ce n'est pas pour vous si</p>
           </div>
           <ul className="space-y-5">
             {non.map((item) => (
@@ -947,7 +948,7 @@ function AnalyseCard() {
   return (
     <section className="mx-auto max-w-7xl px-6 pb-28">
       <div className="reveal relative overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
-        <img src={sectionTrades} alt="Mes recherches & Trades" className="w-full" />
+        <img src={sectionTrades} alt="Nos recherches & décisions de trades" className="w-full" />
       </div>
     </section>
   );
@@ -1045,7 +1046,7 @@ function PricingSection() {
             href="#subscribe"
             className="mt-8 flex items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_-4px] hover:shadow-primary/60"
           >
-            Accéder gratuitement
+            Recevoir le rapport
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
@@ -1223,15 +1224,16 @@ function FinalCta() {
         <div className="pointer-events-none absolute inset-0 pdx-grid opacity-[0.07]" />
         <div className="pointer-events-none absolute inset-x-0 -top-20 h-64 pdx-glow opacity-30" />
 
-        <p className="relative text-xs font-bold uppercase tracking-[0.2em] text-primary">Une décision. Maintenant.</p>
+        <p className="relative text-xs font-bold uppercase tracking-[0.2em] text-primary">Prochain rapport · Dimanche soir</p>
 
-        <h2 className="relative mx-auto mt-6 max-w-3xl text-balance font-black text-3xl leading-tight md:text-6xl">
-          La personne que vous voulez devenir commence par les décisions que vous prenez{" "}
-          <em className="not-italic text-primary">aujourd'hui.</em>
+        <h2 className="relative mx-auto mt-6 max-w-3xl font-black text-3xl leading-tight md:text-6xl">
+          Le prochain rapport arrive{" "}
+          <em className="not-italic text-primary">dimanche soir.</em>
+          <br />Les marchés ouvrent lundi matin.
         </h2>
 
         <p className="relative mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          L'intégralité du cadre analytique PARADOXI — gratuit, sans engagement. Pour commencer à construire votre compréhension des marchés dès cette semaine.
+          Vous pouvez le lire — ou le reconstruire vous-même. L'intégralité du cadre PARADOXI, gratuit, sans engagement.
         </p>
 
         <div className="relative mt-10">
@@ -1239,7 +1241,7 @@ function FinalCta() {
             href="#subscribe"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-base font-bold text-primary-foreground transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_60px_-8px] hover:shadow-primary/60"
           >
-            Rejoindre l'Observatoire
+            Recevoir le rapport de dimanche
             <ArrowUpRight className="h-5 w-5" />
           </a>
         </div>
