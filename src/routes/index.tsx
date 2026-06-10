@@ -322,7 +322,7 @@ function Hero() {
           style={{
             opacity: 0.80,
             mixBlendMode: "screen",
-            transform: "translateY(-5%)",
+            transform: "translateY(-22%)",
             maskImage: "radial-gradient(ellipse 90% 55% at 50% 50%, black 10%, transparent 70%)",
           }}
         />
