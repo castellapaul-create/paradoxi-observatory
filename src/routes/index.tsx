@@ -289,8 +289,8 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 pt-24 pb-20">
-      {/* Hero background */}
-      <div className="pointer-events-none absolute inset-0">
+      {/* Hero background — desktop only */}
+      <div className="pointer-events-none absolute inset-0 hidden md:block">
         <img
           src={sectionShowcase}
           alt=""
@@ -300,8 +300,8 @@ function Hero() {
       </div>
       <div className="pointer-events-none absolute inset-0 pdx-grid opacity-[0.14] [mask-image:radial-gradient(75%_80%_at_50%_30%,black,transparent)]" />
       <div className="pointer-events-none absolute inset-x-0 -top-40 h-[900px] pdx-glow opacity-45" />
-      {/* Hands — centered behind title, screen blend so black becomes transparent */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden">
+      {/* Hands — desktop (opacity 0.55) */}
+      <div className="pointer-events-none absolute inset-0 hidden items-center justify-center overflow-hidden md:flex">
         <img
           src={heroHands}
           alt=""
@@ -313,8 +313,19 @@ function Hero() {
           }}
         />
       </div>
-      {/* Mobile: dark veil so background image doesn't bleed through text */}
-      <div className="pointer-events-none absolute inset-0 bg-background/75 md:hidden" />
+      {/* Hands — mobile (opacity 0.80, plus grande visibilité) */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden md:hidden">
+        <img
+          src={heroHands}
+          alt=""
+          className="w-full object-contain"
+          style={{
+            opacity: 0.80,
+            mixBlendMode: "screen",
+            maskImage: "radial-gradient(ellipse 90% 55% at 50% 50%, black 10%, transparent 70%)",
+          }}
+        />
+      </div>
 
       <div className="relative mx-auto w-full max-w-6xl text-center">
         {/* Badge */}
