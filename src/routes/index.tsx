@@ -314,7 +314,7 @@ function Hero() {
         />
       </div>
       {/* Hands — mobile (opacity 0.80, plus grande visibilité) */}
-      <div className="pointer-events-none absolute inset-x-0 -top-32 bottom-0 flex items-center justify-center md:hidden">
+      <div className="pointer-events-none absolute inset-x-0 -top-64 bottom-0 flex items-center justify-center md:hidden">
         <img
           src={heroHands}
           alt=""
