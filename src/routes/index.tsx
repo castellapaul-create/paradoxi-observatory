@@ -351,6 +351,11 @@ function Hero() {
           Chaque dimanche soir, un rapport fondamental complet — COT, macro, banques centrales — synthétisé en un biais directionnel par devise. Pour décider avec leur cadre, pas avec le bruit.
         </p>
 
+        {/* Anti-IA note */}
+        <p className="reveal mx-auto mt-4 max-w-xl text-xs text-muted-foreground/50">
+          Analyse entièrement humaine — ce rapport n'est pas généré par une IA.
+        </p>
+
         {/* Stats row */}
         <div className="reveal mx-auto mt-10 grid w-full max-w-sm grid-cols-3 divide-x divide-border/50 rounded-2xl border border-border/40 bg-card/30 backdrop-blur sm:max-w-none sm:w-auto sm:inline-flex sm:flex-nowrap">
           {[
@@ -899,13 +904,6 @@ function PourQuiSection() {
     { title: "Vous voulez reprendre le contrôle de vos décisions", sub: "Décider avec votre propre analyse — pas sous l'influence d'une alerte ou d'un groupe" },
     { title: "Vous visez l'excellence sur le long terme", sub: "Discipline, constance, profondeur — pas de résultats immédiats promis" },
   ];
-  const non = [
-    { title: "Vous cherchez des signaux à reproduire", sub: "Sans analyse ni compréhension du contexte qui les génère" },
-    { title: "Vous voulez du copy-trading ou des alertes Telegram", sub: "Ce n'est pas ce que nous construisons — ni ce que nous voulons construire" },
-    { title: "Vous attendez une promesse de performance", sub: "Nous n'en faisons aucune — nous offrons de la compréhension" },
-    { title: "Vous cherchez un raccourci vers la richesse rapide", sub: "Ce chemin n'existe pas — et nous ne prétendrons jamais le contraire" },
-    { title: "Vous n'êtes pas prêt à progresser lentement", sub: "La compréhension profonde des marchés demande du temps et de la constance" },
-  ];
   return (
     <section id="pour-qui" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
       <div className="reveal mb-14 text-center">
@@ -915,7 +913,7 @@ function PourQuiSection() {
           PARADOXI Observatory s'adresse à ceux qui ont décidé de progresser sérieusement — pas à ceux qui cherchent encore le raccourci qui n'existe pas.
         </p>
       </div>
-      <div className="reveal grid gap-5 md:grid-cols-2">
+      <div className="reveal mx-auto max-w-2xl">
 
         {/* Pour toi */}
         <div className="relative overflow-hidden rounded-2xl border border-primary/25 bg-primary/[0.04] p-8">
@@ -939,28 +937,6 @@ function PourQuiSection() {
             <a href="#subscribe" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline underline-offset-4">
               Je reconnais ce profil — recevoir le rapport <ArrowRight className="h-3.5 w-3.5" />
             </a>
-          </div>
-        </div>
-
-        {/* Pas pour toi */}
-        <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/20 p-8">
-          <div className="mb-7 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-border/60 bg-card/50 text-xs font-black text-muted-foreground">✕</span>
-            <p className="text-sm font-bold uppercase tracking-[0.15em] text-muted-foreground">Ce n'est pas pour vous si</p>
-          </div>
-          <ul className="space-y-5">
-            {non.map((item) => (
-              <li key={item.title} className="flex items-start gap-3.5">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-border/50 text-[10px] text-muted-foreground/50">✕</span>
-                <div>
-                  <p className="text-sm font-semibold text-muted-foreground/70">{item.title}</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground/50">{item.sub}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 border-t border-border/30 pt-6">
-            <p className="text-xs text-muted-foreground/50 italic">Ce n'est pas un jugement — c'est une question de maturité dans la démarche.</p>
           </div>
         </div>
 
