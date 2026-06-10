@@ -314,7 +314,7 @@ function Hero() {
         />
       </div>
       {/* Hands — mobile (opacity 0.80, plus grande visibilité) */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden md:hidden">
+      <div className="pointer-events-none absolute inset-x-0 -top-32 bottom-0 flex items-center justify-center md:hidden">
         <img
           src={heroHands}
           alt=""
@@ -322,7 +322,6 @@ function Hero() {
           style={{
             opacity: 0.80,
             mixBlendMode: "screen",
-            transform: "translateY(-22%)",
             maskImage: "radial-gradient(ellipse 90% 55% at 50% 50%, black 10%, transparent 70%)",
           }}
         />
