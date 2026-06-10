@@ -299,6 +299,8 @@ function Hero() {
       </div>
       <div className="pointer-events-none absolute inset-0 pdx-grid opacity-[0.14] [mask-image:radial-gradient(75%_80%_at_50%_30%,black,transparent)]" />
       <div className="pointer-events-none absolute inset-x-0 -top-40 h-[900px] pdx-glow opacity-45" />
+      {/* Mobile: dark veil so background image doesn't bleed through text */}
+      <div className="pointer-events-none absolute inset-0 bg-background/75 md:hidden" />
 
       <div className="relative mx-auto w-full max-w-6xl text-center">
         {/* Badge */}
@@ -384,7 +386,7 @@ function LogoMarquee() {
 
 function WeeklyReport() {
   return (
-    <section id="rapport" className="mx-auto max-w-7xl px-6 pb-28">
+    <section id="rapport" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
       <div className="reveal relative">
         <div className="pointer-events-none absolute -inset-6 pdx-glow opacity-15" />
         <div className="relative z-10 overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
@@ -399,7 +401,7 @@ function WeeklyReport() {
 
 function BriefingSection() {
   return (
-    <section id="briefing" className="mx-auto max-w-7xl px-6 pb-28">
+    <section id="briefing" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
       <div className="reveal relative">
         <div className="pointer-events-none absolute -inset-6 pdx-glow opacity-15" />
         <div className="relative z-10 overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
@@ -505,7 +507,7 @@ function _SP500Mock_unused() {
 
 function TradesSection() {
   return (
-    <section id="trades" className="mx-auto max-w-7xl px-6 pb-28">
+    <section id="trades" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
       <div className="reveal relative">
         <div className="pointer-events-none absolute -inset-6 pdx-glow opacity-15" />
         <div className="relative z-10 overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
@@ -544,10 +546,10 @@ const RECENT_TRADES = [
 
 function RecentTradesSection() {
   return (
-    <section className="mx-auto max-w-7xl px-6 pb-28">
+    <section className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
 
       {/* Header */}
-      <div className="reveal mb-14 text-center">
+      <div className="reveal mb-8 text-center md:mb-14">
         <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.07] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" style={{ boxShadow: "0 0 6px 2px oklch(0.78 0.18 150 / 0.7)" }} />
           Décisions documentées
@@ -633,7 +635,7 @@ function Editions() {
         <h2 className="font-black text-3xl leading-tight md:text-5xl">Ce que vous lisez chaque dimanche soir</h2>
         <p className="mt-4 text-lg text-muted-foreground">Huit modules conçus pour transformer le bruit des marchés en une lecture claire, structurée et décisionnelle.</p>
       </div>
-      <div className="reveal mt-14 space-y-5">
+      <div className="reveal mt-8 space-y-5 md:mt-14">
         <div className="pdx-marquee-pause overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
           <div className="pdx-marquee-track flex w-max items-center gap-5">
             {rowA.map((item, i) => <EditionPill key={`a-${i}`} item={item} />)}
@@ -658,7 +660,7 @@ function ReportShowcase() {
     { img: reportGbp, title: "Setup GBPUSD", tag: "Watchlist" },
   ];
   return (
-    <section className="mx-auto max-w-7xl px-6 py-28">
+    <section className="mx-auto max-w-7xl px-6 py-12 md:py-28">
       <div className="reveal mx-auto max-w-2xl text-center">
         <h2 className="font-black text-3xl leading-tight md:text-5xl">La rigueur, visible à chaque page</h2>
         <p className="mt-4 text-lg text-muted-foreground">Conçu comme une note de recherche institutionnelle. Dense, mesuré, lisible — même pour celui qui n'a que dix minutes.</p>
@@ -716,7 +718,7 @@ function WhoAmI() {
       <div className="mx-auto max-w-7xl px-6">
 
         {/* Narrative + insight capsules */}
-        <div className="grid items-start gap-16 lg:grid-cols-2">
+        <div className="grid items-start gap-8 lg:gap-16 lg:grid-cols-2">
 
           {/* Left: narrative */}
           <div className="reveal">
@@ -765,7 +767,7 @@ function WhoAmI() {
                 </div>
               );
             })}
-            <div className="flex justify-center pt-4">
+            <div className="hidden justify-center pt-4 md:flex">
               <img
                 src={founderBg}
                 alt=""
@@ -809,7 +811,7 @@ const PIPELINE = [
 
 function MethodeSection() {
   return (
-    <section id="methode" className="mx-auto max-w-7xl px-6 py-28">
+    <section id="methode" className="mx-auto max-w-7xl px-6 py-12 md:py-28">
       <div className="reveal mb-16 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Architecture analytique</p>
         <h2 className="mt-4 font-black text-3xl leading-tight md:text-5xl">
@@ -880,7 +882,7 @@ function PourQuiSection() {
     { title: "Vous n'êtes pas prêt à progresser lentement", sub: "La compréhension profonde des marchés demande du temps et de la constance" },
   ];
   return (
-    <section id="pour-qui" className="mx-auto max-w-7xl px-6 pb-28">
+    <section id="pour-qui" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
       <div className="reveal mb-14 text-center">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Un choix délibéré</p>
         <h2 className="mt-4 font-black text-3xl leading-tight md:text-5xl">Ce n'est pas pour tout le monde. Et c'est voulu.</h2>
@@ -946,7 +948,7 @@ function PourQuiSection() {
 
 function AnalyseCard() {
   return (
-    <section className="mx-auto max-w-7xl px-6 pb-28">
+    <section className="mx-auto hidden max-w-7xl px-6 pb-12 md:block md:pb-28">
       <div className="reveal relative overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
         <img src={sectionTrades} alt="Nos recherches & décisions de trades" className="w-full" />
       </div>
@@ -975,7 +977,7 @@ const PLAN_CHECKLIST = [
 
 function PricingSection() {
   return (
-    <section id="pricing" className="mx-auto max-w-7xl px-6 pb-28">
+    <section id="pricing" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
 
       {/* Header */}
       <div className="reveal mb-16 text-center">
@@ -1101,7 +1103,7 @@ function PricingSection() {
 function Testimonials() {
   const row = [...TESTIMONIALS, ...TESTIMONIALS];
   return (
-    <section className="relative py-28">
+    <section className="relative py-12 md:py-28">
       <div className="reveal mx-auto mb-14 max-w-2xl px-6 text-center">
         <span className="text-sm font-semibold text-primary">Ils ont pris la décision</span>
         <h2 className="mt-3 font-black text-3xl leading-tight md:text-5xl">Ce que ça change, concrètement</h2>
@@ -1133,7 +1135,7 @@ function Testimonials() {
 
 function PrivateLetter() {
   return (
-    <section id="subscribe" className="mx-auto max-w-7xl px-6 py-28">
+    <section id="subscribe" className="mx-auto max-w-7xl px-6 py-12 md:py-28">
       <div className="reveal pdx-card relative overflow-hidden rounded-[2rem] p-8 md:p-14">
         <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 pdx-glow opacity-50" />
         <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -1171,7 +1173,7 @@ function PrivateLetter() {
 function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="mx-auto max-w-7xl px-6 py-28">
+    <section id="faq" className="mx-auto max-w-7xl px-6 py-12 md:py-28">
       <div className="grid gap-12 lg:grid-cols-2">
 
         {/* Left: mobile mockup */}
@@ -1216,7 +1218,7 @@ function Faq() {
 
 function FinalCta() {
   return (
-    <section className="mx-auto max-w-7xl px-6 pb-28">
+    <section className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
       <div
         className="reveal relative overflow-hidden rounded-[2.5rem] border border-primary/20 px-8 py-20 text-center md:px-20"
         style={{ background: "radial-gradient(ellipse 85% 85% at 50% 60%, oklch(0.78 0.18 150 / 0.1), oklch(0.78 0.18 150 / 0.03) 55%, transparent)" }}
