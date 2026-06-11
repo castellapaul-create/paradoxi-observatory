@@ -1,9 +1,15 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const createCheckoutSession = createServerFn({ method: "POST" })
   .inputValidator(z.object({ email: z.string().email("Adresse email invalide") }))
   .handler(async ({ data }) => {
+    const ip = getRequest().headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+    const { allowed, retryAfterSec } = checkRateLimit(ip, { max: 5, windowMs: 60_000 });
+    if (!allowed) throw new Error(`Trop de tentatives. Réessayez dans ${retryAfterSec}s.`);
+
     const secretKey = process.env.STRIPE_SECRET_KEY;
     const priceId = process.env.STRIPE_PRICE_ID;
     const baseUrl = process.env.PUBLIC_URL ?? "https://paradoxi.vercel.app";

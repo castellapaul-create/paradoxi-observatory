@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 // ─── Google Sheets helpers (Web Crypto — compatible Edge Runtime) ─────────────
 
@@ -294,6 +296,10 @@ function buildWelcomeHtml(): string {
 export const subscribeEmail = createServerFn({ method: "POST" })
   .inputValidator(z.object({ email: z.string().email("Adresse email invalide") }))
   .handler(async ({ data }) => {
+    const ip = getRequest().headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+    const { allowed, retryAfterSec } = checkRateLimit(ip, { max: 5, windowMs: 60_000 });
+    if (!allowed) throw new Error(`Trop de tentatives. Réessayez dans ${retryAfterSec}s.`);
+
     const apiKey = process.env.RESEND_API_KEY;
     const audienceId = process.env.RESEND_AUDIENCE_ID;
     const fromEmail = process.env.FROM_EMAIL ?? "PARADOXI Observatory <onboarding@resend.dev>";
