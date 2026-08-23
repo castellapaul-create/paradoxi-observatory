@@ -255,11 +255,11 @@ export function PdxStyles() {
   .pdx2 .hero-grid > .hero-actions{ flex-direction:column; align-items:stretch; gap:10px; margin-bottom:0; }
   .pdx2 .hero-actions a{ justify-content:center; }
   .pdx2 .hero-grid > .hero-meta{ font-size:12.5px; flex-wrap:wrap; row-gap:4px; justify-content:center; }
-  .pdx2 .hero-visual{ position:relative; width:145%; margin-left:-35%; margin-right:0; z-index:0; }
+  .pdx2 .hero-visual{ position:relative; width:185%; margin-left:-62%; margin-right:0; z-index:0; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
-    -webkit-mask-image: radial-gradient(ellipse closest-side at 62% 50%, black 55%, transparent 100%);
-    mask-image: radial-gradient(ellipse closest-side at 62% 50%, black 55%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 68% 50%, black 50%, transparent 100%);
+    mask-image: radial-gradient(ellipse closest-side at 68% 50%, black 50%, transparent 100%);
   }
   .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
   .pdx2 .footer-grid{ grid-template-columns:1fr 1fr; }
