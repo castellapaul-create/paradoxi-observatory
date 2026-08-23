@@ -258,7 +258,7 @@ export function PdxStyles() {
   .pdx2 .hero-grid > .hero-actions{ flex-direction:column; align-items:stretch; gap:10px; margin-bottom:0; }
   .pdx2 .hero-actions a{ justify-content:center; }
   .pdx2 .hero-grid > .hero-meta{ font-size:12.5px; flex-wrap:wrap; row-gap:4px; justify-content:center; }
-  .pdx2 .hero-visual{ position:absolute; top:78px; right:-8%; width:64%; z-index:1; pointer-events:none; }
+  .pdx2 .hero-visual{ position:absolute; top:48px; right:-10%; width:80%; z-index:1; pointer-events:none; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
     opacity:.96;
