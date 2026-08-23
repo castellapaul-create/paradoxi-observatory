@@ -241,25 +241,25 @@ export function PdxStyles() {
   .pdx2 .faq-layout{ grid-template-columns:1fr; }
   .pdx2 .faq-phone{ position:static; max-width:320px; margin:0 auto 40px; }
   .pdx2 .hero-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1.05fr .95fr;
     grid-template-areas:
-      "title"
-      "visual"
-      "lede"
-      "actions"
-      "meta";
-    row-gap:22px;
+      "title visual"
+      "lede lede"
+      "actions actions"
+      "meta meta";
+    column-gap:0; row-gap:20px;
+    align-items:center;
   }
-  .pdx2 .hero-grid > h1{ font-size:clamp(1.6rem, 6vw, 2.2rem); line-height:1.15; margin-bottom:0; text-align:center; }
+  .pdx2 .hero-grid > h1{ font-size:clamp(1.35rem, 5.6vw, 1.8rem); line-height:1.15; margin-bottom:0; text-align:left; position:relative; z-index:1; }
   .pdx2 .hero-grid > .lede{ font-size:15px; margin-bottom:0; max-width:none; text-align:center; margin-left:auto; margin-right:auto; }
   .pdx2 .hero-grid > .hero-actions{ flex-direction:column; align-items:stretch; gap:10px; margin-bottom:0; }
   .pdx2 .hero-actions a{ justify-content:center; }
   .pdx2 .hero-grid > .hero-meta{ font-size:12.5px; flex-wrap:wrap; row-gap:4px; justify-content:center; }
-  .pdx2 .hero-visual{ margin-right:0; width:80%; margin-left:auto; margin-right:auto; }
+  .pdx2 .hero-visual{ position:relative; width:145%; margin-left:-35%; margin-right:0; z-index:0; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
-    -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, black 72%, transparent 100%);
-    mask-image: radial-gradient(ellipse closest-side at 50% 50%, black 72%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 62% 50%, black 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse closest-side at 62% 50%, black 55%, transparent 100%);
   }
   .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
   .pdx2 .footer-grid{ grid-template-columns:1fr 1fr; }
