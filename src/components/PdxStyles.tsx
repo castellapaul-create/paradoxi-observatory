@@ -258,7 +258,8 @@ export function PdxStyles() {
   .pdx2 .hero-visual{ margin-right:0; width:80%; margin-left:auto; margin-right:auto; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
-    -webkit-mask-image:none; mask-image:none;
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, black 72%, transparent 100%);
+    mask-image: radial-gradient(ellipse closest-side at 50% 50%, black 72%, transparent 100%);
   }
   .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
   .pdx2 .footer-grid{ grid-template-columns:1fr 1fr; }
