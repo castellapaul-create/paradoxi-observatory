@@ -250,18 +250,18 @@ export function PdxStyles() {
     row-gap:20px;
     position:relative;
   }
-  .pdx2 .hero-grid > h1{ font-size:clamp(1.9rem, 8vw, 2.6rem); line-height:1.14; margin-bottom:0; text-align:left; position:relative; z-index:0; }
+  .pdx2 .hero-grid > h1{ font-size:clamp(2.1rem, 9vw, 2.9rem); line-height:1.08; margin-bottom:0; text-align:left; position:relative; z-index:0; }
   .pdx2 .hero-grid > .lede{ font-size:15px; margin-bottom:0; max-width:none; text-align:center; margin-left:auto; margin-right:auto; }
   .pdx2 .hero-grid > .hero-actions{ flex-direction:column; align-items:stretch; gap:10px; margin-bottom:0; }
   .pdx2 .hero-actions a{ justify-content:center; }
   .pdx2 .hero-grid > .hero-meta{ font-size:12.5px; flex-wrap:wrap; row-gap:4px; justify-content:center; }
-  .pdx2 .hero-visual{ position:absolute; top:44px; right:-10%; width:72%; z-index:1; pointer-events:none; }
+  .pdx2 .hero-visual{ position:absolute; top:34px; right:-16%; width:105%; z-index:1; pointer-events:none; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
     mix-blend-mode:screen;
-    opacity:.88;
-    -webkit-mask-image: radial-gradient(ellipse closest-side at 58% 45%, black 72%, transparent 100%);
-    mask-image: radial-gradient(ellipse closest-side at 58% 45%, black 72%, transparent 100%);
+    opacity:.92;
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 62% 42%, black 78%, transparent 100%);
+    mask-image: radial-gradient(ellipse closest-side at 62% 42%, black 78%, transparent 100%);
   }
   .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
   .pdx2 .footer-grid{ grid-template-columns:1fr 1fr; }
