@@ -59,8 +59,8 @@ export function PdxStyles() {
 .pdx2 .hero-grid > .hero-meta{ grid-area:meta; display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--text-muted); }
 .pdx2 .hero-meta .dot{ color:var(--border); }
 .pdx2 .hero-meta .stars{ color:#f5a623; letter-spacing:1px; }
-.pdx2 .hero-visual{ grid-area:visual; position:relative; margin-right:-4%; }
-.pdx2 .hero-visual img{ width:112%; max-width:112%; height:auto; display:block; -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 46%, black 48%, transparent 100%); mask-image: radial-gradient(ellipse closest-side at 50% 46%, black 48%, transparent 100%); }
+.pdx2 .hero-visual{ grid-area:visual; position:relative; margin-right:-14%; }
+.pdx2 .hero-visual img{ width:132%; max-width:132%; height:auto; display:block; -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 46%, black 48%, transparent 100%); mask-image: radial-gradient(ellipse closest-side at 50% 46%, black 48%, transparent 100%); }
 
 .pdx2 .trust-bar{ background:var(--bg-dark); color:#fff; margin-top:64px; }
 .pdx2 .trust-viewport{ overflow:hidden; }
