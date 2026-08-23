@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useRef, useEffect, type FormEvent } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Layers,
   BarChart3,
@@ -12,17 +12,13 @@ import {
   Plus,
   ArrowRight,
   ArrowUpRight,
-  Check,
-  Loader2,
 } from "lucide-react";
 import { useReveal } from "@/hooks/use-reveal";
 import { PdxLogo } from "@/components/PdxLogo";
-import { subscribeEmail } from "@/lib/api/subscribe.functions";
 import paradoxiLogo from "@/assets/paradoxi-logo.png";
 import reportFx from "@/assets/report-fx-overview.png";
 import reportUsd from "@/assets/report-usd-rates.png";
 import reportGbp from "@/assets/report-gbpusd.png";
-import reportCover from "@/assets/report-cover.png";
 import sectionTrades from "@/assets/section-trades.png";
 import sectionBriefing from "@/assets/section-briefing.png";
 import sectionRapport from "@/assets/section-rapport.png";
@@ -100,70 +96,6 @@ const FAQ = [
   { q: "Est-ce un conseil en investissement ?", a: "Non. PARADOXI Observatory est un contenu strictement éducatif et informatif. Il ne constitue en aucun cas une recommandation personnalisée d'achat ou de vente d'instruments financiers. Vous restez seul décideur de vos choix — c'est précisément l'objectif." },
 ];
 
-// ─── Email form ──────────────────────────────────────────────────────────────
-
-type FormStatus = "idle" | "loading" | "done" | "error";
-
-function EmailForm({ large }: { large?: boolean }) {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  async function onSubmit(e: FormEvent) {
-    e.preventDefault();
-    if (!email.trim() || status === "loading") return;
-    setStatus("loading");
-    setErrorMsg("");
-    try {
-      await subscribeEmail({ data: { email: email.trim() } });
-      setStatus("done");
-    } catch (err) {
-      setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Une erreur est survenue, veuillez réessayer.");
-      setTimeout(() => setStatus("idle"), 5000);
-    }
-  }
-
-  if (status === "done") {
-    return (
-      <div className={`mx-auto flex items-center justify-center gap-2 rounded-2xl border border-primary/40 bg-primary/10 px-6 py-4 text-primary ${large ? "max-w-xl text-base" : "max-w-md text-sm"}`}>
-        <Check className="h-5 w-5 shrink-0" />
-        Merci — votre prochaine édition arrive dimanche.
-      </div>
-    );
-  }
-
-  return (
-    <div className="mx-auto w-full">
-      <form
-        onSubmit={onSubmit}
-        className={`mx-auto flex flex-col gap-2 rounded-2xl border border-border bg-card/80 p-3 backdrop-blur sm:flex-row sm:items-center sm:rounded-full sm:p-2 sm:pl-5 ${large ? "max-w-xl" : "max-w-md"}`}
-      >
-        <input
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Votre adresse email"
-          className="w-full bg-transparent px-2 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none sm:h-full sm:flex-1 sm:px-0 sm:py-0"
-        />
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="inline-flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] disabled:opacity-70 disabled:hover:scale-100 sm:w-auto sm:rounded-full sm:py-0 sm:h-11"
-        >
-          {status === "loading" ? (
-            <><Loader2 className="h-4 w-4 animate-spin" />Inscription…</>
-          ) : "Recevoir le rapport"}
-        </button>
-      </form>
-      {status === "error" && errorMsg && (
-        <p className={`mx-auto mt-3 text-center text-xs text-destructive ${large ? "max-w-xl" : "max-w-md"}`}>{errorMsg}</p>
-      )}
-    </div>
-  );
-}
-
 // ─── Page ────────────────────────────────────────────────────────────────────
 
 // ─── Cursor glow ─────────────────────────────────────────────────────────────
@@ -231,7 +163,6 @@ function Index() {
       <Testimonials />
       <PourQuiSection />
       <PricingSection />
-      <PrivateLetter />
       <Faq />
       <FinalCta />
       <Footer />
@@ -250,6 +181,7 @@ function Nav() {
           <a href="#rapport" className="transition-colors hover:text-foreground">Rapport</a>
           <a href="#methode" className="transition-colors hover:text-foreground">Méthode</a>
           <a href="#pour-qui" className="transition-colors hover:text-foreground">Pour qui</a>
+          <a href="#pricing" className="transition-colors hover:text-foreground">Tarifs</a>
           <a href="#faq" className="transition-colors hover:text-foreground">FAQ</a>
         </nav>
         <div className="flex items-center gap-3">
@@ -275,9 +207,9 @@ function Nav() {
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
             </svg>
           </a>
-          <a href="#subscribe" className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_20px_-4px] hover:shadow-primary/50">
-            Recevoir le rapport
-          </a>
+          <Link to="/abonnement" className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_20px_-4px] hover:shadow-primary/50">
+            S'abonner
+          </Link>
         </div>
       </div>
     </header>
@@ -368,18 +300,23 @@ function Hero() {
           ))}
         </div>
 
-        {/* Pricing narrative */}
-        <div className="reveal mx-auto mt-8 max-w-lg rounded-xl border border-primary/20 bg-primary/[0.05] px-5 py-3 text-center text-sm">
-          <span className="font-semibold text-foreground">Période de lancement terminée.</span>
-          {" "}<span className="text-muted-foreground">Abonnement Premium disponible : <strong className="font-semibold text-foreground/80">69,99 €/mois</strong>.</span>
+        {/* Pricing CTA */}
+        <div className="reveal mt-8 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#pricing"
+            className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_30px_-4px] hover:shadow-primary/60"
+          >
+            Voir les tarifs
+          </a>
+          <Link
+            to="/abonnement"
+            className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/40 px-8 py-3.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-card"
+          >
+            S'abonner
+          </Link>
         </div>
 
-        {/* Email capture */}
-        <div className="reveal mt-6 mx-auto max-w-lg">
-          <EmailForm large />
-        </div>
-
-        <p className="reveal mt-4 text-xs text-muted-foreground/35">
+        <p className="reveal mt-6 text-xs text-muted-foreground/35">
           Contenu éducatif et informatif · Jamais un conseil en investissement · Données RGPD protégées
         </p>
       </div>
@@ -932,8 +869,8 @@ function PourQuiSection() {
             ))}
           </ul>
           <div className="mt-8 border-t border-primary/15 pt-6">
-            <a href="#subscribe" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline underline-offset-4">
-              Je reconnais ce profil — recevoir le rapport <ArrowRight className="h-3.5 w-3.5" />
+            <a href="#pricing" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline underline-offset-4">
+              Je reconnais ce profil — voir les tarifs <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
@@ -1156,41 +1093,6 @@ function Testimonials() {
 
 // ─── Private letter / Subscribe ───────────────────────────────────────────────
 
-function PrivateLetter() {
-  return (
-    <section id="subscribe" className="mx-auto max-w-7xl px-6 py-12 md:py-28">
-      <div className="reveal pdx-card relative overflow-hidden rounded-[2rem] p-8 md:p-14">
-        <div className="pointer-events-none absolute -right-20 -top-20 h-80 w-80 pdx-glow opacity-50" />
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <span className="text-sm font-semibold text-primary">Publication privée</span>
-            <h2 className="mt-3 font-black text-3xl leading-tight md:text-5xl">
-              Ce n'est pas un email de plus. C'est votre rendez-vous hebdomadaire avec la clarté.
-            </h2>
-            <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-primary/25 bg-primary/[0.06] px-4 py-2 text-xs">
-              <span className="font-bold text-muted-foreground line-through decoration-2">Gratuit</span>
-              <span className="h-px w-4 bg-border/60" />
-              <span className="text-muted-foreground">Terminé · 69,99 €/mois désormais</span>
-            </div>
-            <p className="mt-5 text-lg text-muted-foreground">
-              Chaque dimanche soir, un rapport arrive dans votre boîte mail. Dense, structuré, lisible. Il ne vous dit pas quoi trader. Il vous aide à comprendre dans quel environnement vous évoluez — et pourquoi les marchés se comportent comme ils se comportent. C'est la différence entre réagir et décider.
-            </p>
-            <div className="mt-8">
-              <EmailForm />
-            </div>
-          </div>
-          <div className="relative">
-            <div className="pointer-events-none absolute -inset-6 pdx-glow opacity-50" />
-            <div className="pdx-float overflow-hidden rounded-2xl border border-border shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)]">
-              <img src={reportCover} alt="Rapport PARADOXI" className="w-full" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
 function Faq() {
@@ -1263,10 +1165,10 @@ function FinalCta() {
 
         <div className="relative mt-10">
           <a
-            href="#subscribe"
+            href="#pricing"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-base font-bold text-primary-foreground transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_60px_-8px] hover:shadow-primary/60"
           >
-            Recevoir le rapport de dimanche
+            Voir les tarifs
             <ArrowUpRight className="h-5 w-5" />
           </a>
         </div>
@@ -1287,8 +1189,13 @@ function Footer() {
             <p className="mt-5 max-w-sm text-sm text-muted-foreground">
               L'observatoire de recherche pour ceux qui ont décidé de comprendre les marchés — pas de les subir.
             </p>
-            <div className="mt-6 max-w-md">
-              <EmailForm />
+            <div className="mt-6">
+              <a
+                href="#pricing"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_20px_-4px] hover:shadow-primary/50"
+              >
+                Voir les tarifs
+              </a>
             </div>
             <div className="mt-6 flex items-center gap-3">
               <a
@@ -1325,9 +1232,8 @@ function Footer() {
             </div>
             <div className="space-y-3">
               <p className="font-semibold">Lettre</p>
-              <a href="#subscribe" className="block text-muted-foreground transition-colors hover:text-foreground">S'abonner</a>
+              <a href="#pricing" className="block text-muted-foreground transition-colors hover:text-foreground">S'abonner</a>
               <span className="block text-muted-foreground">Hebdomadaire</span>
-              <span className="block text-muted-foreground">Gratuit</span>
             </div>
           </div>
         </div>
