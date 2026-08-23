@@ -1,35 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useRef, useEffect } from "react";
-import {
-  Layers,
-  BarChart3,
-  Landmark,
-  Droplets,
-  Compass,
-  TrendingUp,
-  ShieldAlert,
-  Eye,
-  Plus,
-  ArrowRight,
-  ArrowUpRight,
-} from "lucide-react";
-import { useReveal } from "@/hooks/use-reveal";
-import { PdxLogo } from "@/components/PdxLogo";
-import paradoxiLogo from "@/assets/paradoxi-logo.png";
-import reportFx from "@/assets/report-fx-overview.png";
-import reportUsd from "@/assets/report-usd-rates.png";
-import reportGbp from "@/assets/report-gbpusd.png";
-import sectionTrades from "@/assets/section-trades.png";
-import sectionBriefing from "@/assets/section-briefing.png";
+import { useEffect, useState } from "react";
+
+import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
+import heroGlass from "@/assets/hero-glass-figure.jpg";
 import sectionRapport from "@/assets/section-rapport.png";
-import sectionShowcase from "@/assets/9D653234-1959-4A48-B0BA-DB75F32CF634.jpeg";
-import heroHands from "@/assets/hero-hands.png";
-import sectionMobile from "@/assets/A4806527-511C-47B8-B8C7-FFA71690663C.png";
-import founderBg from "@/assets/8E9213F7-50FE-44F1-B634-A8988C0BB773.png";
-import analyseChart from "@/assets/CE981A19-CB33-4A71-A1E6-62F9AC31E1C1.jpeg";
-import tradeEurnzd from "@/assets/trade-eurnzd.png";
-import tradeNzdjpy from "@/assets/trade-nzdjpy.png";
-import tradeUsdcad from "@/assets/trade-usdcad.png";
+import sectionTrades from "@/assets/section-trades.png";
+import tradeEurnzd from "@/assets/trade-eurnzd-clean.png";
+import tradeNzdjpy from "@/assets/trade-nzdjpy-clean.png";
+import tradeUsdcad from "@/assets/trade-usdcad-clean.png";
+import portraitFounder from "@/assets/portrait-linkedin.jpg";
+import mobileMockup from "@/assets/mobile-mockup.jpg";
+import appIcon from "@/assets/app-icon-web.jpg";
+import appNotification from "@/assets/app-notification.jpg";
 
 import logoTradingView from "@/assets/logos/tradingview.png";
 import logoForexFactory from "@/assets/logos/forexfactory.png";
@@ -46,14 +28,22 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Recevez gratuitement chaque semaine la lettre privée PARADOXI Observatory : fondamentaux FX, anticipations de taux et lecture macro institutionnelle.",
+          "Chaque dimanche, une analyse macroéconomique complète et les biais directionnels des principales devises — construits avec la rigueur d'un desk institutionnel.",
       },
       { property: "og:title", content: "PARADOXI Observatory" },
       {
         property: "og:description",
-        content: "La synthèse macro FX hebdomadaire — fondamentaux, taux et régimes de marché. Gratuit par email.",
+        content: "La synthèse macro FX hebdomadaire — fondamentaux, taux et régimes de marché.",
       },
       { property: "og:type", content: "website" },
+    ],
+    links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap",
+      },
     ],
   }),
   component: Index,
@@ -69,148 +59,103 @@ const LOGOS = [
   { src: logoPolymarket, alt: "Polymarket" },
 ];
 
-const TESTIMONIALS = [
-  { quote: "Depuis que je lis PARADOXI, j'aborde chaque semaine avec une vision structurée que je n'avais pas avant. Ce n'est pas un rapport — c'est un cadre de pensée.", name: "Julien M.", role: "Trader indépendant FX" },
-  { quote: "La rigueur est institutionnelle, le ton est humain. C'est exactement le niveau que j'attendais depuis des années.", name: "Sarah L.", role: "Gérante de portefeuille" },
-  { quote: "Pour la première fois, je comprends pourquoi les marchés bougent. Pas par chance. Par méthode.", name: "Antoine R.", role: "Analyste macro" },
-  { quote: "J'ai arrêté trois abonnements pour ne garder que PARADOXI. La différence, c'est la profondeur analytique.", name: "Mehdi B.", role: "Trader prop firm" },
-  { quote: "Ce que j'apprécie, c'est que personne ne me dit quoi faire. On me donne les éléments pour décider moi-même.", name: "Claire D.", role: "Day trader" },
-  { quote: "PARADOXI m'a aidé à construire un regard sur les marchés. Pas un système — un regard.", name: "Thomas V.", role: "Investisseur particulier" },
+const STEPS = [
+  { num: "01", tag: "COT", title: "COT Report", desc: "Positionnement des grands spéculateurs sur les futures — identifier qui porte le marché." },
+  { num: "02", tag: "Macro", title: "Macro Framework", desc: "Cycles économiques, inflation, emploi, croissance — l'environnement fondamental de chaque devise." },
+  { num: "03", tag: "Banques centrales", title: "Central Bank Watch", desc: "Anticipations de taux et calendrier décisionnel des grandes banques centrales." },
+  { num: "04", tag: "Synthèse", title: "Weekly Bias", desc: "La convergence des trois signaux, hiérarchisée et publiée chaque dimanche." },
 ];
 
-const EDITION_ITEMS = [
-  { icon: Layers, title: "Macro Framework", desc: "Le régime de marché, la hiérarchie des catalyseurs et le biais directionnel de la semaine." },
-  { icon: BarChart3, title: "FX Scorecard", desc: "La force relative des devises en un coup d'œil — pour savoir qui mène le marché et pourquoi." },
-  { icon: Landmark, title: "Central Bank Watch", desc: "Positionnement des grandes banques centrales, anticipations de taux et calendrier décisionnel." },
-  { icon: Droplets, title: "Liquidity Map", desc: "L'état des conditions de liquidité et de l'appétit pour le risque à travers l'ensemble des actifs." },
-  { icon: Compass, title: "Weekly Bias", desc: "Le biais directionnel par devise — fondamentaux, technique et catalyseurs convergents." },
-  { icon: TrendingUp, title: "Institutional Flows", desc: "Où se positionnent les mains fortes — et ce que leur positionnement révèle sur le marché." },
-  { icon: ShieldAlert, title: "Risk Regime", desc: "Risk-on, risk-off ou transition — et ce que chaque régime implique pour votre lecture de marché." },
-  { icon: Eye, title: "Watchlist Forex", desc: "Les paires sous surveillance avec thèse directionnelle, contexte macro et niveaux structurants." },
+const FEATURES = [
+  { title: "Rapport Hebdomadaire", desc: "Macro Framework complet, livré chaque dimanche en PDF dans votre boîte mail.", icon: <path d="M3 4h18v16H3zM3 9h18M8 4v5" /> },
+  { title: "FX Scorecard", desc: "Force relative des devises en un coup d'œil.", icon: <path d="M3 20V10M10 20V4M17 20v-7" /> },
+  { title: "Central Bank Watch", desc: "Positionnement et anticipations des banques centrales.", icon: <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6" /> },
+  { title: "Weekly Bias", desc: "Biais directionnel par devise, contextualisé par le PCI.", icon: <path d="M12 3v3m0 12v3M3 12h3m12 0h3M6 6l2 2m8 8l2 2M18 6l-2 2M8 16l-2 2" /> },
+  { title: "Watchlist Forex", desc: "Les paires sous surveillance, thèse directionnelle et niveaux structurants.", icon: <path d="M9 18l3-3 3 3M12 15V4M4 15v3a2 2 0 002 2h12a2 2 0 002-2v-3" /> },
+  { title: "Décisions de Trades", desc: "Analyse des setups fondamentaux en cours, documentée.", icon: <path d="M3 17l6-6 4 4 8-8M21 7v6h-6" /> },
+];
+
+const TRADES = [
+  { symbol: "EUR/NZD", direction: "long" as const, image: tradeEurnzd, result: "PCI Convergent", desc: "COT institutionnel EUR haussier + divergence macro NZD. Biais validé par la CB Watch." },
+  { symbol: "NZD/JPY", direction: "short" as const, image: tradeNzdjpy, result: "Convergence ×3", desc: "Positionnement COT JPY haussier + macro NZD affaiblie + confirmation banque centrale." },
+  { symbol: "USD/CAD", direction: "long" as const, image: tradeUsdcad, result: "PCI Haussier", desc: "Biais USD soutenu par la Fed + fragilité macro CAD. Convergence positionnement institutionnel." },
+];
+
+const PLAN_CHECKLIST = [
+  "Rapport Macro Hebdomadaire",
+  "FX Scorecard",
+  "Central Bank Watch",
+  "Weekly Bias",
+];
+
+const TESTIMONIALS = [
+  { quote: "Depuis que je lis PARADOXI, j'aborde chaque semaine avec une vision structurée que je n'avais pas avant. Ce n'est pas un rapport — c'est un cadre de pensée.", name: "Julien M.", role: "Trader indépendant FX", initials: "JM" },
+  { quote: "La rigueur est institutionnelle, le ton est humain. C'est exactement le niveau que j'attendais depuis des années.", name: "Sarah L.", role: "Gérante de portefeuille", initials: "SL" },
+  { quote: "Pour la première fois, je comprends pourquoi les marchés bougent. Pas par chance. Par méthode.", name: "Antoine R.", role: "Analyste macro", initials: "AR" },
+  { quote: "J'ai arrêté trois abonnements pour ne garder que PARADOXI. La différence, c'est la profondeur analytique.", name: "Mehdi B.", role: "Trader prop firm", initials: "MB" },
+  { quote: "Ce que j'apprécie, c'est que personne ne me dit quoi faire. On me donne les éléments pour décider moi-même.", name: "Claire D.", role: "Day trader", initials: "CD" },
+  { quote: "PARADOXI m'a aidé à construire un regard sur les marchés. Pas un système — un regard.", name: "Thomas V.", role: "Investisseur particulier", initials: "TV" },
 ];
 
 const FAQ = [
-  { q: "Qu'est-ce que PARADOXI Observatory exactement ?", a: "Un observatoire de recherche financière indépendant. Chaque semaine, nous produisons une analyse macro approfondie des marchés des changes : fondamentaux, banques centrales, positionnement institutionnel, régimes de risque. Pas des signaux à copier — une compréhension à construire." },
-  { q: "Combien coûte l'accès ?", a: "La période de lancement gratuite est terminée. L'accès complet — rapports, scorecard, watchlist, décisions de trades — est désormais proposé à 69,99 €/mois, sans engagement." },
-  { q: "À quelle fréquence le rapport est-il publié ?", a: "Une édition complète chaque dimanche soir — pour préparer votre semaine de marché avec méthode. Accompagnée d'un briefing quotidien les jours d'ouverture, pour suivre l'évolution du contexte macro en temps réel." },
-  { q: "Est-ce un conseil en investissement ?", a: "Non. PARADOXI Observatory est un contenu strictement éducatif et informatif. Il ne constitue en aucun cas une recommandation personnalisée d'achat ou de vente d'instruments financiers. Vous restez seul décideur de vos choix — c'est précisément l'objectif." },
+  { q: "Qu'est-ce que PARADOXI Observatory exactement ?", a: "Un observatoire de recherche financière indépendant. Chaque semaine, nous produisons une analyse macro approfondie des marchés des changes — pas des signaux à copier, une compréhension à construire." },
+  { q: "Combien coûte l'accès ?", a: "69,99 €/mois, sans engagement. Un tarif préférentiel de 49,99 €/mois est réservé aux membres déjà inscrits avant l'ouverture." },
+  { q: "Est-ce un conseil en investissement ?", a: "Non. Contenu strictement éducatif et informatif, qui ne constitue en aucun cas une recommandation personnalisée. Vous restez seul décideur de vos choix." },
 ];
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-// ─── Cursor glow ─────────────────────────────────────────────────────────────
-
-function CursorGlow() {
-  const ref = useRef<HTMLDivElement>(null);
-  const pos = useRef({ x: -1000, y: -1000 });
-  const target = useRef({ x: -1000, y: -1000 });
-  const raf = useRef<number>(0);
+function Index() {
+  const [appModalOpen, setAppModalOpen] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-
-    const onMove = (e: MouseEvent) => {
-      target.current = { x: e.clientX, y: e.clientY };
-    };
-
-    const tick = () => {
-      pos.current.x = lerp(pos.current.x, target.current.x, 0.10);
-      pos.current.y = lerp(pos.current.y, target.current.y, 0.10);
-      el.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px) translate(-50%, -50%)`;
-      raf.current = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener("mousemove", onMove);
-    raf.current = requestAnimationFrame(tick);
-
-    return () => {
-      window.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(raf.current);
-    };
-  }, []);
+    document.body.style.overflow = appModalOpen ? "hidden" : "";
+    if (!appModalOpen) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setAppModalOpen(false);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [appModalOpen]);
 
   return (
-    <div
-      ref={ref}
-      className="pointer-events-none fixed left-0 top-0 z-[9999]"
-      style={{
-        width: "750px",
-        height: "750px",
-        background: "radial-gradient(circle, oklch(0.78 0.18 150 / 0.05) 0%, transparent 58%)",
-        willChange: "transform",
-      }}
-    />
-  );
-}
-
-function Index() {
-  useReveal();
-  return (
-    <div className="min-h-screen overflow-x-hidden bg-background text-foreground antialiased">
-      <CursorGlow />
-      <Nav />
+    <div className="pdx2">
+      <PdxStyles />
+      <Nav onOpenApp={() => setAppModalOpen(true)} />
       <Hero />
+      <TrustBar />
       <LogoMarquee />
-      <MethodeSection />
-      <WeeklyReport />
-      <Editions />
-      <RecentTradesSection />
-      <AnalyseCard />
-      <WhoAmI />
+      <RapportShowcase />
+      <Methode />
+      <FeaturesGrid />
+      <TradesShowcase />
+      <Founder />
       <Testimonials />
-      <PourQuiSection />
-      <PricingSection />
+      <Pricing />
       <Faq />
-      <FinalCta />
       <Footer />
+      {appModalOpen && <AppModal onClose={() => setAppModalOpen(false)} />}
     </div>
   );
 }
 
 // ─── Nav ─────────────────────────────────────────────────────────────────────
 
-function Nav() {
+function Nav({ onOpenApp }: { onOpenApp: () => void }) {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-background/60 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <PdxLogo />
-        <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <a href="#rapport" className="transition-colors hover:text-foreground">Rapport</a>
-          <a href="#methode" className="transition-colors hover:text-foreground">Méthode</a>
-          <a href="#pour-qui" className="transition-colors hover:text-foreground">Pour qui</a>
-          <a href="#pricing" className="transition-colors hover:text-foreground">Tarifs</a>
-          <a href="#faq" className="transition-colors hover:text-foreground">FAQ</a>
+    <header className="nav">
+      <div className="nav-inner">
+        <img className="logo" src={paradoxiLogoLight} alt="PARADOXI Observatory" />
+        <nav className="nav-links">
+          <a href="#rapport">Rapport</a>
+          <a href="#methode">Méthode</a>
+          <a href="#pricing">Tarifs</a>
+          <button type="button" className="nav-app-link" onClick={onOpenApp}>
+            App <span className="nav-app-badge">Bientôt</span>
+          </button>
+          <a href="#faq">FAQ</a>
         </nav>
-        <div className="flex items-center gap-3">
-          <a
-            href="https://www.linkedin.com/in/paul-c-977b70153"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden items-center justify-center text-muted-foreground transition-colors hover:text-foreground md:flex"
-            aria-label="LinkedIn"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-          </a>
-          <a
-            href="https://www.instagram.com/paradoxi.observatory?utm_source=qr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden items-center justify-center text-muted-foreground transition-colors hover:text-foreground md:flex"
-            aria-label="Instagram"
-          >
-            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-            </svg>
-          </a>
-          <Link to="/abonnement" className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_20px_-4px] hover:shadow-primary/50">
-            S'abonner
-          </Link>
-        </div>
+        <a href="#pricing" className="nav-cta">S'abonner</a>
       </div>
     </header>
   );
@@ -220,392 +165,82 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden px-6 pt-24 pb-20">
-      {/* Hero background — desktop only */}
-      <div className="pointer-events-none absolute inset-0 hidden md:block">
-        <img
-          src={sectionShowcase}
-          alt=""
-          className="h-full w-full object-cover"
-          style={{ opacity: 0.20, maskImage: "radial-gradient(ellipse 62% 90% at 50% 25%, transparent 22%, black 68%)" }}
-        />
-      </div>
-      <div className="pointer-events-none absolute inset-0 pdx-grid opacity-[0.14] [mask-image:radial-gradient(75%_80%_at_50%_30%,black,transparent)]" />
-      <div className="pointer-events-none absolute inset-x-0 -top-40 h-[900px] pdx-glow opacity-45" />
-      {/* Hands — desktop (opacity 0.55) */}
-      <div className="pointer-events-none absolute inset-0 hidden items-center justify-center overflow-hidden md:flex">
-        <img
-          src={heroHands}
-          alt=""
-          className="w-full max-w-5xl object-contain"
-          style={{
-            opacity: 0.55,
-            mixBlendMode: "screen",
-            maskImage: "radial-gradient(ellipse 82% 58% at 50% 50%, black 10%, transparent 68%)",
-          }}
-        />
-      </div>
-      {/* Hands — mobile (opacity 0.80, plus grande visibilité) */}
-      <div className="pointer-events-none absolute inset-x-0 -top-64 bottom-0 flex items-center justify-center md:hidden">
-        <img
-          src={heroHands}
-          alt=""
-          className="w-full object-contain"
-          style={{
-            opacity: 0.80,
-            mixBlendMode: "screen",
-            maskImage: "radial-gradient(ellipse 90% 55% at 50% 50%, black 10%, transparent 70%)",
-          }}
-        />
-      </div>
-
-      <div className="relative mx-auto w-full max-w-6xl text-center">
-        {/* Badge */}
-        <div className="reveal mb-9 inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.07] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" style={{ boxShadow: "0 0 6px 2px oklch(0.78 0.18 150 / 0.7)" }} />
-          OBSERVATOIRE DE RECHERCHE FX
+    <section className="hero">
+      <div className="wrap hero-grid">
+        <div>
+          <h1>Vous analysez les marchés avec les outils du retail. Les desks institutionnels lisent <em>autre chose.</em></h1>
+          <p className="lede">Chaque dimanche, une analyse macroéconomique complète et les biais directionnels des principales devises — construits avec la même rigueur qu'un desk institutionnel.</p>
+          <div className="hero-actions">
+            <a href="#pricing" className="btn-primary">Voir les tarifs →</a>
+            <a href="#methode" className="btn-ghost">Comment ça marche</a>
+          </div>
+          <div className="hero-meta">
+            <span className="stars">★★★★★</span>
+            <span>52 dimanches consécutifs</span>
+            <span className="dot">·</span>
+            <span>~300 lecteurs confidentiel</span>
+          </div>
         </div>
-
-        {/* Title */}
-        <h1
-          className="reveal font-black tracking-tight"
-          style={{ fontSize: "clamp(1.75rem, 4.5vw, 4.8rem)", lineHeight: "1.08", overflowWrap: "break-word" }}
-        >
-          Vous analysez les marchés
-          <br />
-          <span className="text-primary">avec les outils du retail.</span>
-          <br />
-          Les desks institutionnels<br className="sm:hidden" /> lisent autre chose.
-        </h1>
-
-        {/* Subtitle */}
-        <p className="reveal mx-auto mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-          Chaque dimanche, recevez gratuitement une analyse macroéconomique et les biais directionnels des principales devises.
-        </p>
-
-        {/* Stats row */}
-        <div className="reveal mx-auto mt-10 grid w-full max-w-sm grid-cols-3 divide-x divide-border/50 rounded-2xl border border-border/40 bg-card/30 backdrop-blur sm:max-w-none sm:w-auto sm:inline-flex sm:flex-nowrap">
-          {[
-            { value: "+1000h", label: "de recherche cumulées" },
-            { value: "52", label: "dimanches consécutifs" },
-            { value: "~300", label: "lecteurs · confidentiel", dot: true },
-          ].map((s) => (
-            <div key={s.value} className="flex flex-col items-center gap-1 px-4 py-4 text-center sm:flex-row sm:items-center sm:gap-3 sm:px-7 sm:text-left">
-              <span className="text-xl font-black text-foreground sm:text-[1.75rem]">{s.value}</span>
-              <span className="flex items-center gap-1.5 text-[11px] leading-snug text-muted-foreground sm:text-xs">
-                {s.dot && <span className="hidden h-1.5 w-1.5 shrink-0 rounded-full bg-primary sm:block" />}
-                {s.label}
-              </span>
-            </div>
-          ))}
+        <div className="hero-visual">
+          <img src={heroGlass} alt="Figure abstraite en verre — représentation de l'analyse des données de marché" />
         </div>
-
-        {/* Pricing CTA */}
-        <div className="reveal mt-8 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="#pricing"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_30px_-4px] hover:shadow-primary/60"
-          >
-            Voir les tarifs
-          </a>
-          <Link
-            to="/abonnement"
-            className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-card/40 px-8 py-3.5 text-sm font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-card"
-          >
-            S'abonner
-          </Link>
-        </div>
-
-        <p className="reveal mt-6 text-xs text-muted-foreground/35">
-          Contenu éducatif et informatif · Jamais un conseil en investissement · Données RGPD protégées
-        </p>
       </div>
     </section>
   );
 }
 
-// ─── Logo strip ───────────────────────────────────────────────────────────────
+// ─── Trust bar ───────────────────────────────────────────────────────────────
+
+function TrustBar() {
+  return (
+    <div className="trust-bar">
+      <div className="trust-inner">
+        <div className="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 12l2 2 4-4" /><circle cx="12" cy="12" r="9" /></svg>
+          <span><strong>100% éducatif</strong> — jamais un conseil en investissement</span>
+        </div>
+        <div className="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 6v6l4 2" /><circle cx="12" cy="12" r="9" /></svg>
+          <span><strong>Chaque dimanche</strong> — sans exception depuis 52 semaines</span>
+        </div>
+        <div className="trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="10" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
+          <span><strong>Sans engagement</strong> — résiliable en un clic</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Logo marquee ────────────────────────────────────────────────────────────
 
 function LogoMarquee() {
-  const items = [...LOGOS, ...LOGOS, ...LOGOS];
+  const items = [...LOGOS, ...LOGOS];
   return (
-    <div className="border-y border-border/40 py-10">
-      <p className="mb-6 text-center font-mono text-[10px] uppercase tracking-[0.28em] text-muted-foreground/35">
-        Sources &amp; données utilisées dans la recherche
-      </p>
-      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
-        <div className="pdx-marquee-track flex w-max items-center gap-16">
-          {items.map((logo, i) => (
-            <img key={i} src={logo.src} alt={logo.alt} className="h-7 w-auto shrink-0 opacity-35 transition-opacity hover:opacity-65 md:h-8" />
-          ))}
+    <div className="marquee-section">
+      <div className="wrap">
+        <p className="marquee-label">Sources &amp; données utilisées dans la recherche</p>
+        <div className="marquee-viewport">
+          <div className="marquee-logos">
+            {items.map((logo, i) => (
+              <img key={i} src={logo.src} alt={logo.alt} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-// ─── Weekly Report ────────────────────────────────────────────────────────────
+// ─── Showcases ───────────────────────────────────────────────────────────────
 
-function WeeklyReport() {
+function RapportShowcase() {
   return (
-    <section id="rapport" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
-      <div className="reveal relative">
-        <div className="pointer-events-none absolute -inset-6 pdx-glow opacity-15" />
-        <div className="relative z-10 overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
-          <img src={sectionRapport} alt="Rapport Fondamental Hebdomadaire" className="w-full" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Briefing ─────────────────────────────────────────────────────────────────
-
-function BriefingSection() {
-  return (
-    <section id="briefing" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
-      <div className="reveal relative">
-        <div className="pointer-events-none absolute -inset-6 pdx-glow opacity-15" />
-        <div className="relative z-10 overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
-          <img src={sectionBriefing} alt="Briefing Macro Quotidien" className="w-full" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Trades ───────────────────────────────────────────────────────────────────
-
-function _TvCandlestickMock_unused() {
-  const candles: Array<[number, number, number, number, number]> = [
-    [8, 88, 76, 92, 73], [18, 80, 70, 84, 67], [28, 74, 82, 86, 71],
-    [38, 80, 70, 84, 67], [48, 72, 62, 76, 59], [58, 65, 55, 69, 52],
-    [68, 60, 68, 72, 56], [78, 65, 55, 70, 52], [88, 57, 47, 62, 44],
-    [98, 50, 42, 56, 39], [108, 45, 55, 58, 41], [118, 50, 40, 54, 37],
-    [128, 43, 35, 48, 32], [138, 40, 48, 52, 36], [148, 44, 36, 48, 33],
-    [158, 38, 30, 42, 27], [168, 32, 24, 37, 21], [178, 28, 36, 40, 24],
-    [188, 32, 24, 36, 21], [198, 28, 20, 33, 17], [208, 24, 16, 29, 13],
-    [218, 20, 28, 32, 16], [228, 24, 16, 28, 13], [238, 18, 10, 23, 7],
-    [248, 14, 8, 19, 5], [258, 16, 8, 21, 5], [268, 12, 6, 17, 3],
-  ];
-  return (
-    <div className="bg-[#f0f3fa] p-3">
-      <div className="flex items-center justify-between text-[10px]">
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-gray-700">EUR/USD</span>
-          <span className="text-gray-400">·</span>
-          <span className="font-medium text-gray-500">1D</span>
-          <span className="ml-1 text-[9px] text-gray-400">OANDA</span>
-        </div>
-        <div className="flex items-center gap-1.5 text-[9px] text-gray-400">
-          {["1h","4h","1D","1W"].map(t => (
-            <span key={t} className={t === "1D" ? "font-bold text-blue-600" : ""}>{t}</span>
-          ))}
-        </div>
-      </div>
-      <div className="mt-0.5 flex items-baseline gap-2 text-[10px]">
-        <span className="font-bold text-[#26a69a]">1.0847</span>
-        <span className="text-[9px] text-[#26a69a]">+0.0012 (+0.11%)</span>
-      </div>
-      <svg viewBox="0 0 280 80" className="mt-1 w-full" fill="none">
-        {[15, 35, 55, 75].map(y => (
-          <line key={y} x1="0" x2="280" y1={y} y2={y} stroke="#dde2ee" strokeWidth="0.5" />
-        ))}
-        <path d="M0,76 C15,74 30,70 50,62 C70,54 90,46 110,36 C130,27 150,20 170,15 C190,10 210,7 230,5 C250,3 265,2 280,1" stroke="#2196f3" strokeWidth="1" opacity="0.7" />
-        {candles.map(([x, o, c, h, l], i) => {
-          const up = c < o;
-          const col = up ? "#26a69a" : "#ef5350";
-          return (
-            <g key={i}>
-              <line x1={x} x2={x} y1={h} y2={l} stroke={col} strokeWidth="0.8" />
-              <rect x={x - 2.5} y={Math.min(o, c)} width="5" height={Math.max(Math.abs(o - c), 1)} fill={col} />
-            </g>
-          );
-        })}
-        <text x="272" y="12" fontSize="6" fill="#999" textAnchor="end">1.090</text>
-        <text x="272" y="40" fontSize="6" fill="#999" textAnchor="end">1.082</text>
-        <text x="272" y="72" fontSize="6" fill="#999" textAnchor="end">1.074</text>
-      </svg>
-      <div className="flex justify-between text-[8px] text-gray-400">
-        <span>Jan</span><span>Fév</span><span>Mar</span><span>Avr</span><span>Mai</span><span>Jun</span>
-      </div>
-    </div>
-  );
-}
-
-function _SP500Mock_unused() {
-  const lines = [
-    { color: "#50dc96", path: "M0,55 C20,52 40,46 60,38 C80,30 100,22 120,16 C140,10 160,6 180,3" },
-    { color: "#2196f3", path: "M0,62 C20,60 40,55 60,48 C80,41 100,35 120,28 C140,22 160,17 180,13" },
-    { color: "#ff9800", path: "M0,68 C20,66 40,63 60,57 C80,51 100,46 120,40 C140,34 160,30 180,25" },
-    { color: "#ef5350", path: "M0,72 C20,71 40,69 60,65 C80,61 100,58 120,54 C140,50 160,48 180,43" },
-  ];
-  return (
-    <div className="bg-card p-3">
-      <p className="text-[10px] font-semibold text-foreground/80">S&amp;P 500 · Performance</p>
-      <p className="text-[9px] text-muted-foreground">YTD comparatif secteurs</p>
-      <svg viewBox="0 0 180 70" className="mt-2 w-full" fill="none">
-        {[15, 35, 55].map(y => (
-          <line key={y} x1="0" x2="180" y1={y} y2={y} stroke="currentColor" strokeWidth="0.3" opacity="0.12" />
-        ))}
-        {lines.map((l, i) => (
-          <path key={i} d={l.path} stroke={l.color} strokeWidth="1.4" opacity="0.85" />
-        ))}
-      </svg>
-      <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
-        {[
-          { c: "#50dc96", l: "Tech" }, { c: "#2196f3", l: "Fin." },
-          { c: "#ff9800", l: "Énergie" }, { c: "#ef5350", l: "Santé" },
-        ].map(({ c, l }) => (
-          <div key={l} className="flex items-center gap-1">
-            <span className="h-1.5 w-3 rounded-full" style={{ backgroundColor: c }} />
-            <span className="text-[9px] text-muted-foreground">{l}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function TradesSection() {
-  return (
-    <section id="trades" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
-      <div className="reveal relative">
-        <div className="pointer-events-none absolute -inset-6 pdx-glow opacity-15" />
-        <div className="relative z-10 overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
-          <img src={sectionTrades} alt="Recherches & Décisions de Trades" className="w-full" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Recent Trades ───────────────────────────────────────────────────────────
-
-const RECENT_TRADES = [
-  {
-    symbol: "EUR/NZD",
-    direction: "Long" as const,
-    result: "PCI Convergent",
-    desc: "COT institutionnel EUR haussier + divergence macro NZD. Biais validé par la CB Watch.",
-    image: tradeEurnzd,
-  },
-  {
-    symbol: "NZD/JPY",
-    direction: "Short" as const,
-    result: "Convergence ×3",
-    desc: "Positionnement COT JPY haussier + macro NZD affaiblie + confirmation banque centrale.",
-    image: tradeNzdjpy,
-  },
-  {
-    symbol: "USD/CAD",
-    direction: "Long" as const,
-    result: "PCI Haussier",
-    desc: "Biais USD soutenu par la Fed + fragilité macro CAD. Convergence positionnement institutionnel.",
-    image: tradeUsdcad,
-  },
-];
-
-function RecentTradesSection() {
-  return (
-    <section className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
-
-      {/* Header */}
-      <div className="reveal mb-8 text-center md:mb-14">
-        <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-primary/25 bg-primary/[0.07] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-          <span className="h-1.5 w-1.5 rounded-full bg-primary" style={{ boxShadow: "0 0 6px 2px oklch(0.78 0.18 150 / 0.7)" }} />
-          Décisions documentées
-        </div>
-        <h2 className="font-black text-3xl leading-tight md:text-5xl">Des convictions argumentées, pas des signaux</h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
-          Chaque position naît d'une thèse fondamentale construite. Rien n'est masqué — la conviction, le raisonnement et le résultat sont exposés avec la même rigueur.
-        </p>
-      </div>
-
-      {/* Trade cards */}
-      <div className="grid gap-5 md:grid-cols-3">
-        {RECENT_TRADES.map((trade) => (
-          <div
-            key={trade.symbol}
-            className="reveal group relative overflow-hidden rounded-2xl border border-border/60 bg-card/30 transition-all duration-300 hover:border-border hover:bg-card/50"
-          >
-            {/* Chart image */}
-            <div className="relative overflow-hidden">
-              <img
-                src={trade.image}
-                alt={`Trade ${trade.symbol}`}
-                className="w-full transition-transform duration-500 group-hover:scale-[1.03]"
-              />
-              {/* Top badges */}
-              <div className="absolute left-3 top-3 flex items-center gap-1.5">
-                <span className="rounded-full border border-border/60 bg-background/85 px-2.5 py-1 text-xs font-black backdrop-blur-md">
-                  {trade.symbol}
-                </span>
-              </div>
-              <div className="absolute right-3 top-3">
-                <span
-                  className={`rounded-full border px-2.5 py-1 text-xs font-bold backdrop-blur-md ${
-                    trade.direction === "Long"
-                      ? "border-primary/35 bg-primary/15 text-primary"
-                      : "border-red-500/35 bg-red-500/15 text-red-400"
-                  }`}
-                >
-                  {trade.direction}
-                </span>
-              </div>
-            </div>
-
-            {/* Footer */}
-            <div className="flex items-center justify-between gap-3 px-4 py-3.5">
-              <p className="text-xs leading-snug text-muted-foreground">{trade.desc}</p>
-              <span className="shrink-0 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-black text-primary">
-                {trade.result}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ─── Editions marquee ─────────────────────────────────────────────────────────
-
-function EditionPill({ item }: { item: (typeof EDITION_ITEMS)[number] }) {
-  const Icon = item.icon;
-  return (
-    <div
-      title={item.desc}
-      className="group flex shrink-0 items-center gap-3 rounded-full border border-border bg-card/60 px-7 py-4 transition-colors duration-300 hover:border-primary/40 hover:bg-card"
-    >
-      <Icon className="h-5 w-5 shrink-0 text-primary" />
-      <span className="whitespace-nowrap text-lg font-medium text-foreground/80 transition-colors group-hover:text-foreground">
-        {item.title}
-      </span>
-    </div>
-  );
-}
-
-function Editions() {
-  const firstRow = EDITION_ITEMS.slice(0, 4);
-  const secondRow = EDITION_ITEMS.slice(4);
-  const rowA = [...firstRow, ...firstRow, ...firstRow];
-  const rowB = [...secondRow, ...secondRow, ...secondRow];
-  return (
-    <section id="editions" className="py-28">
-      <div className="reveal mx-auto max-w-2xl px-6 text-center">
-        <h2 className="font-black text-3xl leading-tight md:text-5xl">Ce que vous lirez chaque dimanche soir</h2>
-        <p className="mt-4 text-lg text-muted-foreground">Huit modules conçus pour transformer le bruit des marchés en une lecture claire, structurée et décisionnelle.</p>
-      </div>
-      <div className="reveal mt-8 space-y-5 md:mt-14">
-        <div className="pdx-marquee-pause overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-          <div className="pdx-marquee-track flex w-max items-center gap-5">
-            {rowA.map((item, i) => <EditionPill key={`a-${i}`} item={item} />)}
-          </div>
-        </div>
-        <div className="pdx-marquee-pause overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-          <div className="pdx-marquee-reverse flex w-max items-center gap-5">
-            {rowB.map((item, i) => <EditionPill key={`b-${i}`} item={item} />)}
+    <section className="showcase" id="rapport">
+      <div className="wrap">
+        <div className="showcase-frame">
+          <div className="showcase-card">
+            <img src={sectionRapport} alt="Rapport Fondamental Hebdomadaire PARADOXI Observatory" />
           </div>
         </div>
       </div>
@@ -613,134 +248,32 @@ function Editions() {
   );
 }
 
-// ─── Report showcase ──────────────────────────────────────────────────────────
-
-function ReportShowcase() {
-  const cards = [
-    { img: reportFx, title: "L'état du marché des changes", tag: "Overview" },
-    { img: reportUsd, title: "Le dollar soutenu par les taux", tag: "Forex" },
-    { img: reportGbp, title: "Setup GBPUSD", tag: "Watchlist" },
-  ];
+function TradesShowcase() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-12 md:py-28">
-      <div className="reveal mx-auto max-w-2xl text-center">
-        <h2 className="font-black text-3xl leading-tight md:text-5xl">La rigueur, visible à chaque page</h2>
-        <p className="mt-4 text-lg text-muted-foreground">Conçu comme une note de recherche institutionnelle. Dense, mesuré, lisible — même pour celui qui n'a que dix minutes.</p>
-      </div>
-      <div className="mt-16 grid gap-6 lg:grid-cols-3">
-        {cards.map((c, i) => (
-          <article
-            key={c.title}
-            className="reveal pdx-hover-glow group overflow-hidden rounded-2xl border border-border/80 bg-card"
-            style={{ transitionDelay: `${i * 80}ms` }}
-          >
-            <div className="relative overflow-hidden">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-20 pdx-glow opacity-30" />
-              <img src={c.img} alt={c.title} className="w-full transition-transform duration-700 group-hover:scale-[1.04]" />
-            </div>
-            <div className="flex items-center justify-between p-6">
-              <div>
-                <p className="text-xs uppercase tracking-wider text-primary">{c.tag}</p>
-                <h3 className="mt-1 text-base font-semibold">{c.title}</h3>
-              </div>
-              <ArrowRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-// ─── Qui suis-je ─────────────────────────────────────────────────────────────
-
-function WhoAmI() {
-
-  const proofCards = [
-    {
-      icon: TrendingUp,
-      title: "Un processus reproductible, pas une opinion",
-      desc: "Chaque édition suit le même pipeline : COT, macro, banques centrales, biais par devise. La même rigueur toutes les semaines — sans improvisation.",
-    },
-    {
-      icon: ShieldAlert,
-      title: "Indépendant par construction",
-      desc: "Aucun affilié, aucun sponsor, aucune pression commerciale. PARADOXI ne dépend que de la qualité de sa recherche — c'est notre seule ligne de défense.",
-    },
-    {
-      icon: Eye,
-      title: "Conçu pour des décideurs, pas des suiveurs",
-      desc: "Nous ne vous donnons pas quoi trader. Nous vous donnons les éléments pour que votre propre jugement soit informé, structuré et indépendant.",
-    },
-  ];
-
-
-  return (
-    <section id="about" className="py-28">
-      <div className="mx-auto max-w-7xl px-6">
-
-        {/* Narrative + insight capsules */}
-        <div className="grid items-start gap-8 lg:gap-16 lg:grid-cols-2">
-
-          {/* Left: narrative */}
-          <div className="reveal">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">La conviction derrière l'Observatoire</p>
-            <h2
-              className="mt-5 font-black leading-tight tracking-tight"
-              style={{ fontSize: "clamp(1.9rem, 3.5vw, 3rem)" }}
-            >
-              PARADOXI Observatory existe parce qu'un accès sérieux aux marchés ne devrait pas être réservé aux professionnels.
-            </h2>
-            <p className="mt-6 border-l-2 border-primary/40 pl-5 text-base italic leading-relaxed text-muted-foreground">
-              Nous ne vendons pas une promesse de performance. Nous construisons un observatoire de recherche pour partager la lecture que la plupart des particuliers ambitieux n'ont jamais eu accès.
-            </p>
-            <div className="mt-8 space-y-4 text-base leading-relaxed text-muted-foreground">
-              <p>
-                PARADOXI Observatory est une publication indépendante fondée sur une conviction simple : la compréhension des marchés est une compétence — et comme toutes les compétences, elle s'acquiert par la méthode, la constance et la profondeur analytique.
-              </p>
-              <p>
-                La majorité des traders particuliers ne manquent pas d'ambition. Ils manquent d'un cadre. Ils cherchent des entrées là où ils devraient chercher une <em className="not-italic text-foreground/80">compréhension</em>. Ils veulent des résultats immédiats là où ce qui compte, c'est la progression sur le temps long.
-              </p>
-              <p>
-                PARADOXI a été construit en réponse à ce manque. Chaque édition est le produit d'un processus analytique rigoureux — COT, macro, banques centrales, flux institutionnels — synthétisé pour être lisible, décisionnel et exploitable par un trader sérieux, sans expérience institutionnelle préalable.
-              </p>
-              <p>
-                Nous n'avons pas vocation à vous dire quoi faire. Nous avons vocation à vous donner les éléments pour décider vous-même — avec plus de clarté, plus de structure et plus de confiance dans votre propre jugement.
-              </p>
-            </div>
+    <section className="showcase">
+      <div className="wrap">
+        <div className="showcase-frame">
+          <div className="showcase-card">
+            <img src={sectionTrades} alt="Mes Recherches et Décisions de Trades PARADOXI Observatory" />
           </div>
-
-          {/* Right: 3 insight capsules + founder image */}
-          <div className="reveal space-y-4">
-            {proofCards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={card.title}
-                  className="flex gap-4 rounded-xl border border-border/60 bg-card/50 px-5 py-4 transition-colors hover:border-primary/25 hover:bg-card"
-                >
-                  <span className="mt-0.5 shrink-0 text-primary">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground">{card.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{card.desc}</p>
-                  </div>
+        </div>
+        <div className="trades-grid">
+          {TRADES.map((t) => (
+            <div key={t.symbol} className="trade-card">
+              <div className="chart-wrap">
+                <img src={t.image} alt={`Trade ${t.symbol}`} />
+                <div className="badges">
+                  <span className="symbol">{t.symbol}</span>
+                  <span className={`direction ${t.direction}`}>{t.direction === "long" ? "Long" : "Short"}</span>
                 </div>
-              );
-            })}
-            <div className="hidden justify-center pt-4 md:flex">
-              <img
-                src={founderBg}
-                alt=""
-                className="w-3/4"
-                style={{ opacity: 0.22, maskImage: "radial-gradient(65% 65% at 50% 50%, black, transparent)" }}
-              />
+              </div>
+              <div className="body">
+                <p className="result">{t.result}</p>
+                <p className="desc">{t.desc}</p>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-
-
       </div>
     </section>
   );
@@ -748,511 +281,491 @@ function WhoAmI() {
 
 // ─── Méthode ─────────────────────────────────────────────────────────────────
 
-const PIPELINE = [
-  {
-    id: "COT",
-    label: "COT Report",
-    desc: "Positionnement des grands spéculateurs et commerciaux sur les futures — identifier qui porte le marché.",
-  },
-  {
-    id: "MACRO",
-    label: "Macro Framework",
-    desc: "Cycles économiques, données d'inflation, emploi, croissance — lire l'environnement fondamental de chaque devise.",
-  },
-  {
-    id: "CB",
-    label: "CB Synthesis",
-    desc: "Synthèse des banques centrales : rhétorique, anticipations de taux implicites, calendrier décisionnel.",
-  },
-  {
-    id: "BIAS",
-    label: "Bias par devise",
-    desc: "Conviction directionnelle pour chaque devise majeure, pondérée par la convergence des trois lectures précédentes.",
-  },
-];
-
-function MethodeSection() {
+function Methode() {
   return (
-    <section id="methode" className="mx-auto max-w-7xl px-6 py-12 md:py-28">
-      <div className="reveal mb-16 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Architecture analytique</p>
-        <h2 className="mt-4 font-black text-3xl leading-tight md:text-5xl">
-          Un processus rigoureux, pas une opinion
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
-          Chaque semaine, la même rigueur. Le même processus. La même exigence — pour que votre lecture de marché repose sur de la structure, pas sur l'intuition. Consolidé dans un index propriétaire : le <strong className="font-semibold text-foreground">PCI</strong> (Paradoxi Confluence Index).
-        </p>
-      </div>
-
-      {/* Pipeline steps */}
-      <div className="reveal relative">
-        {/* Connector line — desktop */}
-        <div className="pointer-events-none absolute left-0 right-0 top-[2.75rem] hidden h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent lg:block" />
-
-        <div className="grid gap-6 lg:grid-cols-4">
-          {PIPELINE.map((step, i) => (
-            <div key={step.id} className="relative flex flex-col items-center text-center">
-              {/* Step number + connector dot */}
-              <div className="relative z-10 mb-5 flex h-[44px] w-[44px] items-center justify-center rounded-full border border-primary/35 bg-background">
-                <span className="text-xs font-black text-primary">{String(i + 1).padStart(2, "0")}</span>
-                <div className="pointer-events-none absolute inset-0 rounded-full" style={{ boxShadow: "0 0 16px 4px rgba(80,220,150,0.18)" }} />
-              </div>
-              <span className="mb-2 text-[11px] font-black tracking-[0.18em] text-primary/70 uppercase">{step.id}</span>
-              <h3 className="text-base font-black tracking-tight">{step.label}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+    <section className="section" id="methode">
+      <div className="wrap">
+        <div className="section-head center" style={{ marginLeft: "auto", marginRight: "auto" }}>
+          <p className="eyebrow">Architecture analytique</p>
+          <h2>Un processus rigoureux, pas une opinion</h2>
+          <p>Consolidé chaque semaine dans un index propriétaire : le <strong>PCI</strong> (Paradoxi Confluence Index).</p>
+        </div>
+        <div className="steps">
+          {STEPS.map((s) => (
+            <div key={s.num} className="step">
+              <div className="num">{s.num}</div>
+              <p className="tag">{s.tag}</p>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
 
-        {/* PCI output */}
-        <div className="reveal mt-12 flex justify-center">
-          <div
-            className="relative max-w-lg overflow-hidden rounded-2xl border border-primary/30 px-10 py-8 text-center"
-            style={{ background: "radial-gradient(ellipse 80% 80% at 50% 100%, oklch(0.78 0.18 150 / 0.08), transparent)" }}
-          >
-            <div className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Signal de convergence</p>
-            <h3 className="mt-2 text-2xl font-black tracking-tight">PCI — Paradoxi Confluence Index</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              COT, macro, banques centrales — chacune est lisible gratuitement. La convergence des trois, mesurée et hiérarchisée, ne l'est pas. C'est le PCI.
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Quand les trois convergent dans la même direction, ce n'est plus une opinion — c'est une thèse. Le PCI mesure cette convergence et oriente le Weekly Bias publié chaque dimanche.
-            </p>
-            <p className="mt-4 text-xs text-muted-foreground/45 italic">
-              Analyse entièrement humaine — ce rapport n'est pas généré par une IA.
-            </p>
-          </div>
+// ─── Features ────────────────────────────────────────────────────────────────
+
+function FeaturesGrid() {
+  return (
+    <section className="section soft" id="rapport-features">
+      <div className="wrap">
+        <div className="section-head">
+          <p className="eyebrow">Conditions d'accès</p>
+          <h2>Tout ce que vous recevrez, dès maintenant.</h2>
+          <p>L'intégralité du contenu, sans friction. La confiance se gagne par la qualité — pas par les contrats.</p>
         </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Pour qui / Pour qui pas ──────────────────────────────────────────────────
-
-function PourQuiSection() {
-  const oui = [
-    { title: "Vous voulez comprendre, pas juste suivre", sub: "Un signal sans contexte ne vous intéresse plus — vous voulez le raisonnement derrière le mouvement" },
-    { title: "Vous cherchez à construire une compétence durable", sub: "Pas un raccourci — une progression méthodique qui vous appartient" },
-    { title: "Vous êtes prêts à investir 15 minutes par semaine", sub: "Pour développer un regard que peu de particuliers possèdent" },
-    { title: "Vous voulez reprendre le contrôle de vos décisions", sub: "Décider avec votre propre analyse — pas sous l'influence d'une alerte ou d'un groupe" },
-    { title: "Vous visez l'excellence sur le long terme", sub: "Discipline, constance, profondeur — pas de résultats immédiats promis" },
-  ];
-  return (
-    <section id="pour-qui" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
-      <div className="reveal mb-14 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Un choix délibéré</p>
-        <h2 className="mt-4 font-black text-3xl leading-tight md:text-5xl">Ce n'est pas pour tout le monde. Et c'est voulu.</h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
-          PARADOXI Observatory s'adresse à ceux qui ont décidé de progresser sérieusement — pas à ceux qui cherchent encore le raccourci qui n'existe pas.
-        </p>
-      </div>
-      <div className="reveal mx-auto max-w-2xl">
-
-        {/* Pour toi */}
-        <div className="relative overflow-hidden rounded-2xl border border-primary/25 bg-primary/[0.04] p-8">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          <div className="mb-7 flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-xs font-black text-primary">✓</span>
-            <p className="text-sm font-bold uppercase tracking-[0.15em] text-primary">C'est pour vous si</p>
-          </div>
-          <ul className="space-y-5">
-            {oui.map((item) => (
-              <li key={item.title} className="flex items-start gap-3.5">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-[10px] font-black text-primary">✓</span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground/90">{item.title}</p>
-                  <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{item.sub}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 border-t border-primary/15 pt-6">
-            <a href="#pricing" className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline underline-offset-4">
-              Je reconnais ce profil — voir les tarifs <ArrowRight className="h-3.5 w-3.5" />
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-// ─── Analyse Card (Clairvoyant style) ────────────────────────────────────────
-
-function AnalyseCard() {
-  return (
-    <section className="mx-auto hidden max-w-7xl px-6 pb-12 md:block md:pb-28">
-      <div className="reveal relative overflow-hidden rounded-2xl border border-border/60 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.95)]">
-        <img src={sectionTrades} alt="Nos recherches & décisions de trades" className="w-full" />
-      </div>
-    </section>
-  );
-}
-
-// ─── Pricing ──────────────────────────────────────────────────────────────────
-
-const PRICING_FEATURES = [
-  { icon: Layers, title: "Rapport Hebdomadaire", desc: "Macro Framework complet livré chaque dimanche." },
-  { icon: BarChart3, title: "FX Scorecard", desc: "Force relative des devises en un coup d'œil." },
-  { icon: Landmark, title: "Central Bank Watch", desc: "Positionnement et anticipations de taux des banques centrales." },
-  { icon: Compass, title: "Weekly Bias", desc: "Biais directionnel par devise, contextualisé par le PCI." },
-  { icon: Eye, title: "Briefing Quotidien", desc: "Lecture macro overnight, 5 minutes chaque matin." },
-  { icon: TrendingUp, title: "Décisions de Trades", desc: "Analyse des setups fondamentaux en cours, documentée." },
-];
-
-const PLAN_CHECKLIST = [
-  "Rapport Macro Hebdomadaire (chaque dimanche)",
-  "FX Scorecard — force relative des devises",
-  "Central Bank Watch — BCE, Fed, BoE, BoJ...",
-  "Weekly Bias par devise (PCI-driven)",
-  "Décisions de Trades documentées & argumentées",
-];
-
-function PricingSection() {
-  return (
-    <section id="pricing" className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
-
-      {/* Header */}
-      <div className="reveal mb-16 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary">Conditions d'accès</p>
-        <h2 className="mt-4 font-black leading-tight" style={{ fontSize: "clamp(2.2rem, 4vw, 3.8rem)" }}>
-          Tout ce que vous recevrez, dès maintenant.
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
-          L'intégralité du contenu, sans friction, sans engagement. La confiance se gagne par la qualité — pas par les contrats.
-        </p>
-      </div>
-
-      {/* Feature grid */}
-      <div className="reveal grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {PRICING_FEATURES.map((f) => {
-          const Icon = f.icon;
-          return (
-            <div
-              key={f.title}
-              className="flex gap-4 rounded-2xl border border-border/50 bg-card/30 p-6 transition-colors hover:border-primary/20 hover:bg-card/50"
-            >
-              <span className="mt-0.5 shrink-0 text-primary">
-                <Icon className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="font-semibold text-foreground">{f.title}</p>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-              </div>
+        <div className="features">
+          {FEATURES.map((f) => (
+            <div key={f.title} className="feature">
+              <div className="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{f.icon}</svg></div>
+              <div><h3>{f.title}</h3><p>{f.desc}</p></div>
             </div>
-          );
-        })}
-      </div>
-
-      {/* Price cards */}
-      <h3 className="reveal mt-16 mb-6 text-center font-black text-2xl md:text-3xl">Abonnement</h3>
-      <div className="reveal grid gap-5 md:grid-cols-3">
-
-        {/* Free — expired */}
-        <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/20 p-8 opacity-70">
-
-          {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-3 py-1 text-xs font-bold text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40" />
-            Période de lancement · Terminée
-          </div>
-
-          {/* Price */}
-          <div className="flex items-end gap-3">
-            <span className="text-5xl font-black text-muted-foreground/50 line-through decoration-2">Gratuit</span>
-          </div>
-          <p className="mt-3 text-sm text-muted-foreground">L'accès complet était offert sans condition pendant la période de lancement. Cette offre est désormais terminée.</p>
-
-          {/* Checklist */}
-          <ul className="mt-6 space-y-3 border-t border-border/30 pt-6">
-            {PLAN_CHECKLIST.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground/60">
-                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-border/50 text-[9px] text-muted-foreground/40">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-8 flex items-center justify-center gap-2 rounded-full border border-border/40 bg-card/40 py-3.5 text-sm font-bold text-muted-foreground/60">
-            Offre expirée
-          </div>
+          ))}
         </div>
-
-        {/* Premium — liste d'attente */}
-        <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/20 p-8">
-
-          {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-3 py-1 text-xs font-bold text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40" />
-            Membre
-          </div>
-
-          {/* Price */}
-          <div className="flex items-end gap-2">
-            <span className="text-5xl font-black text-foreground">49,99 €</span>
-            <span className="mb-1.5 text-sm text-muted-foreground">/mois</span>
-          </div>
-          <p className="mt-3 text-sm text-muted-foreground">Tarif préférentiel réservé aux membres déjà inscrits avant l'ouverture — reconnu automatiquement via votre email au paiement.</p>
-
-          {/* Checklist */}
-          <ul className="mt-6 space-y-3 border-t border-border/30 pt-6">
-            {PLAN_CHECKLIST.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground/60">
-                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-border/50 text-[9px] text-muted-foreground/40">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <Link
-            to="/abonnement"
-            className="mt-8 flex w-full items-center justify-center gap-2 rounded-full border border-border/40 bg-card/50 py-3.5 text-sm font-semibold text-muted-foreground transition-colors hover:border-primary/30 hover:bg-card hover:text-foreground"
-          >
-            Souscrire
-          </Link>
-        </div>
-
-        {/* Premium — active */}
-        <div
-          className="relative overflow-hidden rounded-2xl border border-primary/30 p-8"
-          style={{ background: "radial-gradient(ellipse 80% 120% at 50% 110%, oklch(0.78 0.18 150 / 0.10), transparent)" }}
-        >
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-
-          {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" style={{ boxShadow: "0 0 6px 2px oklch(0.78 0.18 150 / 0.7)" }} />
-            Disponible maintenant
-          </div>
-
-          {/* Price */}
-          <div className="flex items-end gap-2">
-            <span className="text-5xl font-black text-foreground">69,99 €</span>
-            <span className="mb-1.5 text-sm text-muted-foreground">/mois</span>
-          </div>
-          <p className="mt-3 text-sm text-muted-foreground">L'accès complet — rapports, scorecard, watchlist, décisions de trades. Sans engagement.</p>
-
-          {/* Checklist */}
-          <ul className="mt-6 space-y-3 border-t border-primary/10 pt-6">
-            {PLAN_CHECKLIST.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-sm text-foreground/80">
-                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/20 text-[9px] font-black text-primary">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-
-          <Link
-            to="/abonnement"
-            className="mt-8 flex items-center justify-center gap-2 rounded-full bg-primary py-3.5 text-sm font-bold text-primary-foreground transition-all hover:scale-[1.02] hover:shadow-[0_0_30px_-4px] hover:shadow-primary/60"
-          >
-            Souscrire
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
-
       </div>
     </section>
   );
 }
 
-// ─── Testimonials ─────────────────────────────────────────────────────────────
+// ─── Founder ─────────────────────────────────────────────────────────────────
+
+function Founder() {
+  return (
+    <section className="section">
+      <div className="wrap founder">
+        <div className="founder-portrait">
+          <img src={portraitFounder} alt="Paul Castella, fondateur de PARADOXI Observatory" />
+        </div>
+        <div className="founder-body">
+          <p className="eyebrow">La conviction derrière l'Observatoire</p>
+          <h2 style={{ fontSize: "clamp(1.7rem,2.6vw,2.3rem)", fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1.2, margin: "0 0 20px" }}>
+            PARADOXI Observatory existe parce qu'un accès sérieux aux marchés ne devrait pas être réservé aux professionnels.
+          </h2>
+          <p>La majorité des traders particuliers ne manquent pas d'ambition. Ils manquent d'un cadre. PARADOXI a été construit en réponse à ce manque : un processus analytique rigoureux — COT, macro, banques centrales, flux institutionnels — synthétisé pour être lisible, décisionnel et exploitable, sans expérience institutionnelle préalable.</p>
+          <p>Nous n'avons pas vocation à vous dire quoi faire. Nous avons vocation à vous donner les éléments pour décider vous-même — avec plus de clarté et plus de confiance dans votre propre jugement.</p>
+          <div className="founder-proof">
+            <div className="founder-proof-item">
+              <span className="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 17l6-6 4 4 8-8M21 7v6h-6" /></svg></span>
+              <div><h4>Un processus reproductible, pas une opinion</h4><p>Le même pipeline, la même rigueur, chaque semaine — sans improvisation.</p></div>
+            </div>
+            <div className="founder-proof-item">
+              <span className="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" /></svg></span>
+              <div><h4>Indépendant par construction</h4><p>Aucun affilié, aucun sponsor — seule la qualité de la recherche compte.</p></div>
+            </div>
+            <div className="founder-proof-item">
+              <span className="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" /></svg></span>
+              <div><h4>Conçu pour des décideurs, pas des suiveurs</h4><p>Les éléments pour un jugement informé — jamais un signal à copier.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Testimonials ────────────────────────────────────────────────────────────
 
 function Testimonials() {
-  const row = [...TESTIMONIALS, ...TESTIMONIALS];
+  const items = [...TESTIMONIALS, ...TESTIMONIALS];
   return (
-    <section className="relative py-12 md:py-28">
-      <div className="reveal mx-auto mb-14 max-w-2xl px-6 text-center">
-        <span className="text-sm font-semibold text-primary">Ils ont pris la décision</span>
-        <h2 className="mt-3 font-black text-3xl leading-tight md:text-5xl">Ce que ça change, concrètement</h2>
-        <p className="mt-4 text-lg text-muted-foreground">Des lecteurs de profils différents, unis par un même choix : lire le marché avec plus de rigueur et de profondeur.</p>
-      </div>
-      <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        <div className="pdx-marquee-track flex w-max items-stretch gap-6">
-          {row.map((t, i) => (
-            <figure key={i} className="pdx-card flex w-[340px] shrink-0 flex-col justify-between rounded-2xl p-7 md:w-[400px]">
-              <blockquote className="text-base leading-relaxed text-foreground/90">"{t.quote}"</blockquote>
-              <figcaption className="mt-6 flex items-center gap-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-sm font-bold text-primary">
-                  {t.name.charAt(0)}
-                </span>
-                <span>
-                  <span className="block text-sm font-semibold">{t.name}</span>
-                  <span className="block text-xs text-muted-foreground">{t.role}</span>
-                </span>
-              </figcaption>
-            </figure>
-          ))}
+    <section className="section soft">
+      <div className="wrap">
+        <div className="section-head center" style={{ marginLeft: "auto", marginRight: "auto" }}>
+          <p className="eyebrow">Ils lisent PARADOXI</p>
+          <h2>Ce qu'en disent nos lecteurs</h2>
+        </div>
+        <div className="testimonials-viewport">
+          <div className="testimonials-grid">
+            {items.map((t, i) => (
+              <div key={i} className="testimonial">
+                <span className="stars">★★★★★</span>
+                <p className="quote">{t.quote}</p>
+                <div className="author">
+                  <span className="avatar">{t.initials}</span>
+                  <div>
+                    <p className="name">{t.name}</p>
+                    <p className="role">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// ─── Private letter / Subscribe ───────────────────────────────────────────────
+// ─── Pricing ─────────────────────────────────────────────────────────────────
 
-// ─── FAQ ──────────────────────────────────────────────────────────────────────
+function CheckIcon() {
+  return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6L9 17l-5-5" /></svg>;
+}
+
+function Pricing() {
+  return (
+    <section className="section" id="pricing">
+      <div className="wrap">
+        <div className="section-head center" style={{ marginLeft: "auto", marginRight: "auto" }}>
+          <p className="eyebrow">Abonnement</p>
+          <h2>Un tarif simple, sans surprise.</h2>
+        </div>
+        <div className="pricing-grid">
+          <div className="price-card">
+            <span className="price-badge">Période de lancement · Terminée</span>
+            <p className="price-amount" style={{ textDecoration: "line-through", color: "var(--text-faint)" }}>Gratuit</p>
+            <p className="price-desc">L'accès complet était offert sans condition pendant la période de lancement.</p>
+            <ul className="price-list">
+              {PLAN_CHECKLIST.slice(0, 3).map((item) => <li key={item}><CheckIcon />{item}</li>)}
+            </ul>
+            <span className="price-cta">Offre expirée</span>
+          </div>
+          <div className="price-card">
+            <span className="price-badge">Membre</span>
+            <p className="price-amount">49,99&nbsp;€<span>/mois</span></p>
+            <p className="price-desc">Tarif préférentiel réservé aux membres déjà inscrits avant l'ouverture.</p>
+            <ul className="price-list">
+              {PLAN_CHECKLIST.map((item) => <li key={item}><CheckIcon />{item}</li>)}
+            </ul>
+            <Link to="/abonnement" className="price-cta">Souscrire</Link>
+          </div>
+          <div className="price-card featured">
+            <span className="price-badge">Disponible maintenant</span>
+            <p className="price-amount">69,99&nbsp;€<span>/mois</span></p>
+            <p className="price-desc">L'accès complet — rapports, scorecard, watchlist, décisions de trades. Sans engagement.</p>
+            <ul className="price-list">
+              <li><CheckIcon />Rapport Macro Hebdomadaire</li>
+              <li><CheckIcon />FX Scorecard</li>
+              <li><CheckIcon />Central Bank Watch</li>
+              <li><CheckIcon />Weekly Bias &amp; Décisions de Trades</li>
+            </ul>
+            <Link to="/abonnement" className="price-cta">Souscrire</Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
 
 function Faq() {
-  const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="mx-auto max-w-7xl px-6 py-12 md:py-28">
-      <div className="grid gap-12 lg:grid-cols-2">
-
-        {/* Left: mobile mockup */}
-        <div className="reveal lg:sticky lg:top-28 lg:self-start">
-          <div className="relative overflow-hidden rounded-[2rem] border border-border/40 bg-black shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]">
-            <div className="pointer-events-none absolute inset-0 pdx-glow opacity-15" />
-            <img src={sectionMobile} alt="PARADOXI Observatory sur mobile" className="relative w-full" />
+    <section className="section soft" id="faq">
+      <div className="wrap">
+        <div className="faq-layout">
+          <div className="faq-phone">
+            <img src={mobileMockup} alt="PARADOXI Observatory sur mobile — profil du fondateur" />
           </div>
-        </div>
-
-        {/* FAQ accordion */}
-        <div>
-          <h2 className="reveal font-black text-3xl leading-tight md:text-5xl">Questions fréquentes</h2>
-          <div className="mt-8 divide-y divide-border/60 border-t border-border/60">
-            {FAQ.map((f, i) => {
-              const isOpen = open === i;
-              return (
-                <button
-                  key={f.q}
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="reveal flex w-full flex-col py-6 text-left"
-                >
-                  <span className="flex items-center justify-between gap-4">
-                    <span className="text-lg font-semibold">{f.q}</span>
-                    <Plus className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-45 text-primary" : ""}`} />
-                  </span>
-                  <span className={`grid transition-all duration-300 ${isOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                    <span className="overflow-hidden text-muted-foreground">{f.a}</span>
-                  </span>
-                </button>
-              );
-            })}
+          <div>
+            <div className="section-head">
+              <p className="eyebrow">Questions fréquentes</p>
+              <h2>Tout ce qu'il faut savoir</h2>
+            </div>
+            <div className="faq-list">
+              {FAQ.map((f, i) => (
+                <details key={f.q} className="faq-item" open={i === 0}>
+                  <summary>{f.q}<span className="plus">+</span></summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
-        </div>
-
-      </div>
-    </section>
-  );
-}
-
-// ─── Final CTA ────────────────────────────────────────────────────────────────
-
-function FinalCta() {
-  return (
-    <section className="mx-auto max-w-7xl px-6 pb-12 md:pb-28">
-      <div
-        className="reveal relative overflow-hidden rounded-[2.5rem] border border-primary/20 px-8 py-20 text-center md:px-20"
-        style={{ background: "radial-gradient(ellipse 85% 85% at 50% 60%, oklch(0.78 0.18 150 / 0.1), oklch(0.78 0.18 150 / 0.03) 55%, transparent)" }}
-      >
-        <div className="pointer-events-none absolute inset-0 pdx-grid opacity-[0.07]" />
-        <div className="pointer-events-none absolute inset-x-0 -top-20 h-64 pdx-glow opacity-30" />
-
-        <p className="relative text-xs font-bold uppercase tracking-[0.2em] text-primary">Prochain rapport · Dimanche soir</p>
-
-        <h2 className="relative mx-auto mt-6 max-w-3xl font-black text-3xl leading-tight md:text-6xl">
-          Le prochain rapport arrive{" "}
-          <em className="not-italic text-primary">dimanche soir.</em>
-          <br />Les marchés ouvrent lundi matin.
-        </h2>
-
-        <p className="relative mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Vous pouvez le lire — ou le reconstruire vous-même. L'intégralité du cadre PARADOXI, gratuit, sans engagement.
-        </p>
-
-        <div className="relative mt-10">
-          <a
-            href="#pricing"
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-10 py-4 text-base font-bold text-primary-foreground transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_60px_-8px] hover:shadow-primary/60"
-          >
-            Voir les tarifs
-            <ArrowUpRight className="h-5 w-5" />
-          </a>
         </div>
       </div>
     </section>
   );
 }
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
+// ─── Footer ──────────────────────────────────────────────────────────────────
 
 function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-card/20">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-12 lg:grid-cols-2">
+    <footer className="footer">
+      <div className="wrap">
+        <div className="footer-grid">
           <div>
-            <PdxLogo />
-            <p className="mt-5 max-w-sm text-sm text-muted-foreground">
-              L'observatoire de recherche pour ceux qui ont décidé de comprendre les marchés — pas de les subir.
-            </p>
-            <div className="mt-6">
-              <a
-                href="#pricing"
-                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:scale-[1.03] hover:shadow-[0_0_20px_-4px] hover:shadow-primary/50"
-              >
-                Voir les tarifs
-              </a>
-            </div>
-            <div className="mt-6 flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/in/paul-c-977b70153"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-card/50 text-muted-foreground transition-all hover:border-primary/40 hover:text-foreground"
-                aria-label="LinkedIn"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-              <a
-                href="https://www.instagram.com/paradoxi.observatory?utm_source=qr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-card/50 text-muted-foreground transition-all hover:border-primary/40 hover:text-foreground"
-                aria-label="Instagram"
-              >
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                </svg>
-              </a>
-            </div>
+            <img className="footer-logo" src={paradoxiLogoLight} alt="PARADOXI Observatory" />
+            <p className="blurb">L'observatoire de recherche pour ceux qui ont décidé de comprendre les marchés — pas de les subir.</p>
           </div>
-          <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3 lg:justify-items-end">
-            <div className="space-y-3">
-              <p className="font-semibold">Navigation</p>
-              <a href="#rapport" className="block text-muted-foreground transition-colors hover:text-foreground">Rapport hebdomadaire</a>
-              <a href="#briefing" className="block text-muted-foreground transition-colors hover:text-foreground">Briefing quotidien</a>
-              <a href="#trades" className="block text-muted-foreground transition-colors hover:text-foreground">Recherches &amp; Trades</a>
-              <a href="#faq" className="block text-muted-foreground transition-colors hover:text-foreground">FAQ</a>
-            </div>
-            <div className="space-y-3">
-              <p className="font-semibold">Lettre</p>
-              <a href="#pricing" className="block text-muted-foreground transition-colors hover:text-foreground">S'abonner</a>
-              <span className="block text-muted-foreground">Hebdomadaire</span>
-            </div>
-            <div className="space-y-3">
-              <p className="font-semibold">Légal</p>
-              <Link to="/mentions-legales" className="block text-muted-foreground transition-colors hover:text-foreground">Mentions légales</Link>
-              <Link to="/cgv" className="block text-muted-foreground transition-colors hover:text-foreground">CGV</Link>
-              <Link to="/confidentialite" className="block text-muted-foreground transition-colors hover:text-foreground">Confidentialité</Link>
-            </div>
+          <div>
+            <h4>Navigation</h4>
+            <ul><li><a href="#rapport">Rapport</a></li><li><a href="#methode">Méthode</a></li><li><a href="#faq">FAQ</a></li></ul>
+          </div>
+          <div>
+            <h4>Abonnement</h4>
+            <ul><li><a href="#pricing">Tarifs</a></li><li><a href="#pricing">S'abonner</a></li></ul>
+          </div>
+          <div>
+            <h4>Légal</h4>
+            <ul>
+              <li><Link to="/mentions-legales">Mentions légales</Link></li>
+              <li><Link to="/cgv">CGV</Link></li>
+              <li><Link to="/confidentialite">Confidentialité</Link></li>
+            </ul>
           </div>
         </div>
-        <div className="mt-14 border-t border-border/40 pt-8">
-          <p className="text-xs leading-relaxed text-muted-foreground/50">
-            CONFIDENTIEL · Contenu éducatif et informatif uniquement. PARADOXI Observatory ne constitue en aucun cas un conseil en investissement. Le trading sur les marchés financiers comporte un risque élevé de perte en capital. Les performances passées ne préjugent pas des performances futures.
-          </p>
-          <p className="mt-5 text-xs text-muted-foreground/35">
-            © {new Date().getFullYear()} PAMILYS INVEST — PARADOXI Observatory. Tous droits réservés.
-          </p>
+        <div className="footer-bottom">
+          CONFIDENTIEL · Contenu éducatif et informatif uniquement. PARADOXI Observatory ne constitue en aucun cas un conseil en investissement. Le trading comporte un risque élevé de perte en capital.<br />
+          © {new Date().getFullYear()} PAMILYS INVEST — PARADOXI Observatory. Tous droits réservés.
         </div>
       </div>
     </footer>
+  );
+}
+
+// ─── App modal ───────────────────────────────────────────────────────────────
+
+function AppModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="app-modal is-open" id="app-modal">
+      <div className="app-modal-backdrop" onClick={onClose} />
+      <div className="app-modal-panel">
+        <button type="button" className="app-modal-close" aria-label="Fermer" onClick={onClose}>✕</button>
+        <div className="app-modal-hero">
+          <img className="app-modal-icon" src={appIcon} alt="Icône de l'application PARADOXI Observatory" />
+          <h3>La recherche macro de PARADOXI, toujours à portée de main.</h3>
+          <p>Rapports, biais directionnels et alertes reçus en notification, lus hors-ligne, archivés automatiquement.</p>
+          <div className="app-modal-notif">
+            <img src={appNotification} alt="Aperçu d'une notification PARADOXI Observatory" />
+          </div>
+        </div>
+        <div className="app-modal-features">
+          <div className="app-modal-feature">
+            <span className="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" /></svg></span>
+            <div><h4>Rapports en notification</h4><p>Votre édition arrive sur l'écran verrouillé, chaque dimanche.</p></div>
+          </div>
+          <div className="app-modal-feature">
+            <span className="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 19V6a2 2 0 012-2h12a2 2 0 012 2v13M4 19a2 2 0 002 2h12a2 2 0 002-2M4 19h16M9 9h6m-6 4h6" /></svg></span>
+            <div><h4>Lecture hors-ligne</h4><p>Tous vos rapports disponibles sans connexion.</p></div>
+          </div>
+          <div className="app-modal-feature">
+            <span className="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18M7 15l4-6 3 4 5-8" /></svg></span>
+            <div><h4>Watchlist synchronisée</h4><p>Le FX Scorecard mis à jour en continu.</p></div>
+          </div>
+          <div className="app-modal-feature">
+            <span className="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z" /></svg></span>
+            <div><h4>Archives illimitées</h4><p>Chaque édition passée, cherchable et classée.</p></div>
+          </div>
+        </div>
+        <div className="app-modal-roadmap">
+          <div><span className="dot active">✓</span><span>Conception</span></div>
+          <div><span className="dot active">✓</span><span>Architecture</span></div>
+          <div><span className="dot future">3</span><span>Bêta fermée</span></div>
+          <div><span className="dot future">4</span><span>Lancement</span></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Styles ──────────────────────────────────────────────────────────────────
+
+function PdxStyles() {
+  return (
+    <style>{`
+.pdx2{
+  --bg:#ffffff; --bg-soft:#f4f5f7; --bg-dark:#111214;
+  --text:#101114; --text-muted:#63656d; --text-faint:#9a9ca3;
+  --border:#e6e7eb; --accent:#0a63d6; --accent-hover:#084fac; --accent-soft:#eaf1fc;
+  --shadow: 0 1px 2px rgba(16,17,20,.03), 0 16px 40px -20px rgba(16,17,20,.12);
+  background:var(--bg); color:var(--text);
+  font-family:"Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.pdx2 *{ box-sizing:border-box; }
+.pdx2 img{ max-width:100%; display:block; }
+.pdx2 a{ text-decoration:none; color:inherit; }
+.pdx2 ul{ margin:0; padding:0; list-style:none; }
+.pdx2 section{ position:relative; }
+.pdx2 .wrap{ max-width:1200px; margin:0 auto; padding:0 32px; }
+
+.pdx2 .nav{ position:sticky; top:0; z-index:40; background:rgba(255,255,255,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
+.pdx2 .nav-inner{ max-width:1200px; margin:0 auto; padding:18px 32px; display:flex; align-items:center; justify-content:space-between; }
+.pdx2 .logo{ height:34px; width:auto; }
+.pdx2 .nav-links{ display:flex; align-items:center; gap:32px; font-size:14.5px; font-weight:500; color:var(--text-muted); }
+.pdx2 .nav-links a:hover{ color:var(--text); }
+.pdx2 .nav-app-link{ display:inline-flex; align-items:center; gap:7px; font:inherit; color:inherit; background:none; border:none; padding:0; cursor:pointer; }
+.pdx2 .nav-app-badge{ font-size:9.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:var(--accent); background:var(--accent-soft); border:1px solid color-mix(in oklab, var(--accent) 30%, transparent); padding:2px 7px; border-radius:999px; }
+.pdx2 .nav-cta{ display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#fff; font-size:14px; font-weight:600; padding:11px 22px; border-radius:999px; box-shadow:0 8px 20px -8px rgba(10,99,214,.55); transition:background .15s ease, transform .15s ease; }
+.pdx2 .nav-cta:hover{ background:var(--accent-hover); transform:translateY(-1px); }
+
+.pdx2 .hero{ padding:88px 0 0; }
+.pdx2 .hero-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:44px; align-items:center; }
+.pdx2 .hero h1{ font-size:clamp(2.6rem, 4.6vw, 4.4rem); font-weight:800; line-height:1.05; letter-spacing:-0.02em; margin:0 0 24px; text-wrap:balance; }
+.pdx2 .hero h1 em{ font-style:normal; color:var(--accent); }
+.pdx2 .hero .lede{ font-size:18px; line-height:1.65; color:var(--text-muted); max-width:46ch; margin:0 0 32px; }
+.pdx2 .hero-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-bottom:20px; }
+.pdx2 .btn-primary{ display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#fff; font-size:15.5px; font-weight:700; padding:16px 30px; border-radius:999px; box-shadow:0 12px 28px -10px rgba(10,99,214,.5); transition:background .15s ease, transform .15s ease; }
+.pdx2 .btn-primary:hover{ background:var(--accent-hover); transform:translateY(-1px); }
+.pdx2 .btn-ghost{ display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--text); font-size:15.5px; font-weight:600; padding:15px 28px; border-radius:999px; border:1.5px solid var(--border); transition:border-color .15s ease, background .15s ease; }
+.pdx2 .btn-ghost:hover{ border-color:var(--text); }
+.pdx2 .hero-meta{ display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--text-muted); }
+.pdx2 .hero-meta .dot{ color:var(--border); }
+.pdx2 .hero-meta .stars{ color:#f5a623; letter-spacing:1px; }
+.pdx2 .hero-visual{ position:relative; margin-right:-4%; }
+.pdx2 .hero-visual img{ width:112%; max-width:112%; height:auto; display:block; -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 46%, black 48%, transparent 100%); mask-image: radial-gradient(ellipse closest-side at 50% 46%, black 48%, transparent 100%); }
+
+.pdx2 .trust-bar{ background:var(--bg-dark); color:#fff; margin-top:64px; }
+.pdx2 .trust-inner{ max-width:1200px; margin:0 auto; padding:20px 32px; display:flex; flex-wrap:nowrap; gap:clamp(16px,3vw,40px); justify-content:center; overflow-x:auto; }
+.pdx2 .trust-item{ display:flex; align-items:center; gap:9px; font-size:clamp(11.5px,1.35vw,14px); color:#c7c9d1; white-space:nowrap; }
+.pdx2 .trust-item strong{ color:#fff; font-weight:700; }
+.pdx2 .trust-item svg{ flex-shrink:0; opacity:.8; }
+
+.pdx2 .section{ padding:96px 0; }
+.pdx2 .section.soft{ background:var(--bg-soft); }
+.pdx2 .section-head{ max-width:640px; margin:0 0 56px; }
+.pdx2 .eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 12px; }
+.pdx2 .section-head h2{ font-size:clamp(1.9rem, 3vw, 2.7rem); font-weight:800; letter-spacing:-0.01em; line-height:1.15; margin:0 0 16px; text-wrap:balance; }
+.pdx2 .section-head p{ font-size:16.5px; line-height:1.65; color:var(--text-muted); margin:0; }
+.pdx2 .section-head.center{ text-align:center; }
+
+.pdx2 .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+.pdx2 .step{ background:#fff; border:1px solid var(--border); border-radius:20px; padding:28px 22px; }
+.pdx2 .step .num{ display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:13px; font-weight:800; margin-bottom:18px; }
+.pdx2 .step .tag{ font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint); margin-bottom:6px; }
+.pdx2 .step h3{ font-size:16.5px; font-weight:700; margin:0 0 8px; }
+.pdx2 .step p{ font-size:14px; line-height:1.6; color:var(--text-muted); margin:0; }
+
+.pdx2 .features{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.pdx2 .feature{ background:#fff; border:1px solid var(--border); border-radius:20px; padding:26px; display:flex; gap:16px; align-items:flex-start; }
+.pdx2 .feature .icon{ flex-shrink:0; width:42px; height:42px; border-radius:12px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; }
+.pdx2 .feature h3{ font-size:15px; font-weight:700; margin:0 0 4px; }
+.pdx2 .feature p{ font-size:13.5px; line-height:1.55; color:var(--text-muted); margin:0; }
+
+.pdx2 .pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.pdx2 .price-card{ background:#fff; border:1.5px solid var(--border); border-radius:24px; padding:34px 28px; display:flex; flex-direction:column; }
+.pdx2 .price-card.featured{ border-color:var(--accent); box-shadow:0 20px 44px -20px rgba(10,99,214,.35); }
+.pdx2 .price-badge{ display:inline-flex; align-items:center; gap:6px; align-self:flex-start; font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:6px 12px; border-radius:999px; background:var(--bg-soft); color:var(--text-muted); margin-bottom:20px; }
+.pdx2 .price-card.featured .price-badge{ background:var(--accent-soft); color:var(--accent); }
+.pdx2 .price-amount{ font-size:2.6rem; font-weight:800; letter-spacing:-0.02em; margin:0 0 6px; }
+.pdx2 .price-amount span{ font-size:14px; font-weight:500; color:var(--text-muted); }
+.pdx2 .price-desc{ font-size:13.5px; color:var(--text-muted); margin:0 0 24px; line-height:1.55; }
+.pdx2 .price-list{ display:flex; flex-direction:column; gap:11px; margin:0 0 28px; padding-top:20px; border-top:1px solid var(--border); }
+.pdx2 .price-list li{ display:flex; gap:10px; align-items:flex-start; font-size:13.5px; color:var(--text); }
+.pdx2 .price-list li svg{ flex-shrink:0; margin-top:2px; color:var(--accent); }
+.pdx2 .price-cta{ margin-top:auto; text-align:center; padding:14px; border-radius:999px; font-size:14.5px; font-weight:700; border:1.5px solid var(--border); color:var(--text); display:block; }
+.pdx2 .price-card.featured .price-cta{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+.pdx2 .faq-list{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; }
+.pdx2 .faq-item{ border-bottom:1px solid var(--border); padding:26px 0; }
+.pdx2 .faq-item summary{ display:flex; align-items:center; justify-content:space-between; gap:16px; font-size:16px; font-weight:600; cursor:pointer; list-style:none; }
+.pdx2 .faq-item summary::-webkit-details-marker{ display:none; }
+.pdx2 .faq-item summary .plus{ color:var(--accent); font-size:20px; font-weight:400; transition:transform .2s ease; }
+.pdx2 .faq-item[open] summary .plus{ transform:rotate(45deg); }
+.pdx2 .faq-item p{ margin:14px 0 0; font-size:14.5px; line-height:1.7; color:var(--text-muted); max-width:64ch; }
+
+.pdx2 .footer{ background:var(--bg-dark); color:#c7c9d1; padding:72px 0 40px; }
+.pdx2 .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px; margin-bottom:56px; }
+.pdx2 .footer-logo{ height:20px; width:auto; margin-bottom:18px; filter:invert(1) brightness(2); }
+.pdx2 .footer p.blurb{ font-size:14px; line-height:1.6; color:#8d8f99; max-width:32ch; }
+.pdx2 .footer h4{ font-size:12.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#fff; margin:0 0 18px; }
+.pdx2 .footer ul{ display:flex; flex-direction:column; gap:12px; }
+.pdx2 .footer a{ font-size:14px; color:#a9abb4; transition:color .15s ease; }
+.pdx2 .footer a:hover{ color:#fff; }
+.pdx2 .footer-bottom{ border-top:1px solid #26272c; padding-top:28px; font-size:12.5px; color:#71737c; line-height:1.7; }
+
+.pdx2 .marquee-section{ padding:44px 0; border-bottom:1px solid var(--border); }
+.pdx2 .marquee-label{ text-align:center; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--text-faint); margin:0 0 28px; }
+.pdx2 .marquee-viewport{ overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent); mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+.pdx2 .marquee-logos{ display:flex; align-items:center; gap:64px; width:max-content; animation:pdx-marquee-scroll 28s linear infinite; }
+.pdx2 .marquee-logos img{ height:22px; width:auto; flex-shrink:0; opacity:.55; filter:grayscale(1); transition:opacity .15s ease; }
+.pdx2 .marquee-logos img:hover{ opacity:.9; }
+@keyframes pdx-marquee-scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){ .pdx2 .marquee-logos{ animation:none; flex-wrap:wrap; justify-content:center; } }
+
+.pdx2 .showcase{ padding:40px 0; }
+.pdx2 .showcase-frame{ position:relative; border-radius:32px; padding:28px; background:radial-gradient(120% 140% at 50% 0%, color-mix(in oklab, var(--accent) 7%, transparent), transparent 60%), var(--bg-soft); }
+.pdx2 .showcase-card{ position:relative; border-radius:22px; overflow:hidden; box-shadow:0 2px 6px rgba(16,17,20,.05), 0 30px 60px -24px rgba(16,17,20,.22); }
+.pdx2 .showcase-card img{ width:100%; display:block; }
+
+.pdx2 .trades-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:48px; }
+.pdx2 .trade-card{ border:1px solid var(--border); border-radius:20px; overflow:hidden; background:#fff; transition:border-color .15s ease, box-shadow .15s ease; }
+.pdx2 .trade-card:hover{ border-color:#d5d7dc; box-shadow:var(--shadow); }
+.pdx2 .trade-card .chart-wrap{ position:relative; }
+.pdx2 .trade-card img{ width:100%; display:block; }
+.pdx2 .trade-card .badges{ position:absolute; top:12px; left:12px; right:12px; display:flex; justify-content:space-between; }
+.pdx2 .trade-card .symbol{ background:rgba(255,255,255,.92); border:1px solid var(--border); font-size:12px; font-weight:800; padding:5px 11px; border-radius:999px; backdrop-filter:blur(4px); }
+.pdx2 .trade-card .direction{ font-size:11.5px; font-weight:800; padding:5px 11px; border-radius:999px; backdrop-filter:blur(4px); }
+.pdx2 .trade-card .direction.long{ background:rgba(234,251,242,.95); color:#1b9e5c; border:1px solid #b9ecd2; }
+.pdx2 .trade-card .direction.short{ background:rgba(254,238,238,.95); color:#c0392b; border:1px solid #f3c6c6; }
+.pdx2 .trade-card .body{ padding:16px 18px 20px; }
+.pdx2 .trade-card .result{ font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--accent); margin:0 0 6px; }
+.pdx2 .trade-card p.desc{ font-size:13.5px; line-height:1.55; color:var(--text-muted); margin:0; }
+
+.pdx2 .faq-layout{ display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:start; }
+.pdx2 .faq-phone{ border-radius:32px; overflow:hidden; box-shadow:var(--shadow); position:sticky; top:100px; }
+.pdx2 .faq-phone img{ width:100%; display:block; }
+
+.pdx2 .testimonials-viewport{ overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, black 6%, black 94%, transparent); mask-image:linear-gradient(to right, transparent, black 6%, black 94%, transparent); }
+.pdx2 .testimonials-grid{ display:flex; gap:20px; width:max-content; animation:pdx-testimonials-scroll 42s linear infinite; }
+.pdx2 .testimonials-viewport:hover .testimonials-grid{ animation-play-state:paused; }
+@keyframes pdx-testimonials-scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce){ .pdx2 .testimonials-grid{ animation:none; flex-wrap:wrap; width:auto; } }
+.pdx2 .testimonial{ background:#fff; border:1px solid var(--border); border-radius:20px; padding:26px; display:flex; flex-direction:column; gap:16px; width:360px; flex-shrink:0; }
+.pdx2 .testimonial .stars{ color:#f5a623; font-size:13px; letter-spacing:2px; }
+.pdx2 .testimonial p.quote{ font-size:14.5px; line-height:1.65; color:var(--text); margin:0; flex:1; }
+.pdx2 .testimonial .author{ display:flex; align-items:center; gap:10px; }
+.pdx2 .testimonial .avatar{ width:36px; height:36px; border-radius:50%; flex-shrink:0; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; }
+.pdx2 .testimonial .name{ font-size:13.5px; font-weight:700; color:var(--text); }
+.pdx2 .testimonial .role{ font-size:12px; color:var(--text-muted); }
+
+.pdx2 .founder{ display:grid; grid-template-columns:.8fr 1.2fr; gap:56px; align-items:center; }
+.pdx2 .founder-portrait{ border-radius:28px; overflow:hidden; box-shadow:0 2px 6px rgba(16,17,20,.05), 0 30px 60px -24px rgba(16,17,20,.25); }
+.pdx2 .founder-portrait img{ width:100%; display:block; }
+.pdx2 .founder-body p{ font-size:15px; line-height:1.7; color:var(--text-muted); margin:0 0 16px; }
+.pdx2 .founder-proof{ display:flex; flex-direction:column; gap:12px; margin-top:28px; }
+.pdx2 .founder-proof-item{ display:flex; gap:14px; padding:16px 18px; border:1px solid var(--border); border-radius:14px; background:#fff; }
+.pdx2 .founder-proof-item .icon{ flex-shrink:0; width:36px; height:36px; border-radius:10px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; }
+.pdx2 .founder-proof-item h4{ font-size:14px; font-weight:700; margin:0 0 3px; }
+.pdx2 .founder-proof-item p{ font-size:13px; line-height:1.5; color:var(--text-muted); margin:0; }
+
+.pdx2 .app-modal{ position:fixed; inset:0; z-index:100; display:flex; align-items:flex-start; justify-content:center; padding:5vh 20px; overflow-y:auto; }
+.pdx2 .app-modal-backdrop{ position:fixed; inset:0; background:rgba(13,14,17,.55); backdrop-filter:blur(3px); }
+.pdx2 .app-modal-panel{ position:relative; background:#fff; border-radius:28px; max-width:720px; width:100%; box-shadow:0 40px 100px -20px rgba(10,20,40,.4); overflow:hidden; }
+.pdx2 .app-modal-close{ position:absolute; top:18px; right:18px; z-index:2; width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:#fff; color:var(--text-muted); font-size:16px; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.pdx2 .app-modal-close:hover{ color:var(--text); border-color:#d5d7dc; }
+.pdx2 .app-modal-hero{ text-align:center; padding:56px 40px 8px; background:radial-gradient(70% 100% at 50% 0%, color-mix(in oklab, var(--accent) 9%, transparent), transparent 70%); }
+.pdx2 .app-modal-icon{ width:96px; height:96px; margin:0 auto 24px; border-radius:22px; box-shadow:0 20px 40px -14px rgba(10,20,40,.35); }
+.pdx2 .app-modal-hero h3{ font-size:clamp(1.5rem,3vw,2rem); font-weight:800; letter-spacing:-0.01em; margin:0 auto; max-width:440px; text-wrap:balance; }
+.pdx2 .app-modal-hero p{ font-size:14.5px; color:var(--text-muted); max-width:420px; margin:14px auto 0; line-height:1.6; }
+.pdx2 .app-modal-notif{ max-width:340px; margin:32px auto 0; border-radius:18px; overflow:hidden; box-shadow:0 30px 60px -20px rgba(10,20,40,.3); }
+.pdx2 .app-modal-notif img{ width:100%; display:block; }
+.pdx2 .app-modal-features{ display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:36px 40px 8px; }
+.pdx2 .app-modal-feature{ display:flex; gap:12px; }
+.pdx2 .app-modal-feature .icon{ flex-shrink:0; width:34px; height:34px; border-radius:10px; background:var(--accent-soft); color:var(--accent); display:flex; align-items:center; justify-content:center; }
+.pdx2 .app-modal-feature h4{ font-size:13.5px; font-weight:700; margin:0 0 3px; }
+.pdx2 .app-modal-feature p{ font-size:12.5px; color:var(--text-muted); margin:0; line-height:1.5; }
+.pdx2 .app-modal-roadmap{ display:flex; justify-content:space-between; gap:8px; padding:28px 40px 40px; border-top:1px solid var(--border); margin-top:20px; }
+.pdx2 .app-modal-roadmap div{ flex:1; text-align:center; }
+.pdx2 .app-modal-roadmap .dot{ width:22px; height:22px; margin:0 auto 8px; border-radius:50%; font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; color:#fff; background:var(--text); }
+.pdx2 .app-modal-roadmap .dot.active{ background:var(--accent); }
+.pdx2 .app-modal-roadmap .dot.future{ background:#fff; color:var(--text-faint); border:2px solid var(--border); }
+.pdx2 .app-modal-roadmap span{ font-size:11px; font-weight:600; color:var(--text-muted); }
+
+@media (max-width: 860px){
+  .pdx2 .app-modal-features{ grid-template-columns:1fr; }
+  .pdx2 .founder{ grid-template-columns:1fr; }
+  .pdx2 .trades-grid{ grid-template-columns:1fr; }
+  .pdx2 .testimonial{ width:82vw; }
+  .pdx2 .faq-layout{ grid-template-columns:1fr; }
+  .pdx2 .faq-phone{ position:static; max-width:320px; margin:0 auto 40px; }
+  .pdx2 .hero-grid{ grid-template-columns:1fr; }
+  .pdx2 .hero-visual{ aspect-ratio:16/10; order:-1; margin-right:0; }
+  .pdx2 .hero-visual img{ width:100%; max-width:100%; }
+  .pdx2 .steps, .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
+  .pdx2 .footer-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 600px){
+  .pdx2 .wrap, .pdx2 .nav-inner, .pdx2 .trust-inner{ padding-left:20px; padding-right:20px; }
+  .pdx2 .nav-links{ display:none; }
+  .pdx2 .steps, .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr; }
+  .pdx2 .footer-grid{ grid-template-columns:1fr; }
+  .pdx2 .hero{ padding-top:64px; }
+  .pdx2 .section{ padding:64px 0; }
+}
+`}</style>
   );
 }
