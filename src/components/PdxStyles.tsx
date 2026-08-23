@@ -261,7 +261,7 @@ export function PdxStyles() {
   .pdx2 .hero-visual{ position:absolute; top:-40px; right:-14%; width:98%; z-index:1; pointer-events:none; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
-    opacity:.8;
+    opacity:.65;
     -webkit-mask-image: radial-gradient(ellipse closest-side at 52% 42%, black 68%, transparent 100%);
     mask-image: radial-gradient(ellipse closest-side at 52% 42%, black 68%, transparent 100%);
   }
