@@ -30,6 +30,7 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       body: new URLSearchParams({
         "line_items[0][price]": priceId,
         "line_items[0][quantity]": "1",
+        "payment_method_types[0]": "card",
         mode: "subscription",
         customer_email: data.email,
         success_url: `${baseUrl}/merci?session_id={CHECKOUT_SESSION_ID}`,
