@@ -10,12 +10,30 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MerciRouteImport } from './routes/merci'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
+import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as AbonnementRouteImport } from './routes/abonnement'
 import { Route as IndexRouteImport } from './routes/index'
 
 const MerciRoute = MerciRouteImport.update({
   id: '/merci',
   path: '/merci',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CgvRoute = CgvRouteImport.update({
+  id: '/cgv',
+  path: '/cgv',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AbonnementRoute = AbonnementRouteImport.update({
@@ -32,30 +50,61 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/abonnement': typeof AbonnementRoute
+  '/cgv': typeof CgvRoute
+  '/confidentialite': typeof ConfidentialiteRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/merci': typeof MerciRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/abonnement': typeof AbonnementRoute
+  '/cgv': typeof CgvRoute
+  '/confidentialite': typeof ConfidentialiteRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/merci': typeof MerciRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/abonnement': typeof AbonnementRoute
+  '/cgv': typeof CgvRoute
+  '/confidentialite': typeof ConfidentialiteRoute
+  '/mentions-legales': typeof MentionsLegalesRoute
   '/merci': typeof MerciRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/abonnement' | '/merci'
+  fullPaths:
+    | '/'
+    | '/abonnement'
+    | '/cgv'
+    | '/confidentialite'
+    | '/mentions-legales'
+    | '/merci'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/abonnement' | '/merci'
-  id: '__root__' | '/' | '/abonnement' | '/merci'
+  to:
+    | '/'
+    | '/abonnement'
+    | '/cgv'
+    | '/confidentialite'
+    | '/mentions-legales'
+    | '/merci'
+  id:
+    | '__root__'
+    | '/'
+    | '/abonnement'
+    | '/cgv'
+    | '/confidentialite'
+    | '/mentions-legales'
+    | '/merci'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AbonnementRoute: typeof AbonnementRoute
+  CgvRoute: typeof CgvRoute
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
+  MentionsLegalesRoute: typeof MentionsLegalesRoute
   MerciRoute: typeof MerciRoute
 }
 
@@ -66,6 +115,27 @@ declare module '@tanstack/react-router' {
       path: '/merci'
       fullPath: '/merci'
       preLoaderRoute: typeof MerciRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cgv': {
+      id: '/cgv'
+      path: '/cgv'
+      fullPath: '/cgv'
+      preLoaderRoute: typeof CgvRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/abonnement': {
@@ -88,6 +158,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AbonnementRoute: AbonnementRoute,
+  CgvRoute: CgvRoute,
+  ConfidentialiteRoute: ConfidentialiteRoute,
+  MentionsLegalesRoute: MentionsLegalesRoute,
   MerciRoute: MerciRoute,
 }
 export const routeTree = rootRouteImport

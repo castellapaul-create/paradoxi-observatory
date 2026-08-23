@@ -71,6 +71,12 @@ function CheckoutForm() {
       <p className="text-center text-xs text-muted-foreground/50">
         Résiliation en un clic · Paiement sécurisé via Stripe
       </p>
+      <p className="text-center text-xs text-muted-foreground/40">
+        En vous abonnant, vous acceptez nos{" "}
+        <Link to="/cgv" className="underline hover:text-foreground">CGV</Link>
+        {" "}et notre{" "}
+        <Link to="/confidentialite" className="underline hover:text-foreground">politique de confidentialité</Link>.
+      </p>
     </form>
   );
 }

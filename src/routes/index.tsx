@@ -948,7 +948,8 @@ function PricingSection() {
       </div>
 
       {/* Price cards */}
-      <div className="reveal mt-10 grid gap-5 md:grid-cols-3">
+      <h3 className="reveal mt-16 mb-6 text-center font-black text-2xl md:text-3xl">Abonnement</h3>
+      <div className="reveal grid gap-5 md:grid-cols-3">
 
         {/* Free — expired */}
         <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/20 p-8 opacity-70">
@@ -1222,7 +1223,7 @@ function Footer() {
               </a>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-8 text-sm lg:justify-items-end">
+          <div className="grid grid-cols-2 gap-8 text-sm sm:grid-cols-3 lg:justify-items-end">
             <div className="space-y-3">
               <p className="font-semibold">Navigation</p>
               <a href="#rapport" className="block text-muted-foreground transition-colors hover:text-foreground">Rapport hebdomadaire</a>
@@ -1235,6 +1236,12 @@ function Footer() {
               <a href="#pricing" className="block text-muted-foreground transition-colors hover:text-foreground">S'abonner</a>
               <span className="block text-muted-foreground">Hebdomadaire</span>
             </div>
+            <div className="space-y-3">
+              <p className="font-semibold">Légal</p>
+              <Link to="/mentions-legales" className="block text-muted-foreground transition-colors hover:text-foreground">Mentions légales</Link>
+              <Link to="/cgv" className="block text-muted-foreground transition-colors hover:text-foreground">CGV</Link>
+              <Link to="/confidentialite" className="block text-muted-foreground transition-colors hover:text-foreground">Confidentialité</Link>
+            </div>
           </div>
         </div>
         <div className="mt-14 border-t border-border/40 pt-8">
@@ -1242,7 +1249,7 @@ function Footer() {
             CONFIDENTIEL · Contenu éducatif et informatif uniquement. PARADOXI Observatory ne constitue en aucun cas un conseil en investissement. Le trading sur les marchés financiers comporte un risque élevé de perte en capital. Les performances passées ne préjugent pas des performances futures.
           </p>
           <p className="mt-5 text-xs text-muted-foreground/35">
-            © {new Date().getFullYear()} PARADOXI Observatory. Tous droits réservés.
+            © {new Date().getFullYear()} PAMILYS INVEST — PARADOXI Observatory. Tous droits réservés.
           </p>
         </div>
       </div>
