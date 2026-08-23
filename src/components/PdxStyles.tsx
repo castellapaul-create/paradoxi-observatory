@@ -250,18 +250,20 @@ export function PdxStyles() {
     row-gap:20px;
     position:relative;
   }
-  .pdx2 .hero-grid > h1{ font-size:clamp(2.1rem, 9vw, 2.9rem); line-height:1.08; margin-bottom:0; text-align:left; position:relative; z-index:0; }
-  .pdx2 .hero-grid > .lede{ font-size:15px; margin-bottom:0; max-width:none; text-align:center; margin-left:auto; margin-right:auto; }
+  .pdx2 .hero-grid > h1{ margin-bottom:0; text-align:left; position:relative; z-index:auto; display:block; }
+  .pdx2 .hero-lead{ display:block; position:relative; z-index:0; }
+  .pdx2 .hero-lead-line{ display:block; font-size:clamp(2.3rem, 10.5vw, 3.1rem); font-weight:800; line-height:1.02; letter-spacing:-0.02em; color:#d6d8dc; }
+  .pdx2 .hero-main{ display:block; position:relative; z-index:2; font-size:clamp(1.7rem, 7.4vw, 2.2rem); font-weight:800; line-height:1.12; letter-spacing:-0.015em; color:var(--text); margin-top:6px; }
+  .pdx2 .hero-grid > .lede{ font-size:15px; margin-bottom:0; margin-top:14px; max-width:none; text-align:center; margin-left:auto; margin-right:auto; }
   .pdx2 .hero-grid > .hero-actions{ flex-direction:column; align-items:stretch; gap:10px; margin-bottom:0; }
   .pdx2 .hero-actions a{ justify-content:center; }
   .pdx2 .hero-grid > .hero-meta{ font-size:12.5px; flex-wrap:wrap; row-gap:4px; justify-content:center; }
-  .pdx2 .hero-visual{ position:absolute; top:34px; right:-16%; width:105%; z-index:1; pointer-events:none; }
+  .pdx2 .hero-visual{ position:absolute; top:78px; right:-8%; width:64%; z-index:1; pointer-events:none; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
-    mix-blend-mode:screen;
-    opacity:.92;
-    -webkit-mask-image: radial-gradient(ellipse closest-side at 62% 42%, black 78%, transparent 100%);
-    mask-image: radial-gradient(ellipse closest-side at 62% 42%, black 78%, transparent 100%);
+    opacity:.96;
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 52% 42%, black 68%, transparent 100%);
+    mask-image: radial-gradient(ellipse closest-side at 52% 42%, black 68%, transparent 100%);
   }
   .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
   .pdx2 .footer-grid{ grid-template-columns:1fr 1fr; }

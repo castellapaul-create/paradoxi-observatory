@@ -202,7 +202,14 @@ function Hero() {
   return (
     <section className="hero">
       <div className="wrap hero-grid">
-        <h1>Vous analysez les marchés avec les outils du retail. Les desks institutionnels lisent <em>autre chose.</em></h1>
+        <h1>
+          <span className="hero-lead">
+            <span className="hero-lead-line">Vous</span>{" "}
+            <span className="hero-lead-line">analysez</span>{" "}
+            <span className="hero-lead-line">les marchés</span>{" "}
+          </span>
+          <span className="hero-main">avec les outils du retail. Les desks institutionnels lisent <em>autre chose.</em></span>
+        </h1>
         <div className="hero-visual">
           <img src={heroGlass} alt="Figure abstraite en verre — représentation de l'analyse des données de marché" />
         </div>
