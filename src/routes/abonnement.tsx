@@ -62,7 +62,7 @@ function CheckoutForm() {
         >
           {status === "loading" ? (
             <><Loader2 className="h-4 w-4 animate-spin" />Chargement…</>
-          ) : "Souscrire — 69 €/mois"}
+          ) : "Souscrire"}
         </button>
       </div>
       {status === "error" && error && (
@@ -113,10 +113,13 @@ function AbonnementPage() {
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
           {/* Price */}
-          <div className="mb-6 flex items-end gap-2">
-            <span className="text-5xl font-black">69 €</span>
+          <div className="mb-2 flex items-end gap-2">
+            <span className="text-5xl font-black">49,99 €</span>
             <span className="mb-1.5 text-sm text-muted-foreground">/mois · sans engagement</span>
           </div>
+          <p className="mb-6 text-xs text-muted-foreground">
+            Tarif liste d'attente, reconnu automatiquement via votre email · 69,99 €/mois sinon
+          </p>
 
           {/* Features */}
           <ul className="mb-8 space-y-3 border-t border-primary/10 pt-6">

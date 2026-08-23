@@ -95,7 +95,7 @@ const EDITION_ITEMS = [
 
 const FAQ = [
   { q: "Qu'est-ce que PARADOXI Observatory exactement ?", a: "Un observatoire de recherche financière indépendant. Chaque semaine, nous produisons une analyse macro approfondie des marchés des changes : fondamentaux, banques centrales, positionnement institutionnel, régimes de risque. Pas des signaux à copier — une compréhension à construire." },
-  { q: "Combien coûte l'accès ?", a: "L'accès est entièrement gratuit pendant la période de lancement. Une formule premium à 69 €/mois sera proposée prochainement, sur liste d'attente. Les lecteurs inscrits aujourd'hui bénéficieront d'un tarif préférentiel à l'ouverture." },
+  { q: "Combien coûte l'accès ?", a: "L'accès est entièrement gratuit pendant la période de lancement. Une formule premium à 69,99 €/mois sera proposée prochainement. Les lecteurs inscrits aujourd'hui sur liste d'attente bénéficieront d'un tarif préférentiel de 49,99 €/mois à l'ouverture." },
   { q: "À quelle fréquence le rapport est-il publié ?", a: "Une édition complète chaque dimanche soir — pour préparer votre semaine de marché avec méthode. Accompagnée d'un briefing quotidien les jours d'ouverture, pour suivre l'évolution du contexte macro en temps réel." },
   { q: "Est-ce un conseil en investissement ?", a: "Non. PARADOXI Observatory est un contenu strictement éducatif et informatif. Il ne constitue en aucun cas une recommandation personnalisée d'achat ou de vente d'instruments financiers. Vous restez seul décideur de vos choix — c'est précisément l'objectif." },
 ];
@@ -371,7 +371,7 @@ function Hero() {
         {/* Pricing narrative */}
         <div className="reveal mx-auto mt-8 max-w-lg rounded-xl border border-primary/20 bg-primary/[0.05] px-5 py-3 text-center text-sm">
           <span className="font-semibold text-foreground">Gratuit pendant le lancement.</span>
-          {" "}<span className="text-muted-foreground">À l'ouverture : <strong className="font-semibold text-foreground/80">69 €/mois</strong> — tarif préférentiel garanti aux inscrits d'aujourd'hui.</span>
+          {" "}<span className="text-muted-foreground">À l'ouverture : <strong className="font-semibold text-foreground/80">49,99 €/mois</strong> pour les inscrits d'aujourd'hui — <strong className="font-semibold text-foreground/80">69,99 €/mois</strong> sinon.</span>
         </div>
 
         {/* Email capture */}
@@ -1063,10 +1063,10 @@ function PricingSection() {
 
           {/* Price */}
           <div className="flex items-end gap-2">
-            <span className="text-5xl font-black text-foreground">69 €</span>
+            <span className="text-5xl font-black text-foreground">49,99 €</span>
             <span className="mb-1.5 text-sm text-muted-foreground">/mois</span>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">Le tarif préférentiel est réservé aux inscrits actuels. Rejoindre aujourd'hui, c'est sécuriser les meilleures conditions avant l'ouverture officielle.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Tarif préférentiel réservé aux inscrits actuels (69,99 €/mois sinon). Rejoindre aujourd'hui, c'est sécuriser les meilleures conditions avant l'ouverture officielle.</p>
 
           {/* Checklist */}
           <ul className="mt-6 space-y-3 border-t border-border/30 pt-6">
@@ -1146,7 +1146,7 @@ function PrivateLetter() {
             <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-primary/25 bg-primary/[0.06] px-4 py-2 text-xs">
               <span className="font-bold text-primary">Gratuit maintenant</span>
               <span className="h-px w-4 bg-border/60" />
-              <span className="text-muted-foreground">69 €/mois dès l'ouverture · accès prioritaire aux inscrits</span>
+              <span className="text-muted-foreground">49,99 €/mois dès l'ouverture pour les inscrits (69,99 € sinon)</span>
             </div>
             <p className="mt-5 text-lg text-muted-foreground">
               Chaque dimanche soir, un rapport arrive dans votre boîte mail. Dense, structuré, lisible. Il ne vous dit pas quoi trader. Il vous aide à comprendre dans quel environnement vous évoluez — et pourquoi les marchés se comportent comme ils se comportent. C'est la différence entre réagir et décider.

@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { isOnWaitlist } from "@/lib/waitlist";
 
 export const createCheckoutSession = createServerFn({ method: "POST" })
   .inputValidator(z.object({ email: z.string().email("Adresse email invalide") }))
@@ -11,7 +12,9 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
     if (!allowed) throw new Error(`Trop de tentatives. Réessayez dans ${retryAfterSec}s.`);
 
     const secretKey = process.env.STRIPE_SECRET_KEY;
-    const priceId = process.env.STRIPE_PRICE_ID;
+    const priceId = isOnWaitlist(data.email)
+      ? process.env.STRIPE_PRICE_ID_WAITLIST
+      : process.env.STRIPE_PRICE_ID_STANDARD;
     const baseUrl = process.env.PUBLIC_URL ?? "https://paradoxi.vercel.app";
 
     if (!secretKey || !priceId) {
