@@ -1011,7 +1011,7 @@ function PricingSection() {
       </div>
 
       {/* Price cards */}
-      <div className="reveal mt-10 grid gap-5 md:grid-cols-2">
+      <div className="reveal mt-10 grid gap-5 md:grid-cols-3">
 
         {/* Free — expired */}
         <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/20 p-8 opacity-70">
@@ -1041,6 +1041,40 @@ function PricingSection() {
           <div className="mt-8 flex items-center justify-center gap-2 rounded-full border border-border/40 bg-card/40 py-3.5 text-sm font-bold text-muted-foreground/60">
             Offre expirée
           </div>
+        </div>
+
+        {/* Premium — liste d'attente */}
+        <div className="relative overflow-hidden rounded-2xl border border-border/40 bg-card/20 p-8">
+
+          {/* Badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-3 py-1 text-xs font-bold text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/40" />
+            Membre
+          </div>
+
+          {/* Price */}
+          <div className="flex items-end gap-2">
+            <span className="text-5xl font-black text-foreground">49,99 €</span>
+            <span className="mb-1.5 text-sm text-muted-foreground">/mois</span>
+          </div>
+          <p className="mt-3 text-sm text-muted-foreground">Tarif préférentiel réservé aux membres déjà inscrits avant l'ouverture — reconnu automatiquement via votre email au paiement.</p>
+
+          {/* Checklist */}
+          <ul className="mt-6 space-y-3 border-t border-border/30 pt-6">
+            {PLAN_CHECKLIST.map((item) => (
+              <li key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground/60">
+                <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-border/50 text-[9px] text-muted-foreground/40">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            to="/abonnement"
+            className="mt-8 flex w-full items-center justify-center gap-2 rounded-full border border-border/40 bg-card/50 py-3.5 text-sm font-semibold text-muted-foreground transition-colors hover:border-primary/30 hover:bg-card hover:text-foreground"
+          >
+            Souscrire
+          </Link>
         </div>
 
         {/* Premium — active */}
