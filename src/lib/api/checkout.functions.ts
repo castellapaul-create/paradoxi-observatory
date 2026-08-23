@@ -34,7 +34,6 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
         customer_email: data.email,
         success_url: `${baseUrl}/merci?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${baseUrl}/#pricing`,
-        "subscription_data[trial_period_days]": "7",
         locale: "fr",
       }),
     });

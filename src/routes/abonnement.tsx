@@ -69,7 +69,7 @@ function CheckoutForm() {
         <p className="text-center text-xs text-destructive">{error}</p>
       )}
       <p className="text-center text-xs text-muted-foreground/50">
-        7 jours d'essai gratuit · Résiliation en un clic · Paiement sécurisé via Stripe
+        Résiliation en un clic · Paiement sécurisé via Stripe
       </p>
     </form>
   );
