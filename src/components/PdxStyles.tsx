@@ -31,7 +31,7 @@ export function PdxStyles() {
 .pdx2 .nav-cta{ display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#fff; font-size:14px; font-weight:600; padding:11px 22px; border-radius:999px; box-shadow:0 8px 20px -8px rgba(10,99,214,.55); transition:background .15s ease, transform .15s ease; }
 .pdx2 .nav-cta:hover{ background:var(--accent-hover); transform:translateY(-1px); }
 .pdx2 .nav-burger{ display:none; align-items:center; justify-content:center; width:38px; height:38px; border-radius:10px; border:1px solid var(--border); background:#fff; color:var(--text); cursor:pointer; flex-shrink:0; }
-.pdx2 .mobile-menu{ position:absolute; top:100%; left:0; right:0; background:#fff; border-bottom:1px solid var(--border); box-shadow:0 24px 48px -24px rgba(16,17,20,.25); padding:8px 20px 20px; display:flex; flex-direction:column; }
+.pdx2 .mobile-menu{ position:absolute; top:calc(100% + 8px); right:20px; left:auto; width:240px; background:#fff; border:1px solid var(--border); border-radius:16px; box-shadow:0 24px 48px -20px rgba(16,17,20,.3); padding:8px 16px; display:flex; flex-direction:column; }
 .pdx2 .mobile-menu a, .pdx2 .mobile-menu button.nav-app-link{ padding:14px 4px; font-size:15.5px; font-weight:600; color:var(--text); border-bottom:1px solid var(--border); text-align:left; width:100%; justify-content:space-between; }
 .pdx2 .mobile-menu a:last-of-type{ border-bottom:none; }
 .pdx2 .mobile-menu .btn-primary{ justify-content:center; margin-top:16px; }
@@ -75,12 +75,13 @@ export function PdxStyles() {
 .pdx2 .section-head p{ font-size:16.5px; line-height:1.65; color:var(--text-muted); margin:0; }
 .pdx2 .section-head.center{ text-align:center; }
 
-.pdx2 .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-.pdx2 .step{ background:#fff; border:1px solid var(--border); border-radius:20px; padding:28px 22px; }
-.pdx2 .step .num{ display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:13px; font-weight:800; margin-bottom:18px; }
-.pdx2 .step .tag{ font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint); margin-bottom:6px; }
-.pdx2 .step h3{ font-size:16.5px; font-weight:700; margin:0 0 8px; }
-.pdx2 .step p{ font-size:14px; line-height:1.6; color:var(--text-muted); margin:0; }
+.pdx2 .timeline{ position:relative; display:flex; gap:8px; padding-top:8px; }
+.pdx2 .timeline::before{ content:""; position:absolute; top:28px; left:5%; right:5%; height:2px; background:var(--border); }
+.pdx2 .timeline-step{ position:relative; flex:1; display:flex; flex-direction:column; align-items:center; text-align:center; }
+.pdx2 .timeline-dot{ position:relative; z-index:1; flex-shrink:0; width:40px; height:40px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; box-shadow:0 0 0 6px #fff; margin-bottom:20px; }
+.pdx2 .timeline-content .tag{ font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--text-faint); margin-bottom:6px; }
+.pdx2 .timeline-content h3{ font-size:16.5px; font-weight:700; margin:0 0 8px; }
+.pdx2 .timeline-content p{ font-size:14px; line-height:1.6; color:var(--text-muted); margin:0; max-width:220px; }
 
 .pdx2 .features{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
 .pdx2 .feature{ background:#fff; border:1px solid var(--border); border-radius:20px; padding:26px; display:flex; gap:16px; align-items:flex-start; }
@@ -229,22 +230,35 @@ export function PdxStyles() {
   .pdx2 .testimonial{ width:82vw; }
   .pdx2 .faq-layout{ grid-template-columns:1fr; }
   .pdx2 .faq-phone{ position:static; max-width:320px; margin:0 auto 40px; }
-  .pdx2 .hero-grid{ grid-template-columns:1fr; position:relative; }
-  .pdx2 .hero-grid > .hero-copy{ position:relative; z-index:1; }
-  .pdx2 .hero-visual{ position:absolute; top:-24px; left:0; right:0; margin:0; z-index:0; opacity:.6; pointer-events:none; }
+  .pdx2 .hero-grid{ grid-template-columns:1.15fr .85fr; gap:20px; }
+  .pdx2 .hero h1{ font-size:clamp(1.3rem, 4.6vw, 1.9rem); line-height:1.15; margin-bottom:14px; }
+  .pdx2 .hero .lede{ font-size:13.5px; margin-bottom:18px; }
+  .pdx2 .hero-actions{ flex-direction:column; align-items:stretch; gap:10px; margin-bottom:16px; }
+  .pdx2 .hero-actions a{ justify-content:center; padding:12px 18px; font-size:13.5px; }
+  .pdx2 .hero-meta{ font-size:11.5px; flex-wrap:wrap; row-gap:4px; }
+  .pdx2 .hero-visual{ margin-right:0; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
-    -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 32%, black 30%, transparent 82%);
-    mask-image: radial-gradient(ellipse closest-side at 50% 32%, black 30%, transparent 82%);
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 42%, black 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse closest-side at 50% 42%, black 55%, transparent 100%);
   }
-  .pdx2 .steps, .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
+  .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr 1fr; }
   .pdx2 .footer-grid{ grid-template-columns:1fr 1fr; }
+  .pdx2 .timeline{ flex-direction:column; gap:0; padding-top:0; }
+  .pdx2 .timeline::before{ top:0; bottom:0; left:20px; right:auto; width:2px; height:auto; }
+  .pdx2 .timeline-step{ flex-direction:row; align-items:flex-start; text-align:left; padding-bottom:28px; }
+  .pdx2 .timeline-step:last-child{ padding-bottom:0; }
+  .pdx2 .timeline-dot{ margin-bottom:0; margin-right:16px; }
+  .pdx2 .timeline-content{ padding-top:6px; }
+  .pdx2 .timeline-content p{ max-width:none; }
 }
 @media (max-width: 600px){
   .pdx2 .wrap, .pdx2 .nav-inner{ padding-left:20px; padding-right:20px; }
   .pdx2 .nav-links{ display:none; }
+  .pdx2 .hero h1{ font-size:clamp(1.15rem, 5.5vw, 1.5rem); }
+  .pdx2 .hero-grid{ grid-template-columns:1.2fr .8fr; gap:14px; }
   .pdx2 .nav-burger{ display:flex; }
-  .pdx2 .steps, .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr; }
+  .pdx2 .features, .pdx2 .pricing-grid{ grid-template-columns:1fr; }
   .pdx2 .footer-grid{ grid-template-columns:1fr; }
   .pdx2 .hero{ padding-top:64px; }
   .pdx2 .section{ padding:64px 0; }

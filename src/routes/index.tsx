@@ -334,13 +334,15 @@ function Methode() {
           <h2>Un processus rigoureux, pas une opinion</h2>
           <p>Consolidé chaque semaine dans un index propriétaire : le <strong>PCI</strong> (Paradoxi Confluence Index).</p>
         </div>
-        <div className="steps">
+        <div className="timeline">
           {STEPS.map((s) => (
-            <div key={s.num} className="step">
-              <div className="num">{s.num}</div>
-              <p className="tag">{s.tag}</p>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
+            <div key={s.num} className="timeline-step">
+              <span className="timeline-dot">{s.num}</span>
+              <div className="timeline-content">
+                <p className="tag">{s.tag}</p>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
             </div>
           ))}
         </div>
