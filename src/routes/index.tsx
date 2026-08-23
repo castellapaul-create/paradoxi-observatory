@@ -202,22 +202,20 @@ function Hero() {
   return (
     <section className="hero">
       <div className="wrap hero-grid">
-        <div className="hero-copy">
-          <h1>Vous analysez les marchés avec les outils du retail. Les desks institutionnels lisent <em>autre chose.</em></h1>
-          <p className="lede">Chaque dimanche, une analyse macroéconomique complète et les biais directionnels des principales devises — construits avec la même rigueur qu'un desk institutionnel.</p>
-          <div className="hero-actions">
-            <a href="#pricing" className="btn-primary">Voir les tarifs →</a>
-            <a href="#methode" className="btn-ghost">Comment ça marche</a>
-          </div>
-          <div className="hero-meta">
-            <span className="stars">★★★★★</span>
-            <span>52 dimanches consécutifs</span>
-            <span className="dot">·</span>
-            <span>~300 lecteurs confidentiel</span>
-          </div>
-        </div>
+        <h1>Vous analysez les marchés avec les outils du retail. Les desks institutionnels lisent <em>autre chose.</em></h1>
         <div className="hero-visual">
           <img src={heroGlass} alt="Figure abstraite en verre — représentation de l'analyse des données de marché" />
+        </div>
+        <p className="lede">Chaque dimanche, une analyse macroéconomique complète et les biais directionnels des principales devises — construits avec la même rigueur qu'un desk institutionnel.</p>
+        <div className="hero-actions">
+          <a href="#pricing" className="btn-primary">Voir les tarifs →</a>
+          <a href="#methode" className="btn-ghost">Comment ça marche</a>
+        </div>
+        <div className="hero-meta">
+          <span className="stars">★★★★★</span>
+          <span>52 dimanches consécutifs</span>
+          <span className="dot">·</span>
+          <span>~300 lecteurs confidentiel</span>
         </div>
       </div>
     </section>
