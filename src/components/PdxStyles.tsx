@@ -250,12 +250,12 @@ export function PdxStyles() {
     column-gap:0; row-gap:20px;
     align-items:center;
   }
-  .pdx2 .hero-grid > h1{ font-size:clamp(1.35rem, 5.6vw, 1.8rem); line-height:1.15; margin-bottom:0; text-align:left; position:relative; z-index:1; }
+  .pdx2 .hero-grid > h1{ font-size:clamp(1.35rem, 5.6vw, 1.8rem); line-height:1.15; margin-bottom:0; text-align:left; position:relative; z-index:0; }
   .pdx2 .hero-grid > .lede{ font-size:15px; margin-bottom:0; max-width:none; text-align:center; margin-left:auto; margin-right:auto; }
   .pdx2 .hero-grid > .hero-actions{ flex-direction:column; align-items:stretch; gap:10px; margin-bottom:0; }
   .pdx2 .hero-actions a{ justify-content:center; }
   .pdx2 .hero-grid > .hero-meta{ font-size:12.5px; flex-wrap:wrap; row-gap:4px; justify-content:center; }
-  .pdx2 .hero-visual{ position:relative; width:185%; margin-left:-62%; margin-right:0; z-index:0; }
+  .pdx2 .hero-visual{ position:relative; width:185%; margin-left:-62%; margin-right:0; z-index:1; pointer-events:none; }
   .pdx2 .hero-visual img{
     width:100%; max-width:100%;
     -webkit-mask-image: radial-gradient(ellipse closest-side at 68% 50%, black 50%, transparent 100%);
