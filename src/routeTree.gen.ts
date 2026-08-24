@@ -15,6 +15,8 @@ import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as AbonnementRouteImport } from './routes/abonnement'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RapportIndexRouteImport } from './routes/rapport/index'
+import { Route as RapportConfirmerRouteImport } from './routes/rapport/confirmer'
 
 const MerciRoute = MerciRouteImport.update({
   id: '/merci',
@@ -46,6 +48,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RapportIndexRoute = RapportIndexRouteImport.update({
+  id: '/rapport/',
+  path: '/rapport/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RapportConfirmerRoute = RapportConfirmerRouteImport.update({
+  id: '/rapport/confirmer',
+  path: '/rapport/confirmer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +66,8 @@ export interface FileRoutesByFullPath {
   '/confidentialite': typeof ConfidentialiteRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/merci': typeof MerciRoute
+  '/rapport/confirmer': typeof RapportConfirmerRoute
+  '/rapport/': typeof RapportIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +76,8 @@ export interface FileRoutesByTo {
   '/confidentialite': typeof ConfidentialiteRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/merci': typeof MerciRoute
+  '/rapport/confirmer': typeof RapportConfirmerRoute
+  '/rapport': typeof RapportIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +87,8 @@ export interface FileRoutesById {
   '/confidentialite': typeof ConfidentialiteRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/merci': typeof MerciRoute
+  '/rapport/confirmer': typeof RapportConfirmerRoute
+  '/rapport/': typeof RapportIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +99,8 @@ export interface FileRouteTypes {
     | '/confidentialite'
     | '/mentions-legales'
     | '/merci'
+    | '/rapport/confirmer'
+    | '/rapport/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +109,8 @@ export interface FileRouteTypes {
     | '/confidentialite'
     | '/mentions-legales'
     | '/merci'
+    | '/rapport/confirmer'
+    | '/rapport'
   id:
     | '__root__'
     | '/'
@@ -97,6 +119,8 @@ export interface FileRouteTypes {
     | '/confidentialite'
     | '/mentions-legales'
     | '/merci'
+    | '/rapport/confirmer'
+    | '/rapport/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +130,8 @@ export interface RootRouteChildren {
   ConfidentialiteRoute: typeof ConfidentialiteRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   MerciRoute: typeof MerciRoute
+  RapportConfirmerRoute: typeof RapportConfirmerRoute
+  RapportIndexRoute: typeof RapportIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +178,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/rapport/': {
+      id: '/rapport/'
+      path: '/rapport'
+      fullPath: '/rapport/'
+      preLoaderRoute: typeof RapportIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rapport/confirmer': {
+      id: '/rapport/confirmer'
+      path: '/rapport/confirmer'
+      fullPath: '/rapport/confirmer'
+      preLoaderRoute: typeof RapportConfirmerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +202,8 @@ const rootRouteChildren: RootRouteChildren = {
   ConfidentialiteRoute: ConfidentialiteRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   MerciRoute: MerciRoute,
+  RapportConfirmerRoute: RapportConfirmerRoute,
+  RapportIndexRoute: RapportIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

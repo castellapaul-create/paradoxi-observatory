@@ -240,6 +240,9 @@ export function PdxStyles() {
 .pdx2 .legal-page strong{ color:var(--text); }
 
 @media (max-width: 860px){
+  .pdx2 .checkout-row{ flex-direction:column; align-items:stretch; border-radius:20px; }
+  .pdx2 .checkout-row input{ text-align:center; }
+  .pdx2 .checkout-row button{ white-space:normal; }
   .pdx2 .app-modal-features{ grid-template-columns:1fr; }
   .pdx2 .founder{ grid-template-columns:1fr; }
   .pdx2 .trades-grid{ grid-template-columns:1fr; }
