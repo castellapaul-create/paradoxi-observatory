@@ -21,6 +21,7 @@ import logoInvesting from "@/assets/logos/investing.png";
 import logoTradingEconomics from "@/assets/logos/tradingeconomics.png";
 import logoCnn from "@/assets/logos/cnn.png";
 import logoPolymarket from "@/assets/logos/polymarket.png";
+import { PROOF } from "@/config/proof";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -219,10 +220,9 @@ function Hero() {
           <a href="#methode" className="btn-ghost">Comment ça marche</a>
         </div>
         <div className="hero-meta">
-          <span className="stars">★★★★★</span>
-          <span>52 dimanches consécutifs</span>
+          <span>{PROOF.cadence}</span>
           <span className="dot">·</span>
-          <span>~300 lecteurs confidentiel</span>
+          <span>{PROOF.readership}</span>
         </div>
       </div>
     </section>
@@ -239,7 +239,7 @@ const TRUST_ITEMS = (
     </div>
     <div className="trust-item">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 6v6l4 2" /><circle cx="12" cy="12" r="9" /></svg>
-      <span><strong>Chaque dimanche</strong> — sans exception depuis 52 semaines</span>
+      <span><strong>Chaque dimanche</strong> — sans exception</span>
     </div>
     <div className="trust-item">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="10" rx="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
