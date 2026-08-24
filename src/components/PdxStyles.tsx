@@ -179,6 +179,12 @@ export function PdxStyles() {
 .pdx2 .founder{ display:grid; grid-template-columns:.8fr 1.2fr; gap:56px; align-items:center; }
 .pdx2 .founder-portrait{ border-radius:28px; overflow:hidden; box-shadow:0 2px 6px rgba(16,17,20,.05), 0 30px 60px -24px rgba(16,17,20,.25); }
 .pdx2 .founder-portrait img{ width:100%; display:block; }
+.pdx2 .founder-linkedin{ display:flex; align-items:center; gap:12px; padding:16px 20px; background:#fff; border-top:1px solid var(--border); transition:background .15s ease; }
+.pdx2 .founder-linkedin:hover{ background:var(--bg-soft); }
+.pdx2 .founder-linkedin svg{ flex-shrink:0; color:#0a66c2; }
+.pdx2 .founder-linkedin span{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.pdx2 .founder-linkedin strong{ font-size:14.5px; font-weight:700; color:var(--text); }
+.pdx2 .founder-linkedin em{ font-style:normal; font-size:12px; color:var(--text-muted); line-height:1.4; }
 .pdx2 .founder-body p{ font-size:15px; line-height:1.7; color:var(--text-muted); margin:0 0 16px; }
 .pdx2 .founder-proof{ display:flex; flex-direction:column; gap:12px; margin-top:28px; }
 .pdx2 .founder-proof-item{ display:flex; gap:14px; padding:16px 18px; border:1px solid var(--border); border-radius:14px; background:#fff; }
