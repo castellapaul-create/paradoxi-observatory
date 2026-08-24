@@ -5,7 +5,7 @@ import { checkRateLimit } from "@/lib/rate-limit";
 import { isOnWaitlist } from "@/lib/waitlist";
 
 export const createCheckoutSession = createServerFn({ method: "POST" })
-  .inputValidator(z.object({ email: z.string().email("Adresse email invalide") }))
+  .inputValidator(z.object({ email: z.string().email("Adresse email invalide"), src: z.string().max(100).optional() }))
   .handler(async ({ data }) => {
     const ip = getRequest().headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
     const { allowed, retryAfterSec } = checkRateLimit(ip, { max: 5, windowMs: 60_000 });
@@ -33,6 +33,8 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
         "payment_method_types[0]": "card",
         mode: "subscription",
         customer_email: data.email,
+        // Conserve la source (?src=) jusque dans le tableau de bord Stripe.
+        client_reference_id: data.src || "direct",
         success_url: `${baseUrl}/merci?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${baseUrl}/#pricing`,
         locale: "fr",

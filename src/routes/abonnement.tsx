@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { z } from "zod";
 import { PdxStyles } from "@/components/PdxStyles";
 import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
 import { createCheckoutSession } from "@/lib/api/checkout.functions";
+import { trackEvent } from "@/lib/api/track.functions";
 
 export const Route = createFileRoute("/abonnement")({
+  validateSearch: z.object({ src: z.string().max(100).optional() }),
   head: () => ({
     meta: [
       { title: "PARADOXI Observatory — Abonnement Premium" },
@@ -29,7 +32,7 @@ function CheckIcon() {
   return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6L9 17l-5-5" /></svg>;
 }
 
-function CheckoutForm() {
+function CheckoutForm({ src }: { src: string }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
@@ -40,7 +43,8 @@ function CheckoutForm() {
     setStatus("loading");
     setError("");
     try {
-      const { url } = await createCheckoutSession({ data: { email: email.trim() } });
+      trackEvent({ data: { event: "checkout_start", src } }).catch(() => {});
+      const { url } = await createCheckoutSession({ data: { email: email.trim(), src } });
       window.location.href = url;
     } catch (err) {
       setStatus("error");
@@ -73,6 +77,14 @@ function CheckoutForm() {
 }
 
 function AbonnementPage() {
+  const { src } = Route.useSearch();
+  const resolvedSrc = src ?? "direct";
+
+  useEffect(() => {
+    trackEvent({ data: { event: "abonnement_view", src: resolvedSrc } }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="pdx2">
       <PdxStyles />
@@ -97,7 +109,7 @@ function AbonnementPage() {
           <ul className="price-list" style={{ marginBottom: 28 }}>
             {FEATURES.map((label) => <li key={label}><CheckIcon />{label}</li>)}
           </ul>
-          <CheckoutForm />
+          <CheckoutForm src={resolvedSrc} />
         </div>
 
         <p style={{ marginTop: 32, textAlign: "center", fontSize: 12.5, lineHeight: 1.6, color: "var(--text-faint)" }}>

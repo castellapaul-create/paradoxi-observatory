@@ -172,6 +172,8 @@ export const requestReportAccess = createServerFn({ method: "POST" })
       throw new Error(body["message"] ?? "Envoi de la confirmation échoué, veuillez réessayer.");
     }
 
+    appendToSheet("Evenements", [new Date().toISOString(), "rapport_submit", src]).catch(() => {});
+
     return { success: true };
   });
 
@@ -201,6 +203,7 @@ export const confirmReportAccess = createServerFn({ method: "POST" })
     // Resend ne permet pas d'attribut personnalisé (ex. source) sur un contact —
     // on la journalise donc dans Google Sheets, comme le reste du suivi des leads.
     appendToSheet("RapportLeads", [new Date().toISOString(), email, src, "confirmed"]).catch(() => {});
+    appendToSheet("Evenements", [new Date().toISOString(), "rapport_confirmed", src]).catch(() => {});
 
     if (!apiKey) {
       if (process.env.NODE_ENV !== "production") {

@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { PdxStyles } from "@/components/PdxStyles";
 import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
 import sectionRapport from "@/assets/section-rapport.png";
 import { requestReportAccess } from "@/lib/api/report.functions";
+import { trackEvent } from "@/lib/api/track.functions";
 
 export const Route = createFileRoute("/rapport/")({
   validateSearch: z.object({ src: z.string().max(100).optional() }),
@@ -92,6 +93,11 @@ function ReportForm({ src }: { src: string }) {
 
 function RapportPage() {
   const { src } = Route.useSearch();
+
+  useEffect(() => {
+    trackEvent({ data: { event: "rapport_view", src: src ?? "direct" } }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="pdx2">
