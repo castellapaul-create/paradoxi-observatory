@@ -141,7 +141,7 @@ export function PdxStyles() {
 @media (prefers-reduced-motion: reduce){ .pdx2 .marquee-logos{ animation:none; flex-wrap:wrap; justify-content:center; } }
 
 .pdx2 .showcase{ padding:40px 0; }
-.pdx2 .showcase-frame{ position:relative; border-radius:32px; padding:28px; background:radial-gradient(120% 140% at 50% 0%, color-mix(in oklab, var(--accent) 7%, transparent), transparent 60%), var(--bg-soft); }
+.pdx2 .showcase-frame{ position:relative; }
 .pdx2 .showcase-card{ position:relative; border-radius:22px; overflow:hidden; box-shadow:0 2px 6px rgba(16,17,20,.05), 0 30px 60px -24px rgba(16,17,20,.22); }
 .pdx2 .showcase-card img{ width:100%; display:block; }
 
