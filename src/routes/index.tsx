@@ -100,7 +100,7 @@ const TESTIMONIALS = [
 ];
 
 const FAQ = [
-  { q: "Qu'est-ce que PARADOXI Observatory exactement ?", a: "Un observatoire de recherche financière indépendant. Chaque semaine, nous produisons une analyse macro approfondie des marchés des changes — pas des signaux à copier, une compréhension à construire." },
+  { q: "Qu'est-ce que PARADOXI Observatory exactement ?", a: "Un observatoire de recherche financière indépendant. Chaque semaine, je produis une analyse macro approfondie des marchés des changes — pas des signaux à copier, une compréhension à construire." },
   { q: "Combien coûte l'accès ?", a: "69,99 €/mois, sans engagement. Un tarif préférentiel de 49,99 €/mois est réservé aux membres déjà inscrits avant l'ouverture." },
   { q: "Est-ce un conseil en investissement ?", a: "Non. Contenu strictement éducatif et informatif, qui ne constitue en aucun cas une recommandation personnalisée. Vous restez seul décideur de vos choix." },
 ];
@@ -402,7 +402,7 @@ function Founder() {
             PARADOXI Observatory existe parce qu'un accès sérieux aux marchés ne devrait pas être réservé aux professionnels.
           </h2>
           <p>La majorité des traders particuliers ne manquent pas d'ambition. Ils manquent d'un cadre. PARADOXI a été construit en réponse à ce manque : un processus analytique rigoureux — COT, macro, banques centrales, flux institutionnels — synthétisé pour être lisible, décisionnel et exploitable, sans expérience institutionnelle préalable.</p>
-          <p>Nous n'avons pas vocation à vous dire quoi faire. Nous avons vocation à vous donner les éléments pour décider vous-même — avec plus de clarté et plus de confiance dans votre propre jugement.</p>
+          <p>Je n'ai pas vocation à vous dire quoi faire. J'ai vocation à vous donner les éléments pour décider vous-même — avec plus de clarté et plus de confiance dans votre propre jugement.</p>
           <div className="founder-proof">
             <div className="founder-proof-item">
               <span className="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 17l6-6 4 4 8-8M21 7v6h-6" /></svg></span>
@@ -432,7 +432,7 @@ function Testimonials() {
       <div className="wrap">
         <div className="section-head center" style={{ marginLeft: "auto", marginRight: "auto" }}>
           <p className="eyebrow">Ils lisent PARADOXI</p>
-          <h2>Ce qu'en disent nos lecteurs</h2>
+          <h2>Ce qu'en disent mes lecteurs</h2>
         </div>
         <div className="testimonials-viewport">
           <div className="testimonials-grid">

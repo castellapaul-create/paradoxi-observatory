@@ -84,7 +84,7 @@ function ReportForm({ src }: { src: string }) {
       </div>
       {status === "error" && error && <p className="checkout-error">{error}</p>}
       <p className="checkout-note">
-        Contenu éducatif uniquement · Pas un conseil en investissement · Voir notre{" "}
+        Contenu éducatif uniquement · Pas un conseil en investissement · Voir ma{" "}
         <Link to="/confidentialite">politique de confidentialité</Link>.
       </p>
     </form>

@@ -69,7 +69,7 @@ function CheckoutForm({ src }: { src: string }) {
       {status === "error" && error && <p className="checkout-error">{error}</p>}
       <p className="checkout-note">Résiliation en un clic · Paiement sécurisé via Stripe</p>
       <p className="checkout-note">
-        En vous abonnant, vous acceptez nos <Link to="/cgv">CGV</Link> et notre{" "}
+        En vous abonnant, vous acceptez mes <Link to="/cgv">CGV</Link> et ma{" "}
         <Link to="/confidentialite">politique de confidentialité</Link>.
       </p>
     </form>
