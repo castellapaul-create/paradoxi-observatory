@@ -9,13 +9,6 @@ import sectionTrades from "@/assets/section-trades.png";
 import tradeEurnzd from "@/assets/trade-eurnzd-clean.png";
 import tradeNzdjpy from "@/assets/trade-nzdjpy-clean.png";
 import tradeUsdcad from "@/assets/trade-usdcad-clean.png";
-import wallTrade1 from "@/assets/wall-trade-1.png";
-import wallTrade2 from "@/assets/wall-trade-2.png";
-import wallTrade3 from "@/assets/wall-trade-3.png";
-import wallTrade4 from "@/assets/wall-trade-4.png";
-import wallTrade5 from "@/assets/wall-trade-5.png";
-import wallTrade6 from "@/assets/wall-trade-6.png";
-import wallTrade7 from "@/assets/wall-trade-7.png";
 import portraitFounder from "@/assets/portrait-linkedin.jpg";
 import mobileMockup from "@/assets/mobile-mockup.jpg";
 import appIcon from "@/assets/app-icon-web.jpg";
@@ -89,8 +82,6 @@ const TRADES = [
   { symbol: "USD/CAD", direction: "long" as const, image: tradeUsdcad, result: "PCI Haussier", desc: "Biais USD soutenu par la Fed + fragilité macro CAD. Convergence positionnement institutionnel." },
 ];
 
-const TRADE_WALL = [wallTrade1, wallTrade2, wallTrade3, wallTrade4, wallTrade5, wallTrade6, wallTrade7];
-
 const PLAN_CHECKLIST = [
   "Rapport Macro Hebdomadaire",
   "FX Scorecard",
@@ -140,7 +131,6 @@ function Index() {
       <FeaturesGrid />
       <TradesShowcase />
       <Founder />
-      <TradeWall />
       <Testimonials />
       <Pricing />
       <Faq />
@@ -420,29 +410,6 @@ function Founder() {
               <div><h4>Conçu pour des décideurs, pas des suiveurs</h4><p>Les éléments pour un jugement informé — jamais un signal à copier.</p></div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Trade Wall ──────────────────────────────────────────────────────────────
-
-function TradeWall() {
-  return (
-    <section className="section soft">
-      <div className="wrap">
-        <div className="section-head center" style={{ marginLeft: "auto", marginRight: "auto" }}>
-          <p className="eyebrow">Preuve par la pratique</p>
-          <h2>Des analyses réelles, pas des promesses de gain</h2>
-          <p>Un aperçu brut de mes graphiques de travail — le raisonnement technique tel qu'il est produit chaque semaine, sans mise en scène.</p>
-        </div>
-        <div className="trade-wall">
-          {TRADE_WALL.map((src, i) => (
-            <div key={i} className="trade-wall-item">
-              <img src={src} alt="Extrait d'analyse technique PARADOXI Observatory" loading="lazy" />
-            </div>
-          ))}
         </div>
       </div>
     </section>

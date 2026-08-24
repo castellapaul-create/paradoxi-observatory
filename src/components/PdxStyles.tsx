@@ -159,11 +159,6 @@ export function PdxStyles() {
 .pdx2 .trade-card .result{ font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--accent); margin:0 0 6px; }
 .pdx2 .trade-card p.desc{ font-size:13.5px; line-height:1.55; color:var(--text-muted); margin:0; }
 
-.pdx2 .trade-wall{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:16px; }
-.pdx2 .trade-wall-item{ border:1px solid var(--border); border-radius:14px; overflow:hidden; background:#fff; box-shadow:0 1px 2px rgba(16,17,20,.03); transition:box-shadow .15s ease, transform .15s ease; }
-.pdx2 .trade-wall-item:hover{ box-shadow:var(--shadow); transform:translateY(-2px); }
-.pdx2 .trade-wall-item img{ width:100%; display:block; }
-
 .pdx2 .faq-layout{ display:grid; grid-template-columns:.85fr 1.15fr; gap:56px; align-items:start; }
 .pdx2 .faq-phone{ border-radius:32px; overflow:hidden; box-shadow:var(--shadow); position:sticky; top:100px; }
 .pdx2 .faq-phone img{ width:100%; display:block; }
@@ -242,7 +237,6 @@ export function PdxStyles() {
   .pdx2 .app-modal-features{ grid-template-columns:1fr; }
   .pdx2 .founder{ grid-template-columns:1fr; }
   .pdx2 .trades-grid{ grid-template-columns:1fr; }
-  .pdx2 .trade-wall{ grid-template-columns:1fr; }
   .pdx2 .testimonial{ width:82vw; }
   .pdx2 .faq-layout{ grid-template-columns:1fr; }
   .pdx2 .faq-phone{ position:static; max-width:320px; margin:0 auto 40px; }
