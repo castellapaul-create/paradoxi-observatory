@@ -11,8 +11,10 @@ export const Route = createFileRoute("/abonnement")({
   head: () => ({
     meta: [
       { title: "PARADOXI Observatory — Abonnement Premium" },
+      { name: "description", content: "Rejoignez PARADOXI Observatory : rapport macro FX hebdomadaire, FX Scorecard, Central Bank Watch et Weekly Bias." },
       { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://www.paradoxi-observatory.com/abonnement" }],
   }),
   component: AbonnementPage,
 });

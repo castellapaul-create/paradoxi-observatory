@@ -75,6 +75,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "PARADOXI Observatory — Lettre macro FX hebdomadaire" },
       { name: "description", content: "Recevez gratuitement la lettre macro FX hebdomadaire PARADOXI Observatory." },
       { name: "author", content: "PARADOXI Observatory" },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "PARADOXI Observatory",
+          url: "https://www.paradoxi-observatory.com/",
+          founder: { "@type": "Person", name: "Paul Castella" },
+          sameAs: ["https://www.linkedin.com/in/paul-c-977b70153/"],
+        },
+      },
       { property: "og:title", content: "PARADOXI Observatory — Lettre macro FX hebdomadaire" },
       { property: "og:description", content: "Recevez gratuitement la lettre macro FX hebdomadaire PARADOXI Observatory." },
       { property: "og:type", content: "website" },
@@ -100,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <head>
         <HeadContent />
       </head>

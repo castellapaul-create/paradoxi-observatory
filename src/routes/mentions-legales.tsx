@@ -4,7 +4,11 @@ import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
 
 export const Route = createFileRoute("/mentions-legales")({
   head: () => ({
-    meta: [{ title: "PARADOXI Observatory — Mentions légales" }],
+    meta: [
+      { title: "PARADOXI Observatory — Mentions légales" },
+      { name: "description", content: "Mentions légales du site PARADOXI Observatory, édité par PAMILYS INVEST." },
+    ],
+    links: [{ rel: "canonical", href: "https://www.paradoxi-observatory.com/mentions-legales" }],
   }),
   component: MentionsLegalesPage,
 });

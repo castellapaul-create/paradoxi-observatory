@@ -8,6 +8,7 @@ export const Route = createFileRoute("/merci")({
       { title: "PARADOXI Observatory — Bienvenue !" },
       { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://www.paradoxi-observatory.com/merci" }],
   }),
   component: MerciPage,
 });

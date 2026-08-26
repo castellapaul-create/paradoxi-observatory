@@ -12,6 +12,7 @@ export const Route = createFileRoute("/rapport/confirmer")({
       { title: "Confirmation — PARADOXI Observatory" },
       { name: "robots", content: "noindex" },
     ],
+    links: [{ rel: "canonical", href: "https://www.paradoxi-observatory.com/rapport/confirmer" }],
   }),
   component: ConfirmerPage,
 });

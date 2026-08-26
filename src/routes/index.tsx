@@ -38,8 +38,20 @@ export const Route = createFileRoute("/")({
         content: "La synthèse macro FX hebdomadaire — fondamentaux, taux et régimes de marché.",
       },
       { property: "og:type", content: "website" },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        },
+      },
     ],
     links: [
+      { rel: "canonical", href: "https://www.paradoxi-observatory.com/" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -83,6 +95,14 @@ const TRADES = [
   { symbol: "USD/CAD", direction: "long" as const, image: tradeUsdcad, result: "PCI Haussier", desc: "Biais USD soutenu par la Fed + fragilité macro CAD. Convergence positionnement institutionnel." },
 ];
 
+const QUALIFY_ITEMS = [
+  "Vous voulez savoir pourquoi une position se prend, pas juste quoi trader.",
+  "Vous avez déjà testé les signaux ou le copy trading — et ça vous a laissé sur votre faim.",
+  "Vous savez qu'un vrai travail macro hebdomadaire prend des heures — et vous préférez le lire que le refaire chaque dimanche.",
+  "Vous construisez une compétence qui doit tenir sur plusieurs années, pas un résultat sur trois semaines.",
+  "Vous prenez le trading au sérieux, même si personne autour de vous ne le prend au sérieux.",
+];
+
 const PLAN_CHECKLIST = [
   "Rapport Macro Hebdomadaire",
   "FX Scorecard",
@@ -103,6 +123,9 @@ const FAQ = [
   { q: "Qu'est-ce que PARADOXI Observatory exactement ?", a: "Un observatoire de recherche financière indépendant. Chaque semaine, je produis une analyse macro approfondie des marchés des changes — pas des signaux à copier, une compréhension à construire." },
   { q: "Combien coûte l'accès ?", a: "69,99 €/mois, sans engagement. Un tarif préférentiel de 49,99 €/mois est réservé aux membres déjà inscrits avant l'ouverture." },
   { q: "Est-ce un conseil en investissement ?", a: "Non. Contenu strictement éducatif et informatif, qui ne constitue en aucun cas une recommandation personnalisée. Vous restez seul décideur de vos choix." },
+  { q: "Est-ce que je vais recevoir des signaux à suivre ?", a: "Non. Vous recevez le raisonnement complet — positionnement institutionnel, contexte macro, anticipations de banques centrales — jamais une simple instruction d'achat ou de vente à copier aveuglément." },
+  { q: "Puis-je résilier à tout moment ?", a: "Oui. L'abonnement est mensuel et sans engagement : vous pouvez résilier quand vous le souhaitez, sans justification ni frais." },
+  { q: "Le rapport convient-il si je débute encore en trading ?", a: "Il est pensé pour des traders qui ont déjà une pratique et cherchent à structurer leur analyse fondamentale. Si vous débutez tout juste, le rapport reste lisible, mais vous en tirerez le plus de valeur une fois les bases du trading acquises." },
 ];
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -133,6 +156,7 @@ function Index() {
       <TradesShowcase />
       <Founder />
       <Testimonials />
+      <Qualify />
       <Pricing />
       <Faq />
       <Footer />
@@ -449,6 +473,40 @@ function Testimonials() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Qualify ─────────────────────────────────────────────────────────────────
+
+function QualifyCheckIcon() {
+  return <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>;
+}
+
+function Qualify() {
+  return (
+    <section className="section" id="pour-qui">
+      <div className="wrap">
+        <div className="qualify-card">
+          <div className="qualify-lead">
+            <h2>Cette lecture est-elle pour vous ?</h2>
+            <p className="qualify-intro">
+              Vous en avez sûrement assez de lire des analyses contradictoires, ou de suivre un signal sans jamais comprendre le raisonnement derrière. Ce n'est pas un problème de discipline — c'est un problème de méthode. Voici si la mienne peut vous servir.
+            </p>
+          </div>
+          <div>
+            <ul className="qualify-list">
+              {QUALIFY_ITEMS.map((item) => (
+                <li key={item} className="qualify-item">
+                  <span className="qualify-check"><QualifyCheckIcon /></span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="#pricing" className="btn-primary qualify-cta">Voir si mon travail vous correspond →</a>
           </div>
         </div>
       </div>

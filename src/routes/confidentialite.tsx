@@ -4,7 +4,11 @@ import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
 
 export const Route = createFileRoute("/confidentialite")({
   head: () => ({
-    meta: [{ title: "PARADOXI Observatory — Politique de confidentialité" }],
+    meta: [
+      { title: "PARADOXI Observatory — Politique de confidentialité" },
+      { name: "description", content: "Politique de confidentialité et traitement des données personnelles sur PARADOXI Observatory, édité par PAMILYS INVEST." },
+    ],
+    links: [{ rel: "canonical", href: "https://www.paradoxi-observatory.com/confidentialite" }],
   }),
   component: ConfidentialitePage,
 });

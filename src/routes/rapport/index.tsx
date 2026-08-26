@@ -12,8 +12,12 @@ export const Route = createFileRoute("/rapport/")({
   head: () => ({
     meta: [
       { title: "Rapport Fondamental Hebdomadaire — édition d'exemple | PARADOXI Observatory" },
-      { name: "robots", content: "noindex" },
+      {
+        name: "description",
+        content: "Recevez gratuitement une édition d'exemple du rapport fondamental hebdomadaire PARADOXI Observatory : biais directionnel par devise, positionnement COT, anticipations de banques centrales.",
+      },
     ],
+    links: [{ rel: "canonical", href: "https://www.paradoxi-observatory.com/rapport" }],
   }),
   component: RapportPage,
 });

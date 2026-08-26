@@ -4,7 +4,11 @@ import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
 
 export const Route = createFileRoute("/cgv")({
   head: () => ({
-    meta: [{ title: "PARADOXI Observatory — Conditions Générales de Vente" }],
+    meta: [
+      { title: "PARADOXI Observatory — Conditions Générales de Vente" },
+      { name: "description", content: "Conditions Générales de Vente de l'abonnement PARADOXI Observatory, édité par PAMILYS INVEST." },
+    ],
+    links: [{ rel: "canonical", href: "https://www.paradoxi-observatory.com/cgv" }],
   }),
   component: CgvPage,
 });

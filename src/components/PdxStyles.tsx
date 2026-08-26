@@ -79,6 +79,17 @@ export function PdxStyles() {
 
 .pdx2 .section{ padding:96px 0; }
 .pdx2 .section.soft{ background:var(--bg-soft); }
+
+.pdx2 .qualify-card{ background:var(--bg-dark); color:#fff; border-radius:28px; padding:64px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+.pdx2 .qualify-lead h2{ font-size:clamp(1.9rem,3vw,2.5rem); font-weight:800; letter-spacing:-0.01em; line-height:1.15; margin:0 0 20px; color:#fff; }
+.pdx2 .qualify-intro{ font-size:16px; line-height:1.65; color:#c7c9d1; margin:0; max-width:420px; }
+.pdx2 .qualify-list{ display:flex; flex-direction:column; gap:22px; margin:0 0 32px; }
+.pdx2 .qualify-item{ display:flex; align-items:flex-start; gap:14px; font-size:15.5px; line-height:1.5; color:#e7e8ec; }
+.pdx2 .qualify-check{ flex-shrink:0; width:26px; height:26px; border-radius:50%; background:var(--accent); display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.pdx2 .qualify-cta{ display:inline-flex; }
+@media (max-width: 860px){
+  .pdx2 .qualify-card{ grid-template-columns:1fr; padding:40px 28px; border-radius:20px; gap:36px; }
+}
 .pdx2 .section-head{ max-width:640px; margin:0 0 56px; }
 .pdx2 .eyebrow{ font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin:0 0 12px; }
 .pdx2 .section-head h2{ font-size:clamp(1.9rem, 3vw, 2.7rem); font-weight:800; letter-spacing:-0.01em; line-height:1.15; margin:0 0 16px; text-wrap:balance; }
