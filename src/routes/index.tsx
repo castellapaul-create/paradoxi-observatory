@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { PdxStyles } from "@/components/PdxStyles";
+import { useReveal } from "@/hooks/use-reveal";
 import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
 import heroGlass from "@/assets/hero-glass-figure.jpg";
 import sectionRapport from "@/assets/section-rapport.png";
@@ -132,6 +133,7 @@ const FAQ = [
 
 function Index() {
   const [appModalOpen, setAppModalOpen] = useState(false);
+  useReveal();
 
   useEffect(() => {
     document.body.style.overflow = appModalOpen ? "hidden" : "";
@@ -363,9 +365,9 @@ function Methode() {
           <h2>Un processus rigoureux, pas une opinion</h2>
           <p>Consolidé chaque semaine dans un index propriétaire : le <strong>PCI</strong> (Paradoxi Confluence Index).</p>
         </div>
-        <div className="timeline">
+        <div className="timeline reveal reveal-line">
           {STEPS.map((s) => (
-            <div key={s.num} className="timeline-step">
+            <div key={s.num} className="timeline-step reveal">
               <span className="timeline-dot">{s.num}</span>
               <div className="timeline-content">
                 <p className="tag">{s.tag}</p>
@@ -393,7 +395,7 @@ function FeaturesGrid() {
         </div>
         <div className="features">
           {FEATURES.map((f) => (
-            <div key={f.title} className="feature">
+            <div key={f.title} className="feature reveal">
               <div className="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">{f.icon}</svg></div>
               <div><h3>{f.title}</h3><p>{f.desc}</p></div>
             </div>
@@ -428,15 +430,15 @@ function Founder() {
           <p>La majorité des traders particuliers ne manquent pas d'ambition. Ils manquent d'un cadre. PARADOXI a été construit en réponse à ce manque : un processus analytique rigoureux — COT, macro, banques centrales, flux institutionnels — synthétisé pour être lisible, décisionnel et exploitable, sans expérience institutionnelle préalable.</p>
           <p>Je n'ai pas vocation à vous dire quoi faire. J'ai vocation à vous donner les éléments pour décider vous-même — avec plus de clarté et plus de confiance dans votre propre jugement.</p>
           <div className="founder-proof">
-            <div className="founder-proof-item">
+            <div className="founder-proof-item reveal">
               <span className="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 17l6-6 4 4 8-8M21 7v6h-6" /></svg></span>
               <div><h4>Un processus reproductible, pas une opinion</h4><p>Le même pipeline, la même rigueur, chaque semaine — sans improvisation.</p></div>
             </div>
-            <div className="founder-proof-item">
+            <div className="founder-proof-item reveal">
               <span className="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" /></svg></span>
               <div><h4>Indépendant par construction</h4><p>Aucun affilié, aucun sponsor — seule la qualité de la recherche compte.</p></div>
             </div>
-            <div className="founder-proof-item">
+            <div className="founder-proof-item reveal">
               <span className="icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" /><circle cx="12" cy="12" r="3" /></svg></span>
               <div><h4>Conçu pour des décideurs, pas des suiveurs</h4><p>Les éléments pour un jugement informé — jamais un signal à copier.</p></div>
             </div>
@@ -500,7 +502,7 @@ function Qualify() {
           <div>
             <ul className="qualify-list">
               {QUALIFY_ITEMS.map((item) => (
-                <li key={item} className="qualify-item">
+                <li key={item} className="qualify-item reveal">
                   <span className="qualify-check"><QualifyCheckIcon /></span>
                   <span>{item}</span>
                 </li>
