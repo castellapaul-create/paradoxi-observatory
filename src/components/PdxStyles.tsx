@@ -36,8 +36,10 @@ export function PdxStyles() {
 .pdx2 .mobile-menu a:last-of-type{ border-bottom:none; }
 .pdx2 .mobile-menu .btn-primary{ justify-content:center; margin-top:16px; }
 
-.pdx2 .hero{ padding:88px 0 0; }
+.pdx2 .hero{ padding:88px 0 0; overflow:hidden; }
+.pdx2 .hero-streaks{ position:absolute; inset:0; z-index:0; pointer-events:none; }
 .pdx2 .hero-grid{
+  position:relative; z-index:1;
   display:grid;
   grid-template-columns:1fr 1.15fr;
   grid-template-areas:
