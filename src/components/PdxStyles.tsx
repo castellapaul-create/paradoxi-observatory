@@ -90,7 +90,18 @@ export function PdxStyles() {
   .pdx2 .reveal{ opacity:1 !important; transform:none !important; transition:none !important; }
 }
 
-.pdx2 .qualify-card{ background:var(--bg-dark); color:#fff; border-radius:28px; padding:64px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+.pdx2 .qualify-card{
+  position:relative; overflow:hidden;
+  background:var(--bg-dark); color:#fff; border-radius:28px; padding:64px; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+}
+.pdx2 .qualify-card::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(180deg, rgba(17,18,20,.94) 0%, rgba(17,18,20,.75) 45%, rgba(17,18,20,.97) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='500' viewBox='0 0 1200 500'%3E%3Cg fill='none' stroke='rgb(80,140,230)' stroke-width='1'%3E%3Cpath d='M0,120 C150,90 300,140 450,110 C600,80 750,130 900,100 C1050,75 1150,105 1200,90' opacity='.28'/%3E%3Cpath d='M0,165 C150,135 300,185 450,150 C600,120 750,175 900,140 C1050,115 1150,150 1200,130' opacity='.24'/%3E%3Cpath d='M0,210 C150,175 300,230 450,195 C600,160 750,220 900,180 C1050,155 1150,195 1200,175' opacity='.22'/%3E%3Cpath d='M0,255 C150,215 300,275 450,235 C600,200 750,265 900,220 C1050,195 1150,235 1200,215' opacity='.2'/%3E%3Cpath d='M0,300 C150,255 300,320 450,275 C600,235 750,310 900,260 C1050,235 1150,275 1200,255' opacity='.18'/%3E%3Cpath d='M0,345 C150,300 300,365 450,315 C600,275 750,355 900,300 C1050,275 1150,315 1200,295' opacity='.16'/%3E%3Cpath d='M0,390 C150,345 300,410 450,360 C600,320 750,400 900,345 C1050,320 1150,355 1200,335' opacity='.14'/%3E%3Cpath d='M0,435 C150,390 300,455 450,405 C600,365 750,445 900,390 C1050,365 1150,400 1200,380' opacity='.12'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:center bottom; background-size:cover;
+}
+.pdx2 .qualify-card > *{ position:relative; z-index:1; }
 .pdx2 .qualify-lead h2{ font-size:clamp(1.9rem,3vw,2.5rem); font-weight:800; letter-spacing:-0.01em; line-height:1.15; margin:0 0 20px; color:#fff; }
 .pdx2 .qualify-intro{ font-size:16px; line-height:1.65; color:#c7c9d1; margin:0; max-width:420px; }
 .pdx2 .qualify-list{ display:flex; flex-direction:column; gap:22px; margin:0 0 32px; }
