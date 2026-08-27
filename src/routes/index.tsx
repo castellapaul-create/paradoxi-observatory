@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
 import { PdxStyles } from "@/components/PdxStyles";
-import { HeroNeurons } from "@/components/HeroNeurons";
 import { useReveal } from "@/hooks/use-reveal";
 import paradoxiLogoLight from "@/assets/paradoxi-logo-light.png";
 import heroGlass from "@/assets/hero-glass-figure.jpg";
@@ -229,7 +228,6 @@ function Nav({ onOpenApp }: { onOpenApp: () => void }) {
 function Hero() {
   return (
     <section className="hero">
-      <HeroNeurons />
       <div className="wrap hero-grid">
         <h1>
           <span className="hero-lead">
